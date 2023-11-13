@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 工程信息 -->
+    <groupId>com.github.d3</groupId>
+    <artifactId>d3</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <description>D3</description>
+
+    <developers>
+        <developer>
+            <name>Carzer1020</name>
+            <email>Carzer1020@163.com</email>
+        </developer>
+    </developers>
+
+    <!-- 参数配置 -->
+    <properties>
+        <!-- 编译版本、编码类型定义 -->
+        <java.version>21</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.compiler.compilerVersion>${java.version}</maven.compiler.compilerVersion>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <d3.version>${project.version}</d3.version>
+        <d3.starter.version>${project.version}</d3.starter.version>
+        <!-- Maven插件版本定义 -->
+        <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
+        <maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
+        <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
+        <exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
+        <maven-surefire-plugin.version>3.2.2</maven-surefire-plugin.version>
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+        <!-- Spring版本定义 -->
+        <spring-boot.version>3.1.5</spring-boot.version>
+        <spring-cloud.version>2022.0.4</spring-cloud.version>
+        <!-- SLF4J版本定义 -->
+        <slf4j.version>2.0.9</slf4j.version>
+        <!-- mybatis-plus版本定义 -->
+        <mybatis-plus.version>3.5.4.1</mybatis-plus.version>
+        <!-- Spring Doc相关版本定义 -->
+        <springdoc.version>2.2.0</springdoc.version>
+        <swagger.version>2.2.18</swagger.version>
+        <!-- hutool相关版本定义 -->
+        <hutool.version>5.8.22</hutool.version>
+        <!-- apache.commons-io相关版本定义 -->
+        <apache.commons-io.version>2.11.0</apache.commons-io.version>
+        <!-- oauth2-authorization-server -->
+        <oauth2-authorization-server.version>1.1.3</oauth2-authorization-server.version>
+        <!-- 日志存放根目录 -->
+        <log-root-path>logs</log-root-path>
+    </properties>
+
+    <!-- 包含模块 -->
+    <modules>
+        <!-- 授权服务 -->
+        <module>d3-auth</module>
+        <!-- 通用信息 -->
+        <module>d3-commons</module>
+        <!-- 运行时环境 -->
+        <module>d3-context</module>
+        <!-- starter -->
+        <module>d3-starter</module>
+    </modules>
+
+    <!-- 版本管理 -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Boot -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Spring Cloud -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- project dependencies -->
+            <dependency>
+                <groupId>com.github.d3</groupId>
+                <artifactId>d3-constants</artifactId>
+                <version>${d3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.d3</groupId>
+                <artifactId>d3-core</artifactId>
+                <version>${d3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.d3</groupId>
+                <artifactId>d3-context</artifactId>
+                <version>${d3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.d3</groupId>
+                <artifactId>d3-util</artifactId>
+                <version>${d3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.d3</groupId>
+                <artifactId>d3-aop</artifactId>
+                <version>${d3.version}</version>
+            </dependency>
+            <!-- project starter -->
+            <dependency>
+                <groupId>com.github.d3</groupId>
+                <artifactId>d3-starter-web</artifactId>
+                <version>${d3.starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.d3</groupId>
+                <artifactId>d3-starter-springdoc</artifactId>
+                <version>${d3.starter.version}</version>
+            </dependency>
+            <!-- security -->
+            <dependency>
+                <groupId>com.github.d3</groupId>
+                <artifactId>d3-starter-security</artifactId>
+                <version>${d3.starter.version}</version>
+            </dependency>
+            <!-- jdbc -->
+            <dependency>
+                <groupId>com.github.d3</groupId>
+                <artifactId>d3-starter-data-jdbc</artifactId>
+                <version>${d3.starter.version}</version>
+            </dependency>
+            <!-- tenant -->
+            <dependency>
+                <groupId>com.github.d3</groupId>
+                <artifactId>d3-starter-tenant</artifactId>
+                <version>${d3.starter.version}</version>
+            </dependency>
+            <!-- mybatis plus -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-core</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <!-- springdoc -->
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.swagger.core.v3</groupId>
+                <artifactId>swagger-annotations-jakarta</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <!-- hutool -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-core</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <!-- commons-io -->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${apache.commons-io.version}</version>
+            </dependency>
+            <!-- oauth2-authorization-server -->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-oauth2-authorization-server</artifactId>
+                <version>${oauth2-authorization-server.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- 依赖管理 -->
+    <dependencies>
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- processor -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
+        <!-- devtools -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>test</scope>
+            <optional>true</optional>
+        </dependency>
+        <!-- test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- openfeign -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <!-- loadbalancer -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-loadbalancer</artifactId>
+        </dependency>
+        <!-- caffeine -->
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+        </dependency>
+        <!-- bootstrap -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+        <!-- context support -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+        </dependency>
+    </dependencies>
+
+    <!-- build信息 -->
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                                <goal>build-info</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${maven-source-plugin.version}</version>
+                    <configuration>
+                        <attach>true</attach>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>${exec-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${maven-deploy-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven-resources-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <!-- 打包时跳过测试 -->
+                    <skipTests>true</skipTests>
+                    <argLine>
+                        --add-opens java.base/java.lang=ALL-UNNAMED
+                    </argLine>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- 配置信息 -->
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <!-- 环境 -->
+                <spring.profiles.active>dev</spring.profiles.active>
+                <!-- 微服务前缀 -->
+                <prefix>dev</prefix>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <!-- 环境 -->
+                <spring.profiles.active>prod</spring.profiles.active>
+                <!-- 微服务前缀 -->
+                <prefix>prod</prefix>
+            </properties>
+        </profile>
+    </profiles>
+</project>

@@ -1,0 +1,12 @@
+ ${AnsiColor.BLUE}
+     _   _   _ _____ _   _           ____  _____ ______     _______ ____
+    / \ | | | |_   _| | | |         / ___|| ____|  _ \ \   / / ____|  _ \
+   / _ \| | | | | | | |_| |  _____  \___ \|  _| | |_) \ \ / /|  _| | |_) |
+  / ___ \ |_| | | | |  _  | |_____|  ___) | |___|  _ < \ V / | |___|  _ <
+ /_/   \_\___/  |_| |_| |_|         |____/|_____|_| \_\ \_/  |_____|_| \_\
+
+@project.description@ Version: @project.version@
+Spring Boot Version: ${spring-boot.version}
+Spring Cloud Version: ${spring-cloud.version}
+
+Contact: @project.developers.developer.email@

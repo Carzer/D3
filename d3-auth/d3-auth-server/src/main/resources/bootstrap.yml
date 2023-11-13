@@ -1,0 +1,57 @@
+server:
+  port: 9007
+  compression:
+    enabled: true
+  undertow:
+    threads:
+      io: 16
+      worker: 60
+    direct-buffers: true
+
+# 当前配置环境
+spring:
+  application:
+    name: @project.artifactId@
+  main:
+    # 允许多个bean声明为相同名称
+    allow-bean-definition-overriding: true
+    # 允许循环引用
+    allow-circular-references: true
+  mvc:
+    servlet:
+      load-on-startup: -1
+  profiles:
+    active: @spring.profiles.active@
+  config:
+    import:
+      - optional:classpath:/conf/dms/${spring.profiles.active}.yml
+      - optional:classpath:/conf/jetcache/${spring.profiles.active}.yml
+      - optional:classpath:/conf/seata/${spring.profiles.active}.yml
+
+  servlet:
+    multipart:
+      max-file-size: 1GB
+
+# mybatis-plus配置
+mybatis-plus:
+  mapper-locations: classpath:mybatis/mappers/**/*.xml
+  type-aliases-package: com.github.d3.auth.entity
+  config-location: classpath:mybatis/mybatis-config.xml
+
+# spring doc 配置
+springdoc:
+  packages-to-scan: com.github.d3.auth.controller
+dms:
+  springdoc:
+    title: ${spring.application.name}
+    description: @project.description@
+    version: @project.version@
+---
+# 生产环境关闭文档功能
+spring:
+  config:
+    activate:
+      on-profile: prod
+springdoc:
+  api-docs:
+    enabled: false

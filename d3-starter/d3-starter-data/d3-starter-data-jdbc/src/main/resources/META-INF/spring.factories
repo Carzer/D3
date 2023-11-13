@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.github.d3.data.jdbc.config.MpConfiguration,\
+  com.github.d3.data.jdbc.config.JdbcDataSourceAutoConfiguration
