@@ -1,6 +1,6 @@
 package com.github.d3;
 
-import com.github.d3.code.DmsCode;
+import com.github.d3.code.D3Code;
 import com.github.d3.code.RCode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -57,9 +57,9 @@ public final class R<T> {
     /**
      * 构造方法
      *
-     * @param code {@link DmsCode}
+     * @param code {@link D3Code}
      */
-    public R(DmsCode code) {
+    public R(D3Code code) {
         this(code, null, null);
     }
 
@@ -75,22 +75,22 @@ public final class R<T> {
     /**
      * 构造方法
      *
-     * @param code    {@link DmsCode}
+     * @param code    {@link D3Code}
      * @param data    data
      * @param message 消息
      */
-    public R(DmsCode code, T data, String message) {
+    public R(D3Code code, T data, String message) {
         this(false, code, data, message);
     }
 
     /**
      * 构造方法
      *
-     * @param code    {@link DmsCode}
+     * @param code    {@link D3Code}
      * @param data    data
      * @param message 消息
      */
-    public R(boolean silent, DmsCode code, T data, String message) {
+    public R(boolean silent, D3Code code, T data, String message) {
         Assert.state(code != null, "返回码不能为空!");
         this.silent = silent;
         this.code = code.getCode();

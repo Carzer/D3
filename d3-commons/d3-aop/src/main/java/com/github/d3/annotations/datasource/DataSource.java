@@ -12,7 +12,7 @@ import java.lang.annotation.*;
  * @since 2022-11-25
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
+@Target({ElementType.METHOD, ElementType.TYPE})
 @Documented
 public @interface DataSource {
 
@@ -24,5 +24,5 @@ public @interface DataSource {
     /**
      * 数据源类型
      */
-    DatasourceTypeEnum datasourceType() default DatasourceTypeEnum.JDBC;
+    DatasourceTypeEnum type() default DatasourceTypeEnum.JDBC;
 }

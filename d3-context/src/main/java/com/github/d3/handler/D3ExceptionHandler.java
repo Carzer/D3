@@ -3,7 +3,7 @@ package com.github.d3.handler;
 
 import com.github.d3.R;
 import com.github.d3.code.RCode;
-import com.github.d3.exception.AbstractException;
+import com.github.d3.exception.AbstractD3Exception;
 import com.github.d3.util.NetUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ValidationException;
@@ -18,6 +18,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ import java.util.List;
  */
 @Slf4j
 @RestControllerAdvice
-public final class ExceptionHandler {
+public final class D3ExceptionHandler {
 
     /**
      * 异常捕获：自定义异常
@@ -38,8 +39,8 @@ public final class ExceptionHandler {
      * @return 异常消息
      */
     @ResponseStatus(HttpStatus.OK)
-    @org.springframework.web.bind.annotation.ExceptionHandler(AbstractException.class)
-    public R<String> executeFailed(HttpServletRequest request, AbstractException e) {
+    @ExceptionHandler(AbstractD3Exception.class)
+    public R<String> executeFailed(HttpServletRequest request, AbstractD3Exception e) {
         urlInfo(request);
         log.error("业务异常：{}", e.getCode().getMessage());
         return new R<>(e.getCode());
@@ -52,7 +53,7 @@ public final class ExceptionHandler {
      * @return 异常消息
      */
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    @org.springframework.web.bind.annotation.ExceptionHandler(AuthenticationException.class)
+    @ExceptionHandler(AuthenticationException.class)
     public R<String> authFailed(HttpServletRequest request, AuthenticationException e) {
         log.warn("未授权：{}", e.getMessage());
         debugInfo(request, e);
@@ -66,7 +67,7 @@ public final class ExceptionHandler {
      * @return 异常消息
      */
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    @org.springframework.web.bind.annotation.ExceptionHandler(AccessDeniedException.class)
+    @ExceptionHandler(AccessDeniedException.class)
     public R<String> forbidden(HttpServletRequest request, AccessDeniedException e) {
         log.warn("权限拒绝：{}", e.getMessage());
         debugInfo(request, e);
@@ -80,7 +81,7 @@ public final class ExceptionHandler {
      * @return 异常消息
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @org.springframework.web.bind.annotation.ExceptionHandler(HttpMessageNotReadableException.class)
+    @ExceptionHandler(HttpMessageNotReadableException.class)
     public R<String> validFailed(HttpServletRequest request, HttpMessageNotReadableException e) {
         log.warn("非法操作:{}", e.getMessage());
         debugInfo(request, e);
@@ -94,7 +95,7 @@ public final class ExceptionHandler {
      * @return 异常消息
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @org.springframework.web.bind.annotation.ExceptionHandler(IllegalStateException.class)
+    @ExceptionHandler(IllegalStateException.class)
     public R<String> stateFailed(HttpServletRequest request, IllegalStateException e) {
         log.warn("请求状态异常：{}", e.getMessage());
         debugInfo(request, e);
@@ -108,7 +109,7 @@ public final class ExceptionHandler {
      * @return 异常消息
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @org.springframework.web.bind.annotation.ExceptionHandler(IllegalArgumentException.class)
+    @ExceptionHandler(IllegalArgumentException.class)
     public R<String> validFailed(HttpServletRequest request, IllegalArgumentException e) {
         urlInfo(request);
         log.warn("请求参数异常：{}", e.getMessage());
@@ -122,7 +123,7 @@ public final class ExceptionHandler {
      * @return 异常消息
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @org.springframework.web.bind.annotation.ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     public R<String> validFailed(HttpServletRequest request, MethodArgumentNotValidException e) {
         List<ObjectError> allErrors = e.getBindingResult().getAllErrors();
         String errorMessage;
@@ -133,7 +134,7 @@ public final class ExceptionHandler {
                 FieldError fieldError = (FieldError) allErrors.get(0);
                 errorMessage = fieldError.getDefaultMessage();
             } catch (Exception exception) {
-                log.error("获取[请求参数的异常信息]时发生异常", exception);
+                log.error("获取[请求参数的异常的详细信息]时发生异常", exception);
                 errorMessage = "请求参数异常";
             }
         }
@@ -149,7 +150,7 @@ public final class ExceptionHandler {
      * @return 异常消息
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @org.springframework.web.bind.annotation.ExceptionHandler(ValidationException.class)
+    @ExceptionHandler(ValidationException.class)
     public R<String> validFailed(HttpServletRequest request, ValidationException e) {
         urlInfo(request);
         log.warn("参数校验异常：{}", e.getMessage());
@@ -163,7 +164,7 @@ public final class ExceptionHandler {
      * @return 异常消息
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @org.springframework.web.bind.annotation.ExceptionHandler(RuntimeException.class)
+    @ExceptionHandler(RuntimeException.class)
     public R<String> runtimeFailed(HttpServletRequest request, RuntimeException e) {
         urlInfo(request);
         log.error("运行时异常：", e);
@@ -177,7 +178,7 @@ public final class ExceptionHandler {
      * @return 异常消息
      */
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
+    @ExceptionHandler(Exception.class)
     public R<String> executeFailed(HttpServletRequest request, Exception e) {
         urlInfo(request);
         log.error("系统异常：", e);

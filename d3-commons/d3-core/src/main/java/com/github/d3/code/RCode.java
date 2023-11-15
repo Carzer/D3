@@ -11,7 +11,7 @@ import java.util.Map;
  * @author Carzer1020@163.com
  * @since 2022-11-25
  */
-public enum RCode implements DmsCode {
+public enum RCode implements D3Code {
 
     /**
      * 操作码

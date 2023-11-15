@@ -4,25 +4,26 @@ import com.github.d3.code.D3Code;
 import lombok.Getter;
 
 /**
- * 业务异常类
+ * D3系统相关异常
  *
- * @author Carzer1020@163.com
- * @since 2022-11-25
+ * @author wanghongqun
+ * @since 2023-11-14
  */
 @Getter
-public final class BizException extends AbstractD3Exception {
+public final class D3Exception extends AbstractD3Exception {
 
     /**
-     * 业务码
+     * 异常编码
      */
     private final D3Code code;
 
     /**
      * 构造方法
      *
-     * @param code 业务码
+     * @param code 异常编码
      */
-    public BizException(D3Code code) {
+    public D3Exception(D3Code code) {
         this.code = code;
     }
+
 }

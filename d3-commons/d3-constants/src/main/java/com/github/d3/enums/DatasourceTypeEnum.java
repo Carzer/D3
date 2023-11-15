@@ -14,23 +14,29 @@ public enum DatasourceTypeEnum {
     /**
      * 数据源类型
      */
-    JDBC("jdbc", "Jdbc数据源");
+    JDBC(0,"jdbc", "Jdbc数据源");
+
+    /**
+     * val
+     */
+    private final Integer val;
 
     /**
      * key
      */
-    private String key;
+    private final String key;
 
     /**
      * 描述
      */
-    private String desc;
+    private final String desc;
 
     /**
      * @param key  key
      * @param desc 描述
      */
-    DatasourceTypeEnum(String key, String desc) {
+    DatasourceTypeEnum(Integer val,String key, String desc) {
+        this.val = val;
         this.key = key;
         this.desc = desc;
     }

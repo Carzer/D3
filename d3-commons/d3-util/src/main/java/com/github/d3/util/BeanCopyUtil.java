@@ -41,7 +41,7 @@ public class BeanCopyUtil {
      * @return 目标类list
      */
     public <S, T> List<T> copyList(List<S> sourceList, Class<T> targetClass) {
-        return sourceList.stream().map(source -> copy(source, targetClass)).collect(Collectors.toList());
+        return sourceList.stream().map(source -> copy(source, targetClass)).toList();
     }
 
     /**

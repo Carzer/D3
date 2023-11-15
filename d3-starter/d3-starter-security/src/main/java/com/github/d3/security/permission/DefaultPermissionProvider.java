@@ -2,9 +2,11 @@ package com.github.d3.security.permission;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import com.github.d3.provider.PermissionProvider;
 import com.github.d3.util.DurationUtil;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Collections;
 import java.util.Set;
 
 /**
@@ -14,7 +16,7 @@ import java.util.Set;
  * @since 2020-11-19
  */
 @Slf4j
-public class PermissionProvider implements com.github.d3.provider.PermissionProvider {
+public class DefaultPermissionProvider implements PermissionProvider {
 
     /**
      * 权限信息缓存
@@ -43,7 +45,7 @@ public class PermissionProvider implements com.github.d3.provider.PermissionProv
      * @return 权限信息
      */
     private Set<String> getResourceDefineValue(String osCode, String roleCode) {
-        return null;
+        return Collections.emptySet();
     }
 
 }

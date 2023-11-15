@@ -48,22 +48,6 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
     private final DefaultIdentifierGenerator identifierGenerator;
 
     /**
-     * 用户服务
-     * Service中注入自身，是为了方便获取代理对象，防止注解失效问题
-     */
-    private UserService userService;
-
-    /**
-     * 设置用户服务
-     *
-     * @param userService 用户服务
-     */
-    @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
-    /**
      * 根据关键词获取用户
      * 当前支持手机号及用户名
      *
@@ -72,7 +56,6 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
      */
     @Override
     public UserEntity loadUser(String key) {
-        // TODO: 2023/11/13 tablename:userAccount,columns:phone-id,mail-id,name-id
         return null;
     }
 
@@ -100,28 +83,6 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
     }
 
     /**
-     * 更新用户描述
-     *
-     * @param userEntity user
-     * @return int
-     */
-    @Override
-    public int updateProfile(UserEntity userEntity) {
-        return userMapper.updateById(userEntity);
-    }
-
-    /**
-     * 根据登录名查询用户名
-     *
-     * @param loginNames 登录名列表
-     * @return 用户列表
-     */
-    @Override
-    public List<UserEntity> queryByLoginName(List<String> loginNames) {
-        return lambdaQuery().in(UserEntity::getLoginName, loginNames).list();
-    }
-
-    /**
      * 插入用户信息
      * <p>
      *
@@ -146,20 +107,8 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int logicDeleteById(Long id) {
-        lambdaQuery().eq(UserEntity::getId, id)
-                .select(UserEntity::getLoginName)
-                .oneOpt()
-                .ifPresentOrElse(
-                        user -> {
-                            // admin用户不准删除
-                            Assert.isTrue(!"admin".equalsIgnoreCase(user.getLoginName()), "admin用户不可删除!");
-                            // 清除用户与其他信息的关系
-                            userMapper.deleteById(id);
-                        }
-                        , () -> {
-                            throw new BizException(RCode.USER_NOT_EXISTED);
-                        });
-        return 1;
+        // TODO: 2023/11/14 禁止删除管理员用户
+        return userMapper.deleteById(id);
     }
 
     /**
@@ -172,7 +121,7 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
     @Override
     public PageResult<UserEntity> getPage(PageQuery pageQuery, UserEntity userEntity) {
         LambdaQueryWrapper<UserEntity> wrapper = new LambdaQueryWrapper<>();
-        wrapper.likeRight(UserEntity::getLoginName, userEntity.getLoginName());
+        wrapper.likeRight(UserEntity::getName, userEntity.getName());
         return pageResult(pageQuery, wrapper);
     }
 
@@ -220,12 +169,8 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
      * @param userEntity 用户信息
      */
     private void checkUnique(UserEntity userEntity) {
-        // 检查登录名是否重复
-        if (lambdaQuery().eq(UserEntity::getLoginName, userEntity.getLoginName())
-                .count() > 0
-        ) {
-            throw new BizException(RCode.LOGIN_NAME_EXISTED);
-        }
+        // todo 检查登录名是否重复
+
     }
 
     @Override

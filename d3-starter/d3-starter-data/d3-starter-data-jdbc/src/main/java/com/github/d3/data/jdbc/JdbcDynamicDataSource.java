@@ -9,6 +9,7 @@ import org.springframework.util.CollectionUtils;
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * 动态数据源实现类
@@ -38,7 +39,7 @@ public class JdbcDynamicDataSource extends AbstractRoutingDataSource {
     protected DataSource determineTargetDataSource() {
         Object lookupKey = determineCurrentLookupKey();
         DataSource dataSource = this.additionalDataSources.get(lookupKey);
-        if (dataSource == null) {
+        if (lookupKey == null || dataSource == null) {
             return super.determineTargetDataSource();
         }
         return dataSource;
@@ -121,7 +122,11 @@ public class JdbcDynamicDataSource extends AbstractRoutingDataSource {
      * @param key 数据源key
      */
     private void closeDataSourceByKey(Object key) {
-        JdbcDataSource dataSource = (JdbcDataSource) additionalDataSources.get(key);
-        dataSource.close();
+        Optional.ofNullable(additionalDataSources.get(key))
+                .ifPresent(ds -> {
+                    if (ds instanceof JdbcDataSource dataSource) {
+                        dataSource.close();
+                    }
+                });
     }
 }

@@ -1,6 +1,6 @@
 package com.github.d3.exception;
 
-import com.github.d3.code.ErrorCode;
+import com.github.d3.code.MutableCode;
 import lombok.Getter;
 
 /**
@@ -9,13 +9,13 @@ import lombok.Getter;
  * @author Carzer1020@163.com
  * @since 2020-12-21
  */
-public final class MsgException extends AbstractException {
+@Getter
+public final class MsgException extends AbstractD3Exception {
 
     /**
      * 业务码
      */
-    @Getter
-    private final ErrorCode code;
+    private final MutableCode code;
 
     /**
      * 构造方法
@@ -24,8 +24,6 @@ public final class MsgException extends AbstractException {
      */
     public MsgException(String message) {
         super(message);
-        ErrorCode errorCode = ErrorCode.FAILED;
-        errorCode.setMessage(message);
-        this.code = errorCode;
+        this.code = new MutableCode(message);
     }
 }

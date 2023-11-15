@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author Carzer1020@163.com
  * @since 2022-11-25
  */
-public interface DmsCode extends Serializable {
+public interface D3Code extends Serializable {
 
     /**
      * 操作编码

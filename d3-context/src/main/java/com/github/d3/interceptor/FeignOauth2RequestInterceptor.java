@@ -20,6 +20,7 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import java.util.Base64;
 import java.util.Map;
 
 /**
@@ -79,7 +80,7 @@ public final class FeignOauth2RequestInterceptor implements RequestInterceptor {
                 // details中的sessionID非Spring security统一管理的，需使用RequestContextHolder
                 String sessionId = RequestContextHolder.currentRequestAttributes().getSessionId();
                 if (StringUtils.hasText(sessionId)) {
-                    requestTemplate.header("Cookie", String.format("SESSION=%s", Base64Utils.encodeToString(sessionId.getBytes())));
+                    requestTemplate.header("Cookie", String.format("SESSION=%s", Base64.getEncoder().encodeToString(sessionId.getBytes())));
                 }
             }
             // 匿名访问

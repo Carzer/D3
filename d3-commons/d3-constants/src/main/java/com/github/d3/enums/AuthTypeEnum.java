@@ -16,7 +16,10 @@ public enum AuthTypeEnum {
      */
     NONE("none", "没有权限"),
     ALL("all", "所有权限"),
-    GET("get", "查询权限");
+    GET("get", "查询权限"),
+    ADD("add", "新增权限"),
+    PUT("put", "更新权限"),
+    DELETE("delete", "删除权限");
 
     /**
      * 值

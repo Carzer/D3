@@ -1,6 +1,7 @@
 package com.github.d3.security.config;
 
 import com.github.d3.provider.PermissionProvider;
+import com.github.d3.security.permission.DefaultPermissionProvider;
 import com.github.d3.security.permission.MethodSecurityExpressionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -52,7 +53,7 @@ public class MethodSecurityConfig extends GlobalMethodSecurityConfiguration {
     @Bean
     @ConditionalOnMissingBean(PermissionProvider.class)
     public PermissionProvider permissionProvider() {
-        return new com.github.d3.security.permission.PermissionProvider();
+        return new DefaultPermissionProvider();
     }
 
 }

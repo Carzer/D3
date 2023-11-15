@@ -9,6 +9,7 @@ import org.springframework.util.ObjectUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
@@ -85,7 +86,7 @@ public class JsonUtil extends JacksonUtil {
                 int length = deflater.deflate(bytes);
                 outputStream.write(bytes, 0, length);
             }
-            return Base64Utils.encodeToString(outputStream.toByteArray());
+            return Base64.getEncoder().encodeToString(outputStream.toByteArray());
         } catch (Exception e) {
             log.error("压缩json内容异常：", e);
             return null;
@@ -103,7 +104,7 @@ public class JsonUtil extends JacksonUtil {
     public String decompress(String compressedJson) {
         Inflater inflater = new Inflater();
         try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream(256);) {
-            byte[] decode = Base64Utils.decodeFromString(compressedJson);
+            byte[] decode = Base64.getDecoder().decode(compressedJson);
             inflater.setInput(decode);
             final byte[] bytes = new byte[256];
             while (!inflater.finished()) {

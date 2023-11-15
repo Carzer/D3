@@ -23,7 +23,7 @@ public enum UserTypeEnum implements Serializable {
      */
     SUPER_ADMIN(0, "超级管理员"),
     TENANT_ADMIN(100, "租户管理员"),
-    NORMAL_USER(1_000, "普通用户");
+    NORMAL_USER(10_000, "普通用户");
 
     /**
      * 用户类型枚举map

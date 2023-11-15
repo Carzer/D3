@@ -9,23 +9,18 @@ import lombok.Setter;
  * @author Carzer1020@163.com
  * @since 2020-12-21
  */
-public enum ErrorCode implements DmsCode {
+
+@Getter
+public class MutableCode implements D3Code {
 
     /**
-     * 操作码
+     * 编码,默认（1001, "操作失败"）
      */
-    FAILED(1001, "操作失败");
-
-    /**
-     * 编码
-     */
-    @Getter
     private final long code;
 
     /**
      * 信息
      */
-    @Getter
     @Setter
     private String message;
 
@@ -35,9 +30,18 @@ public enum ErrorCode implements DmsCode {
      * @param code    编码
      * @param message 信息
      */
-    ErrorCode(long code, String message) {
+    public MutableCode(long code, String message) {
         this.code = code;
         this.message = message;
+    }
+
+    /**
+     * 构造方法
+     *
+     * @param message 信息
+     */
+    public MutableCode(String message) {
+        this(1_001, message);
     }
 
 }

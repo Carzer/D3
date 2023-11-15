@@ -1,21 +1,24 @@
 package com.github.d3.aspect.datasource;
 
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.d3.annotations.datasource.DataSource;
+import com.github.d3.code.RCode;
+import com.github.d3.enums.DatasourceTypeEnum;
+import com.github.d3.exception.D3Exception;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Method;
+import java.time.Duration;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * 数据源AOP切面定义
@@ -37,79 +40,57 @@ public class DataSourceAspect {
     private final List<DynamicDataSourceProvider> dynamicDataSourceProviders;
 
     /**
-     * AOP切面的切入点（使用注解的方法）
+     * 数据源缓存
      */
-    @Pointcut("@annotation(com.github.d3.annotations.datasource.DataSource)")
-    public void dataSourcePointCut() {
-        // 标记方法
-    }
+    private final Cache<DatasourceTypeEnum, DynamicDataSourceProvider> providerCache = Caffeine.newBuilder()
+            .expireAfterWrite(Duration.ofHours(1)).maximumSize(100).build();
 
-    /**
-     * 在方法执行前切换数据源
-     *
-     * @param joinPoint 切入点
-     */
-    @Before("dataSourcePointCut()")
-    public void before(JoinPoint joinPoint) {
-        DataSource dataSource = dataSource(joinPoint);
-        if (dataSource != null) {
-            getProviderOptional(dataSource)
-                    .ifPresentOrElse(provider ->
-                                    provider.before(dataSource.value())
-                            , () -> {
-                            }
-                    );
+    @SneakyThrows
+    @Around("@within(dataSource) || @annotation(dataSource)")
+    public Object around(ProceedingJoinPoint point, DataSource dataSource) {
+        // 先判断 dataSource 是否为空, 为空则尝试获取上一级注解
+        if (dataSource == null) {
+            Class<?> clazz = point.getTarget().getClass();
+            dataSource = AnnotationUtils.findAnnotation(clazz, DataSource.class);
         }
-    }
 
-    /**
-     * 执行完切面后，将线程共享中的数据源名称清空
-     */
-    @After("dataSourcePointCut()")
-    public void after(JoinPoint joinPoint) {
-        DataSource dataSource = dataSource(joinPoint);
-        if (dataSource != null) {
-            getProviderOptional(dataSource)
-                    .ifPresentOrElse(provider ->
-                                    provider.after(dataSource.value())
-                            , () -> {
-                            }
-                    );
+        // 如果数据源配置信息异常，就不再执行后续操作
+        if (dataSource == null) {
+            throw new D3Exception(RCode.ERROR);
         }
-    }
 
-    /**
-     * 获取数据源
-     *
-     * @param joinPoint 织入点
-     * @return 数据源
-     */
-    private DataSource dataSource(JoinPoint joinPoint) {
-        try {
-            // 如果方法上存在切换数据源的注解，则根据注解内容进行数据源切换
-            MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-            // 获取切入点所在的方法
-            Method method = signature.getMethod();
-            // 获取具体内容
-            return method.getAnnotation(DataSource.class);
-        } catch (Exception e) {
-            log.error("get dataSource error: ", e);
-            return null;
-        }
+        // 获取数据源名称及类型
+        String dataSourceName = dataSource.value();
+        DatasourceTypeEnum dataSourceType = dataSource.type();
+
+        // 获取对应的数据源provider，执行对应的before及after方法
+        DynamicDataSourceProvider provider = getProvider(dataSourceType);
+        provider.before(dataSourceName);
+        Object result = point.proceed();
+        provider.after(dataSourceName);
+        return result;
     }
 
     /**
      * 获取provider
      *
-     * @param dataSource 数据源
+     * @param type 数据源类型
      * @return provider
      */
-    private Optional<DynamicDataSourceProvider> getProviderOptional(DataSource dataSource) {
-        return dynamicDataSourceProviders
-                .stream()
-                .filter(provider ->
-                        provider.supports(dataSource.datasourceType())
-                ).findFirst();
+    private DynamicDataSourceProvider getProvider(DatasourceTypeEnum type) {
+        if (type == null) {
+            throw new D3Exception(RCode.DB_TYPE_NOT_SUPPORTED);
+        }
+        return providerCache.get(type, key ->
+                dynamicDataSourceProviders
+                        .stream()
+                        .filter(provider ->
+                                provider.supports(key)
+                        ).findFirst()
+                        .orElseThrow(
+                                () -> new D3Exception(RCode.DB_TYPE_NOT_SUPPORTED)
+                        )
+        );
     }
 
 }
