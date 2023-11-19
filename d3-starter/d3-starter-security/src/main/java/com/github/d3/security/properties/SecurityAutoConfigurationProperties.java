@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  */
 @Getter
 @Component
-@ConfigurationProperties(prefix = "dms.security", ignoreInvalidFields = true)
+@ConfigurationProperties(prefix = "d3.security", ignoreInvalidFields = true)
 public class SecurityAutoConfigurationProperties {
 
     /**

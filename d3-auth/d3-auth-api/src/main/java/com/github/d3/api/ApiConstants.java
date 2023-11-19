@@ -14,6 +14,6 @@ public class ApiConstants {
     /**
      * feign client的name属性
      */
-    public final String CLIENT_NAME = "dms-auth-server";
+    public final String CLIENT_NAME = "d3-auth-server";
 
 }

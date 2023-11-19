@@ -18,7 +18,7 @@ import java.util.List;
 @Setter
 @Getter
 @Component
-@ConfigurationProperties(prefix = "dms.data.mp", ignoreInvalidFields = true)
+@ConfigurationProperties(prefix = "d3.data.mp", ignoreInvalidFields = true)
 public class MpDataControlProperties {
 
     /**

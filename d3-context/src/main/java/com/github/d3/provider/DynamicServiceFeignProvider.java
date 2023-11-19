@@ -157,7 +157,7 @@ public class DynamicServiceFeignProvider implements FeignProvider {
      */
     @Setter
     @Getter
-    @ConfigurationProperties(prefix = "dms.feign", ignoreInvalidFields = true)
+    @ConfigurationProperties(prefix = "d3.feign", ignoreInvalidFields = true)
     public static class DynamicServiceConfig {
 
         /**

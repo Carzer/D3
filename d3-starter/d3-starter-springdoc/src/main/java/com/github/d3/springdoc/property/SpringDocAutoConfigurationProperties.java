@@ -12,7 +12,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Setter
 @Getter
-@ConfigurationProperties(prefix = "dms.springdoc", ignoreInvalidFields = true)
+@ConfigurationProperties(prefix = "d3.springdoc", ignoreInvalidFields = true)
 public class SpringDocAutoConfigurationProperties {
 
     /**

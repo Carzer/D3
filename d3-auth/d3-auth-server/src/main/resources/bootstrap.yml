@@ -24,7 +24,7 @@ spring:
     active: @spring.profiles.active@
   config:
     import:
-      - optional:classpath:/conf/dms/${spring.profiles.active}.yml
+      - optional:classpath:/conf/d3/${spring.profiles.active}.yml
       - optional:classpath:/conf/jetcache/${spring.profiles.active}.yml
       - optional:classpath:/conf/seata/${spring.profiles.active}.yml
 
@@ -41,7 +41,7 @@ mybatis-plus:
 # spring doc 配置
 springdoc:
   packages-to-scan: com.github.d3.auth.controller
-dms:
+d3:
   springdoc:
     title: ${spring.application.name}
     description: @project.description@

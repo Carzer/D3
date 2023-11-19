@@ -18,7 +18,7 @@ import java.util.List;
 @Setter
 @Getter
 @Component
-@ConfigurationProperties(prefix = "dms.tenant.mp", ignoreInvalidFields = true)
+@ConfigurationProperties(prefix = "d3.tenant.mp", ignoreInvalidFields = true)
 public class MpTenantControlProperties {
 
     /**
