@@ -19,6 +19,15 @@ import org.springframework.web.client.RestTemplate;
 public class AuthServer {
 
     public static void main(String[] args) {
+
+        // 设置nacos日志及缓存路径
+        System.setProperty("JM.LOG.PATH", "logs/auth");
+        System.setProperty("JM.SNAPSHOT.PATH", "logs/auth");
+        // 设置nacos日志级别
+        System.setProperty("com.alibaba.nacos.naming.log.level", "error");
+        System.setProperty("com.alibaba.nacos.config.log.level", "error");
+
+        // 启动项目
         SpringApplication.run(AuthServer.class, args);
         String repeat = "=".repeat(20);
         log.warn("{} 授权中心启动成功 {}", repeat, repeat);

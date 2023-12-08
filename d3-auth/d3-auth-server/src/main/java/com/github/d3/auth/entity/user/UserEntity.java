@@ -67,10 +67,10 @@ public class UserEntity extends MpBaseEntity {
     private Long externalId;
 
     /**
-     * 密码
+     * 凭证
      */
     @TableField(exist = false)
-    private String password;
+    private String credentials;
 
     /**
      * 用户相关信息

@@ -47,12 +47,12 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
      * 根据关键词获取用户
      * 当前支持手机号及用户名
      *
-     * @param key key
+     * @param account key
      * @return 用户信息
      */
     @Override
-    public UserEntity loadUser(String key) {
-        return null;
+    public UserEntity loadUser(String account) {
+        return userMapper.loadUserWithCredentials(account);
     }
 
     /**
@@ -158,9 +158,19 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
 
     }
 
+    /**
+     * 根据用户名查询用户
+     *
+     * @param username the username identifying the user whose data is required.
+     * @return 用户
+     * @throws UsernameNotFoundException 未查询到用户
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity user = loadUser(username);
-        return new User(user.getName(), user.getPassword(), Collections.emptySet());
+        if (user == null) {
+            throw new UsernameNotFoundException("未查询到用户");
+        }
+        return new User(user.getName(), user.getCredentials(), Collections.emptySet());
     }
 }

@@ -45,6 +45,6 @@ public class UserAccountEntity extends MpBaseEntity {
      * 是否启用登录
      */
     @TableField("enabled")
-    private Byte enabled;
+    private Boolean enabled;
 
 }

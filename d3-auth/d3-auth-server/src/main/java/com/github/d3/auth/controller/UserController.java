@@ -66,7 +66,6 @@ public class UserController extends MpBaseController<UserDTO, UserEntity> {
     @Override
     public R<PageResult<UserDTO>> getPage(PageQuery pageQuery, UserDTO userDTO, @Parameter(hidden = true) Principal principal) {
         UserEntity userEntity = BeanCopyUtil.copy(userDTO, UserEntity.class);
-        userEntity.equals(userEntity);
         PageResult<?> page = userService.getPage(pageQuery, userEntity);
         return new R<>(BeanCopyUtil.convertPage(page, UserDTO.class));
     }
