@@ -39,7 +39,7 @@ public class MpBaseEntity implements BaseEntity {
      * 创建时间
      */
     @TableField(value = JdbcDataBaseConstants.CREATE_DATE_COLUMN, fill = FieldFill.INSERT)
-    private LocalDateTime createDate;
+    private LocalDateTime createTime;
 
     /**
      * 更新人
@@ -51,7 +51,7 @@ public class MpBaseEntity implements BaseEntity {
      * 更新时间
      */
     @TableField(value = JdbcDataBaseConstants.UPDATE_DATE_COLUMN, fill = FieldFill.UPDATE)
-    private LocalDateTime updateDate;
+    private LocalDateTime updateTime;
 
     /**
      * 删除标记(0:未删除，其他:已删除)
