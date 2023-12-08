@@ -42,20 +42,22 @@ public class TrimFilter extends OncePerRequestFilter {
             throws IOException, ServletException {
         boolean isDebugEnabled = log.isDebugEnabled();
         if (isDebugEnabled) {
-            log.debug("进入Trim Filter，开始判断是否需要进行过滤");
+            log.debug("当前请求URL[{}],进入Trim Filter，开始判断是否需要进行过滤", request.getRequestURI());
         }
         if (noTrim(request)) {
             if (isDebugEnabled) {
                 log.debug("Header[{}]，值为true，不需要过滤", CommonConstants.NO_TRIM_HEADER);
             }
-            filterChain.doFilter(request, response);
         } else {
             if (isDebugEnabled) {
                 log.debug("Header[{}]，值非true，开始过滤", CommonConstants.NO_TRIM_HEADER);
             }
-            RequestTrimWrapper paramsRequest = new RequestTrimWrapper(request);
-            filterChain.doFilter(paramsRequest, response);
+            request = new RequestTrimWrapper(request);
         }
+        if (isDebugEnabled) {
+            log.debug("当前请求URL[{}],结束过滤行为", request.getRequestURI());
+        }
+        filterChain.doFilter(request, response);
     }
 
     /**

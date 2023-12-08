@@ -34,21 +34,6 @@ public final class JdbcDataBaseConstants {
     public static final String UPDATE_DATE_COLUMN = "update_date";
 
     /**
-     * 删除人字段
-     */
-    public static final String DELETE_BY_PROPERTY = "deleteBy";
-
-    /**
-     * 删除人列
-     */
-    public static final String DELETE_BY_COLUMN = "delete_by";
-
-    /**
-     * 删除时间列
-     */
-    public static final String DELETE_DATE_COLUMN = "delete_date";
-
-    /**
      * 删除标识列
      */
     public static final String DELETE_FLAG_COLUMN = "delete_flag";
@@ -87,12 +72,6 @@ public final class JdbcDataBaseConstants {
      * 未逻辑删除的值
      */
     public static final String LOG_NON_DELETE_VAL = "0";
-
-    /**
-     * 逻辑删除时的填充内容
-     */
-    public static final String LOGIC_DELETE_FILL =
-            ID + ", " + DELETE_DATE_COLUMN + " = now(), " + DELETE_BY_COLUMN + " = '" + DELETE_BY_PROPERTY + "'";
 
     /**
      * 私有构造方法

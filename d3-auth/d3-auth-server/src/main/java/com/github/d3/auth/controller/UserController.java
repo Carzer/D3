@@ -3,7 +3,7 @@ package com.github.d3.auth.controller;
 import com.github.d3.R;
 import com.github.d3.annotations.security.PreAuth;
 import com.github.d3.auth.dto.UserDTO;
-import com.github.d3.auth.entity.UserEntity;
+import com.github.d3.auth.entity.user.UserEntity;
 import com.github.d3.auth.service.UserService;
 import com.github.d3.data.jdbc.controller.MpBaseController;
 import com.github.d3.data.jdbc.service.MpBaseService;
@@ -66,6 +66,7 @@ public class UserController extends MpBaseController<UserDTO, UserEntity> {
     @Override
     public R<PageResult<UserDTO>> getPage(PageQuery pageQuery, UserDTO userDTO, @Parameter(hidden = true) Principal principal) {
         UserEntity userEntity = BeanCopyUtil.copy(userDTO, UserEntity.class);
+        userEntity.equals(userEntity);
         PageResult<?> page = userService.getPage(pageQuery, userEntity);
         return new R<>(BeanCopyUtil.convertPage(page, UserDTO.class));
     }

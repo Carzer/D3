@@ -69,3 +69,7 @@ gen_code
 
 ### node ###
 node_modules
+
+### PDManer ###
+.back_D3/
+D3.pdma.json

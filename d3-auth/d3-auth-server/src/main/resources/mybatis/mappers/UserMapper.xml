@@ -3,7 +3,7 @@
 <mapper namespace="com.github.d3.auth.mapper.UserMapper">
 
     <!--基础result map-->
-    <resultMap id="BaseResultMap" type="com.github.d3.auth.entity.UserEntity">
+    <resultMap id="BaseResultMap" type="com.github.d3.auth.entity.user.UserEntity">
         <result column="id" jdbcType="VARCHAR" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="login_name" jdbcType="VARCHAR" property="loginName"/>

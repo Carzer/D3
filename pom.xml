@@ -39,6 +39,7 @@
         <!-- Spring版本定义 -->
         <spring-boot.version>3.1.5</spring-boot.version>
         <spring-cloud.version>2022.0.4</spring-cloud.version>
+        <alibaba.dependency.version>2022.0.0.0</alibaba.dependency.version>
         <!-- SLF4J版本定义 -->
         <slf4j.version>2.0.9</slf4j.version>
         <!-- mybatis-plus版本定义 -->
@@ -84,6 +85,14 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- alibaba -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${alibaba.dependency.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -326,6 +335,20 @@
                 <spring.profiles.active>dev</spring.profiles.active>
                 <!-- 微服务前缀 -->
                 <prefix>dev</prefix>
+                <!-- 配置中心服务信息 -->
+                <nacos.config.server.addr>localhost:18848</nacos.config.server.addr>
+                <nacos.config.username>nacos</nacos.config.username>
+                <nacos.config.password>nacos</nacos.config.password>
+                <nacos.config.namespace>708eee93-3c07-4692-a20b-955acf56f334</nacos.config.namespace>
+                <nacos.config.group>d3-dev</nacos.config.group>
+                <!-- 注册中心服务信息 -->
+                <nacos.discovery.server.addr>localhost:18848</nacos.discovery.server.addr>
+                <nacos.discovery.username>nacos</nacos.discovery.username>
+                <nacos.discovery.password>nacos</nacos.discovery.password>
+                <nacos.discovery.namespace>708eee93-3c07-4692-a20b-955acf56f334</nacos.discovery.namespace>
+                <nacos.discovery.group>d3-dev</nacos.discovery.group>
+                <!-- Sentinel控制台服务信息 -->
+                <sentinel.dashboard.addr>localhost:8787</sentinel.dashboard.addr>
             </properties>
         </profile>
         <profile>

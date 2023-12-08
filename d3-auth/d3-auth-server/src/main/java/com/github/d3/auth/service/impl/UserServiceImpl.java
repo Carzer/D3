@@ -2,13 +2,11 @@ package com.github.d3.auth.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.incrementer.DefaultIdentifierGenerator;
-import com.github.d3.auth.entity.UserEntity;
+import com.github.d3.auth.entity.user.UserEntity;
 import com.github.d3.auth.mapper.UserMapper;
 import com.github.d3.auth.service.UserService;
 import com.github.d3.auth.util.AuthPasswordEncoder;
-import com.github.d3.code.RCode;
 import com.github.d3.data.jdbc.service.impl.MpBaseServiceImpl;
-import com.github.d3.exception.BizException;
 import com.github.d3.page.PageQuery;
 import com.github.d3.page.PageResult;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +18,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 
 import java.util.Collections;
 import java.util.List;
@@ -57,17 +53,6 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
     @Override
     public UserEntity loadUser(String key) {
         return null;
-    }
-
-    /**
-     * 根据手机号获取用户
-     *
-     * @param id userId
-     * @return 用户主键
-     */
-    @Override
-    public UserEntity loadUserById(Long id) {
-        return userMapper.selectById(id);
     }
 
     /**
@@ -158,9 +143,9 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
          */
         AuthPasswordEncoder passwordEncoder = new AuthPasswordEncoder();
         // 密码加密
-        String rawPass = userEntity.getPassword();
-        String encodedPass = StringUtils.hasText(rawPass) ? passwordEncoder.encode(rawPass) : "$2a$10$89UJRZ6A.ubPmT9MrN6iEePGKdmW2N2b8tIe3Ng1MAVaTfRB2gTKC";
-        userEntity.setPassword(encodedPass);
+//        String rawPass = userEntity.getPassword();
+//        String encodedPass = StringUtils.hasText(rawPass) ? passwordEncoder.encode(rawPass) : "$2a$10$89UJRZ6A.ubPmT9MrN6iEePGKdmW2N2b8tIe3Ng1MAVaTfRB2gTKC";
+//        userEntity.setPassword(encodedPass);
     }
 
     /**

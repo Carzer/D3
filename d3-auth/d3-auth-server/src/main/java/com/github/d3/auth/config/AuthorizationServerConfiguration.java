@@ -39,7 +39,7 @@ import java.util.UUID;
  * AuthorizationServer配置
  *
  * @author Carzer1020@163.com
- * @since 2022-11-28
+ * @since 2023-11-18
  */
 @Configuration
 @EnableWebSecurity
@@ -75,6 +75,7 @@ public class AuthorizationServerConfiguration {
             throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/v3/api-docs", "/oauth/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 // Form login handles the redirect to the login page from the

@@ -54,21 +54,9 @@ public class MpBaseEntity implements BaseEntity {
     private LocalDateTime updateDate;
 
     /**
-     * 删除人
-     */
-    @TableField(value = JdbcDataBaseConstants.DELETE_BY_COLUMN)
-    private String deleteBy;
-
-    /**
-     * 删除时间
-     */
-    @TableField(value = JdbcDataBaseConstants.DELETE_DATE_COLUMN)
-    private LocalDateTime deleteDate;
-
-    /**
      * 删除标记(0:未删除，其他:已删除)
      */
-    @TableLogic(value = JdbcDataBaseConstants.LOG_NON_DELETE_VAL, delval = JdbcDataBaseConstants.LOGIC_DELETE_FILL)
+    @TableLogic(value = JdbcDataBaseConstants.LOG_NON_DELETE_VAL)
     @TableField(JdbcDataBaseConstants.DELETE_FLAG_COLUMN)
     private Long deleteFlag;
 

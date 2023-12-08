@@ -14,6 +14,7 @@ public enum GenderEnum {
     /**
      * 性别
      */
+    UNKNOWN(-1, "unknown", "不便透露"),
     MALE(0, "male", "男"),
     FEMALE(1, "female", "女");
 

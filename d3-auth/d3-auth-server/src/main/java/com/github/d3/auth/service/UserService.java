@@ -1,6 +1,6 @@
 package com.github.d3.auth.service;
 
-import com.github.d3.auth.entity.UserEntity;
+import com.github.d3.auth.entity.user.UserEntity;
 import com.github.d3.data.jdbc.service.MpBaseService;
 
 /**
@@ -18,13 +18,5 @@ public interface UserService extends MpBaseService<UserEntity> {
      * @return 用户信息
      */
     UserEntity loadUser(String account);
-
-    /**
-     * 根据手机号获取用户
-     *
-     * @param id userId
-     * @return 用户主键
-     */
-    UserEntity loadUserById(Long id);
 
 }

@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerIntercep
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.github.d3.data.jdbc.interceptor.FillLineInterceptor;
-import com.github.d3.data.jdbc.interceptor.LogicDeleteInterceptor;
 import com.github.d3.data.jdbc.property.MpDataControlProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,11 +32,6 @@ import java.util.Map;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class MpConfiguration {
-
-    /**
-     * 逻辑删除插件
-     */
-    private final LogicDeleteInterceptor logicDeleteInterceptor;
 
     /**
      * 自定义配置
@@ -67,8 +61,6 @@ public class MpConfiguration {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
         // 设置数据权限控制器
         dataControl(interceptor);
-        // 设置逻辑删除插件
-        interceptor.addInnerInterceptor(logicDeleteInterceptor);
         // 自动填充列
         if (!CollectionUtils.isEmpty(fillLineInterceptors)) {
             fillLineInterceptors.values().forEach(interceptor::addInnerInterceptor);

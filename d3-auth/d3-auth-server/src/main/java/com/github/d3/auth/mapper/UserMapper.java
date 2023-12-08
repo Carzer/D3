@@ -1,6 +1,6 @@
 package com.github.d3.auth.mapper;
 
-import com.github.d3.auth.entity.UserEntity;
+import com.github.d3.auth.entity.user.UserEntity;
 import com.github.d3.data.jdbc.mapper.MpBasisMapper;
 
 /**

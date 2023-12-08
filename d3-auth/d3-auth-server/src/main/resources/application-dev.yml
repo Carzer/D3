@@ -4,7 +4,7 @@ spring:
     jdbc:
       multi:
         mysql01:
-          jdbc-url: jdbc:mysql://localhost:13306/april?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&allowMultiQueries=true&rewriteBatchedStatements=true&useSSL=false
+          jdbc-url: jdbc:mysql://localhost:13306/d3?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&allowMultiQueries=true&rewriteBatchedStatements=true&useSSL=false
           username: d3
           password: K0tXBGwNHBl#
           driver-class-name: com.mysql.cj.jdbc.Driver
@@ -25,9 +25,26 @@ spring:
           connection-timeout: 60_000
 
   cloud:
+    # loadbalancer缓存配置
     loadbalancer:
-      # loadbalancer缓存配置
       cache:
         enabled: true
         caffeine:
           spec: initialCapacity=50,maximumSize=500,expireAfterWrite=5s
+    # alibaba nacos
+    nacos:
+      discovery:
+        service: @prefix@${spring.application.name}
+        namespace: '@nacos.discovery.namespace@'
+        group: '@nacos.discovery.group@'
+        server-addr: '@nacos.discovery.server.addr@'
+        username: '@nacos.discovery.username@'
+        password: '@nacos.discovery.password@'
+
+# spring actuator配置
+management:
+  health:
+    # 数据库健康检查
+    db:
+      # 关闭检查，在没有真实数据库的情况下，不阻碍项目启动
+      enabled: false

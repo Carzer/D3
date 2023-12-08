@@ -22,12 +22,16 @@ spring:
       load-on-startup: -1
   profiles:
     active: @spring.profiles.active@
-  config:
-    import:
-      - optional:classpath:/conf/d3/${spring.profiles.active}.yml
-      - optional:classpath:/conf/jetcache/${spring.profiles.active}.yml
-      - optional:classpath:/conf/seata/${spring.profiles.active}.yml
-
+  cloud:
+    nacos:
+      config:
+        server-addr: '@nacos.config.server.addr@'
+        username: '@nacos.config.username@'
+        password: '@nacos.config.password@'
+        namespace: '@nacos.config.namespace@'
+        group: '@nacos.config.group@'
+        prefix: ${spring.application.name}-${spring.profiles.active}
+        file-extension: yaml
   servlet:
     multipart:
       max-file-size: 1GB
