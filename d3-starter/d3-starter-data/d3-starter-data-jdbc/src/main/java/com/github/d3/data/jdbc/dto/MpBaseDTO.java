@@ -40,7 +40,7 @@ public class MpBaseDTO implements BaseDTO {
      */
     @Schema(description = "创建时间")
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private LocalDateTime createDate;
+    private LocalDateTime createTime;
 
     /**
      * 更新人
@@ -54,7 +54,7 @@ public class MpBaseDTO implements BaseDTO {
      */
     @Schema(description = "更新时间")
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private LocalDateTime updateDate;
+    private LocalDateTime updateTime;
 
     /**
      * 版本号
