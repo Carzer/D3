@@ -36,6 +36,12 @@ public class MpBaseEntity implements BaseEntity {
     private String createBy;
 
     /**
+     * 创建人ID
+     */
+    @TableField(value = JdbcDataBaseConstants.CREATE_BY_ID_COLUMN,fill = FieldFill.INSERT)
+    private Long createById;
+
+    /**
      * 创建时间
      */
     @TableField(value = JdbcDataBaseConstants.CREATE_DATE_COLUMN, fill = FieldFill.INSERT)
@@ -46,6 +52,12 @@ public class MpBaseEntity implements BaseEntity {
      */
     @TableField(value = JdbcDataBaseConstants.UPDATE_BY_COLUMN, fill = FieldFill.UPDATE)
     private String updateBy;
+
+    /**
+     * 更新人ID
+     */
+    @TableField(value = JdbcDataBaseConstants.UPDATE_BY_ID_COLUMN, fill = FieldFill.UPDATE)
+    private String updateById;
 
     /**
      * 更新时间

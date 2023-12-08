@@ -35,6 +35,7 @@ public class MpMetaObjectHandler implements MetaObjectHandler {
             log.debug("start insert fill ....");
         }
         this.strictInsertFill(metaObject, JdbcDataBaseConstants.CREATE_BY_PROPERTY, AuthUtil::getName, String.class);
+        this.strictInsertFill(metaObject, JdbcDataBaseConstants.CREATE_BY_ID_PROPERTY, AuthUtil::getUserId, Long.class);
         this.strictInsertFill(metaObject, JdbcDataBaseConstants.CREATE_DATE_PROPERTY, LocalDateTime::now, LocalDateTime.class);
         this.strictInsertFill(metaObject, JdbcDataBaseConstants.VERSION, () -> 0, Integer.class);
     }
@@ -50,6 +51,7 @@ public class MpMetaObjectHandler implements MetaObjectHandler {
             log.debug("start update fill ....");
         }
         this.strictUpdateFill(metaObject, JdbcDataBaseConstants.UPDATE_BY_PROPERTY, AuthUtil::getName, String.class);
+        this.strictUpdateFill(metaObject, JdbcDataBaseConstants.UPDATE_BY_ID_PROPERTY, AuthUtil::getUserId, Long.class);
         this.strictUpdateFill(metaObject, JdbcDataBaseConstants.UPDATE_DATE_PROPERTY, LocalDateTime::now, LocalDateTime.class);
     }
 

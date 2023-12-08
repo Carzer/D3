@@ -19,19 +19,29 @@ public final class JdbcDataBaseConstants {
     public static final String UPDATE_BY_PROPERTY = "updateBy";
 
     /**
-     * 更新人字段
+     * 更新人列
      */
     public static final String UPDATE_BY_COLUMN = "update_by";
 
     /**
-     * 更新时间字段
+     * 更新人ID字段
      */
-    public static final String UPDATE_DATE_PROPERTY = "updateDate";
+    public static final String UPDATE_BY_ID_PROPERTY = "updateById";
+
+    /**
+     * 更新人ID列
+     */
+    public static final String UPDATE_BY_ID_COLUMN = "update_by_id";
 
     /**
      * 更新时间字段
      */
-    public static final String UPDATE_DATE_COLUMN = "update_date";
+    public static final String UPDATE_DATE_PROPERTY = "updateTime";
+
+    /**
+     * 更新时间字段
+     */
+    public static final String UPDATE_DATE_COLUMN = "update_time";
 
     /**
      * 删除标识列
@@ -49,14 +59,24 @@ public final class JdbcDataBaseConstants {
     public static final String CREATE_BY_COLUMN = "create_by";
 
     /**
+     * 创建人ID字段
+     */
+    public static final String CREATE_BY_ID_PROPERTY = "createById";
+
+    /**
+     * 创建人ID列
+     */
+    public static final String CREATE_BY_ID_COLUMN = "create_by_id";
+
+    /**
      * 创建时间字段
      */
-    public static final String CREATE_DATE_PROPERTY = "createDate";
+    public static final String CREATE_DATE_PROPERTY = "createTime";
 
     /**
      * 创建时间列
      */
-    public static final String CREATE_DATE_COLUMN = "create_date";
+    public static final String CREATE_DATE_COLUMN = "create_time";
 
     /**
      * 乐观锁字段

@@ -28,6 +28,16 @@ public class AuthUtil {
     }
 
     /**
+     * 获取当前用户ID
+     *
+     * @return 当前用户ID
+     */
+    public Long getUserId() {
+        // todo 获取当前用户ID
+        return -1L;
+    }
+
+    /**
      * 由security上下文环境中获取角色列表
      *
      * @return 当前用户角色列表
