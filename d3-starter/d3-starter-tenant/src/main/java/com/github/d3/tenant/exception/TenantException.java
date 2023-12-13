@@ -1,16 +1,17 @@
-package com.github.d3.exception;
+package com.github.d3.tenant.exception;
 
 import com.github.d3.code.D3Code;
+import com.github.d3.exception.AbstractD3Exception;
 import lombok.Getter;
 
 /**
- * D3系统相关异常
+ * 租户相关异常
  *
  * @author Carzer1020@163.com
- * @since 2023-11-14
+ * @since 2023-12-12
  */
 @Getter
-public final class D3Exception extends AbstractD3Exception {
+public class TenantException extends AbstractD3Exception {
 
     /**
      * 异常编码
@@ -22,8 +23,7 @@ public final class D3Exception extends AbstractD3Exception {
      *
      * @param code 异常编码
      */
-    public D3Exception(D3Code code) {
+    public TenantException(D3Code code) {
         this.code = code;
     }
-
 }

@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * 凭证类型
  *
- * @author wanghongqun
+ * @author Carzer1020@163.com
  * @since 2023-12-07
  */
 @Getter

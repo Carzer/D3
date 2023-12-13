@@ -8,7 +8,7 @@ import com.github.d3.code.D3Code;
  * @author Carzer1020@163.com
  * @since 2022-11-25
  */
-public abstract sealed class AbstractD3Exception extends RuntimeException permits D3Exception, BizException, MsgException {
+public abstract class AbstractD3Exception extends RuntimeException {
 
     /**
      * 消息构造方法

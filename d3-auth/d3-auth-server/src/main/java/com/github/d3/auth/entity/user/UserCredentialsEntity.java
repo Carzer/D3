@@ -12,7 +12,7 @@ import java.io.Serial;
 /**
  * 用户凭证
  *
- * @author wanghongqun
+ * @author Carzer1020@163.com
  * @since 2023-12-07
  */
 @Data

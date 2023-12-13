@@ -2,7 +2,9 @@ package com.github.d3.tenant.filter;
 
 import com.github.d3.tenant.TenantContext;
 import com.github.d3.tenant.TenantInfo;
+import com.github.d3.tenant.code.TenantCode;
 import com.github.d3.tenant.constants.TenantConstants;
+import com.github.d3.tenant.exception.TenantException;
 import com.github.d3.util.jackson.JsonUtil;
 import jakarta.servlet.DispatcherType;
 import jakarta.servlet.FilterChain;
@@ -44,6 +46,8 @@ public final class TenantFilter extends OncePerRequestFilter {
         setTenantInfo(request.getHeader(TenantConstants.HEADER_TENANT_INFO));
         // 其他操作
         filterChain.doFilter(request, response);
+        // 移除租户信息
+        removeTenantInfo();
     }
 
     /**
@@ -52,23 +56,21 @@ public final class TenantFilter extends OncePerRequestFilter {
      * @param tenantInfo 租户信息
      */
     private void setTenantInfo(String tenantInfo) {
-        boolean debug = log.isDebugEnabled();
-        if (debug) {
-            log.debug("current thread [{}] tenantInfo is [{}]", Thread.currentThread().getName(), tenantInfo);
-        }
         if (StringUtils.hasText(tenantInfo)) {
-            try {
-                TenantInfo info = JsonUtil.fromJson(tenantInfo, TenantInfo.class);
-                TenantContext.setInfo(info);
-                if (debug) {
-                    log.debug("current thread [{}] set[{}}] to TenantHolder", Thread.currentThread().getName(), tenantInfo);
-                }
-            } catch (Exception e) {
-                log.error("租户信息转换失败：", e);
-                TenantContext.removeInfo();
+            TenantInfo info = JsonUtil.fromJson(tenantInfo, TenantInfo.class);
+            TenantContext.TenantInfoHolder.setInfo(info);
+            if (log.isDebugEnabled()) {
+                log.debug("got tenant info to set, current thread [{}] set tenant info, id [{}]", Thread.currentThread().getName(), info.getTenantId());
             }
         } else {
-            TenantContext.removeInfo();
+            throw new TenantException(TenantCode.TENANT_INFO_NOT_FOUND);
         }
+    }
+
+    /**
+     * 清除租户信息
+     */
+    private void removeTenantInfo() {
+        TenantContext.TenantInfoHolder.removeInfo();
     }
 }

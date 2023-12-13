@@ -1,5 +1,6 @@
 package com.github.d3.auth.config;
 
+import com.github.d3.filter.CommonFilter;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
@@ -14,6 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
@@ -29,6 +31,7 @@ import org.springframework.security.oauth2.server.authorization.settings.Authori
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 
 import java.security.KeyPair;
@@ -47,6 +50,11 @@ import java.util.UUID;
 @EnableWebSecurity
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AuthorizationServerConfiguration {
+
+    /**
+     * 通用filter
+     */
+    private final CommonFilter commonFilter;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -87,7 +95,12 @@ public class AuthorizationServerConfiguration {
                 )
                 // Form login handles the redirect to the login page from the
                 // authorization server filter chain
-                .formLogin(Customizer.withDefaults());
+                .formLogin(Customizer.withDefaults())
+                // 关闭跨域防护
+                .csrf(AbstractHttpConfigurer::disable)
+        ;
+        // common filter
+        http.addFilterBefore(commonFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

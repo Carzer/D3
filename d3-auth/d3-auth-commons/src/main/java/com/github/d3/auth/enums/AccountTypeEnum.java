@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * 用户账户类型枚举类
  *
- * @author wanghongqun
+ * @author Carzer1020@163.com
  * @since 2023-11-14
  */
 @Getter

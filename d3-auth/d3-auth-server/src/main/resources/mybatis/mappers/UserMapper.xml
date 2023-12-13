@@ -28,7 +28,7 @@
     </resultMap>
 
     <!-- 根据账号信息查询用户(查询结果附带凭证) -->
-    <select id="loadUserWithCredentials" resultMap="CredentialsResultMap" parameterType="java.lang.String">
+    <select id="loadUserWithCredentials" resultMap="CredentialsResultMap">
         select u.id,
                u.name,
                u.user_type,
@@ -54,7 +54,7 @@
                  inner join user u
                             on u.id = ua.user_id
                  left join user_credentials uc
-                           on ua.user_id = uc.user_id and uc.credentials_type = 0
+                           on ua.user_id = uc.user_id and uc.credentials_type = #{credentialsType,jdbcType=INTEGER}
     </select>
 
 </mapper>

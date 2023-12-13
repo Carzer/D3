@@ -3,6 +3,7 @@ package com.github.d3.auth.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.incrementer.DefaultIdentifierGenerator;
 import com.github.d3.auth.entity.user.UserEntity;
+import com.github.d3.auth.enums.CredentialsTypeEnum;
 import com.github.d3.auth.mapper.UserMapper;
 import com.github.d3.auth.service.UserService;
 import com.github.d3.auth.util.AuthPasswordEncoder;
@@ -52,7 +53,7 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
      */
     @Override
     public UserEntity loadUser(String account) {
-        return userMapper.loadUserWithCredentials(account);
+        return userMapper.loadUserWithCredentials(account, CredentialsTypeEnum.PASSWORD);
     }
 
     /**

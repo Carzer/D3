@@ -15,7 +15,7 @@ public interface D3Code extends Serializable {
      *
      * @return 操作编码
      */
-    long getCode();
+    Long getCode();
 
     /**
      * 操作描述

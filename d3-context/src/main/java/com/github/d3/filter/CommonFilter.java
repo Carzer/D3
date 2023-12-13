@@ -38,29 +38,32 @@ public final class CommonFilter extends OncePerRequestFilter {
      */
     @Override
     protected void doFilterInternal(HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
-        // 设置来源系统
+        // 设置来源系统信息
         setSourceInfo(request.getHeader(CommonConstants.HEADER_SOURCE));
         // 其他操作
         filterChain.doFilter(request, response);
+        // 移除来源系统信息
+        removeSourceInfo();
     }
 
     /**
-     * 设置来源系统
+     * 设置来源系统信息
      *
-     * @param source 来源系统
+     * @param source 来源系统编码
      */
     private void setSourceInfo(String source) {
-        boolean debug = log.isDebugEnabled();
-        if (debug) {
-            log.debug("current thread [{}] source is [{}]", Thread.currentThread().getName(), source);
-        }
         if (StringUtils.hasText(source)) {
             Context.SourceHolder.setSource(source);
-            if (debug) {
-                log.debug("current thread [{}] set [{}}] to SourceHolder", Thread.currentThread().getName(), source);
+            if (log.isDebugEnabled()) {
+                log.debug("got source to set, current thread [{}] set source [{}] ", Thread.currentThread().getName(), source);
             }
-        } else {
-            Context.SourceHolder.removeSource();
         }
+    }
+
+    /**
+     * 移除来源系统信息
+     */
+    private void removeSourceInfo() {
+        Context.SourceHolder.removeSource();
     }
 }

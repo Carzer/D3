@@ -1,6 +1,7 @@
 package com.github.d3.auth.mapper;
 
 import com.github.d3.auth.entity.user.UserEntity;
+import com.github.d3.auth.enums.CredentialsTypeEnum;
 import com.github.d3.data.jdbc.mapper.MpBasisMapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -18,5 +19,5 @@ public interface UserMapper extends MpBasisMapper<UserEntity> {
      * @param account 账号
      * @return 用户
      */
-    UserEntity loadUserWithCredentials(@Param("account") String account);
+    UserEntity loadUserWithCredentials(@Param("account") String account, @Param("credentialsType") CredentialsTypeEnum credentialsType);
 }

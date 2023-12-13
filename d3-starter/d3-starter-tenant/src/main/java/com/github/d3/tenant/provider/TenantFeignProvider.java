@@ -24,7 +24,7 @@ public class TenantFeignProvider implements FeignProvider {
      */
     @Override
     public void apply(RequestTemplate requestTemplate) {
-        TenantInfo info = TenantContext.getInfo();
+        TenantInfo info = TenantContext.TenantInfoHolder.getInfo();
         if (info != null) {
             requestTemplate.header(TenantConstants.HEADER_TENANT_INFO, JsonUtil.toJson(info));
         }

@@ -1,7 +1,6 @@
 package com.github.d3.code;
 
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 通用编码(自定义错误信息)
@@ -16,13 +15,12 @@ public class MutableCode implements D3Code {
     /**
      * 编码,默认（1001, "操作失败"）
      */
-    private final long code;
+    private final Long code;
 
     /**
      * 信息
      */
-    @Setter
-    private String message;
+    private final String message;
 
     /**
      * 构造方法
@@ -30,7 +28,7 @@ public class MutableCode implements D3Code {
      * @param code    编码
      * @param message 信息
      */
-    public MutableCode(long code, String message) {
+    public MutableCode(Long code, String message) {
         this.code = code;
         this.message = message;
     }
@@ -41,7 +39,7 @@ public class MutableCode implements D3Code {
      * @param message 信息
      */
     public MutableCode(String message) {
-        this(1_001, message);
+        this(1_001L, message);
     }
 
 }
