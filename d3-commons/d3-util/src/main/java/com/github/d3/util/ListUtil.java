@@ -35,7 +35,7 @@ public class ListUtil {
     }
 
     /**
-     * 将list中的内容平铺：根据逗号连接
+     * 将list中的内容平铺:根据逗号连接
      * <p>
      * 例:
      * <p>
@@ -53,7 +53,7 @@ public class ListUtil {
     }
 
     /**
-     * 将list中的内容平铺：根据分隔符连接
+     * 将list中的内容平铺:根据分隔符连接
      *
      * @param list      list
      * @param func      平铺方法

@@ -11,12 +11,4 @@ import com.github.d3.data.jdbc.service.MpBaseService;
  */
 public interface UserService extends MpBaseService<UserEntity> {
 
-    /**
-     * 根据关键词获取用户
-     *
-     * @param account account
-     * @return 用户信息
-     */
-    UserEntity loadUser(String account);
-
 }

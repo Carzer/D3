@@ -30,7 +30,7 @@ public class MapUtil {
     /**
      * 根据数据大小，计算hashmap的初始值
      * <p>
-     * 计算公式：数据大小除以默认负载因子，向上取整后加1
+     * 计算公式:数据大小除以默认负载因子，向上取整后加1
      *
      * @param dataSize 数据大小
      * @return hashmap的初始值

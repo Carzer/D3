@@ -77,7 +77,6 @@ public class UserController extends MpBaseController<UserDTO, UserEntity> {
      */
     @Override
     protected void check(UserDTO userDTO) {
-        Assert.hasText(userDTO.getLoginName(), "登陆名不能为空");
         Assert.hasText(userDTO.getName(), "用户名不能为空");
     }
 

@@ -27,7 +27,7 @@ public final class R<T> {
      * <p>
      * {@link RCode}
      */
-    @Schema(description = "编码：1000,操作成功")
+    @Schema(description = "编码:1000,操作成功")
     private long code;
 
     /**

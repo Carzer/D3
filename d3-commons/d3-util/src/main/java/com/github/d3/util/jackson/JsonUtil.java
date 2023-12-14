@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.Base64Utils;
 import org.springframework.util.ObjectUtils;
 
 import java.io.ByteArrayOutputStream;
@@ -48,7 +47,7 @@ public class JsonUtil extends JacksonUtil {
         try {
             return ObjectUtils.isEmpty(json) ? null : MAPPER.readValue(json, valueType);
         } catch (JsonProcessingException e) {
-            log.error("由Json转换异常：", e);
+            log.error("由Json转换异常:", e);
             return null;
         }
     }
@@ -63,7 +62,7 @@ public class JsonUtil extends JacksonUtil {
         try {
             return MAPPER.readTree(json);
         } catch (JsonProcessingException e) {
-            log.error("读取Json对象为树，发生异常：", e);
+            log.error("读取Json对象为树，发生异常:", e);
             return MAPPER.createObjectNode();
         }
     }
@@ -78,7 +77,7 @@ public class JsonUtil extends JacksonUtil {
      */
     public String compress(String json) {
         Deflater deflater = new Deflater(Deflater.BEST_SPEED);
-        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream(256);) {
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream(256)) {
             deflater.setInput(json.getBytes(StandardCharsets.UTF_8));
             deflater.finish();
             final byte[] bytes = new byte[256];
@@ -103,7 +102,7 @@ public class JsonUtil extends JacksonUtil {
      */
     public String decompress(String compressedJson) {
         Inflater inflater = new Inflater();
-        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream(256);) {
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream(256)) {
             byte[] decode = Base64.getDecoder().decode(compressedJson);
             inflater.setInput(decode);
             final byte[] bytes = new byte[256];

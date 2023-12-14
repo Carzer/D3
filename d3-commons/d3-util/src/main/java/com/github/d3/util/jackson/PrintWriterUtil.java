@@ -3,7 +3,6 @@ package com.github.d3.util.jackson;
 
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.experimental.UtilityClass;
-import org.springframework.http.HttpStatus;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,7 +24,7 @@ public class PrintWriterUtil extends JacksonUtil {
      * @throws IOException IOException
      */
     public void write(HttpServletResponse httpServletResponse, Object o) throws IOException {
-        write(httpServletResponse, o, null);
+        write(httpServletResponse, o, -1);
     }
 
     /**
@@ -36,9 +35,9 @@ public class PrintWriterUtil extends JacksonUtil {
      * @param httpStatus          请求状态
      * @throws IOException IOException
      */
-    public void write(HttpServletResponse httpServletResponse, Object o, HttpStatus httpStatus) throws IOException {
-        if (httpStatus != null) {
-            httpServletResponse.setStatus(httpStatus.value());
+    public void write(HttpServletResponse httpServletResponse, Object o, int httpStatus) throws IOException {
+        if (httpStatus > -1) {
+            httpServletResponse.setStatus(httpStatus);
         }
         httpServletResponse.setContentType("application/json;charset=utf-8");
         String s = MAPPER.writeValueAsString(o);

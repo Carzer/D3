@@ -1,5 +1,6 @@
 package com.github.d3.auth.dto;
 
+import com.github.d3.auth.enums.UserTypeEnum;
 import com.github.d3.data.jdbc.dto.MpBaseDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Size;
@@ -23,29 +24,29 @@ public class UserDTO extends MpBaseDTO {
     private static final long serialVersionUID = -3569077309970490430L;
 
     /**
-     * 主键
+     * 姓名
      */
-    @Schema(description = "主键")
-    private Long id;
-
-    /**
-     * 用户名
-     */
-    @Schema(description = "用户名")
+    @Schema(description = "name")
     @Size(min = 1, max = 50)
+
     private String name;
 
     /**
-     * 登录名
+     * 用户类型
      */
-    @Schema(description = "登录名")
-    @Size(min = 1, max = 50)
-    private String loginName;
+    @Schema(description = "user_type")
+    private UserTypeEnum userType;
 
     /**
-     * 密码
+     * 手机号
      */
-    @Schema(description = "密码")
-    private String password;
+    @Schema(description = "phone")
+    private String phone;
+
+    /**
+     * 邮箱
+     */
+    @Schema(description = "email")
+    private String email;
 
 }

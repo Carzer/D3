@@ -1,5 +1,9 @@
 package com.github.d3.auth.config;
 
+import com.github.d3.auth.handler.D3AccessDeniedHandler;
+import com.github.d3.auth.handler.D3LogoutSuccessHandler;
+import com.github.d3.auth.handler.LoginFailureHandler;
+import com.github.d3.auth.handler.LoginSuccessHandler;
 import com.github.d3.filter.CommonFilter;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -95,7 +99,18 @@ public class AuthorizationServerConfiguration {
                 )
                 // Form login handles the redirect to the login page from the
                 // authorization server filter chain
-                .formLogin(Customizer.withDefaults())
+                .formLogin(formLogin ->
+                        formLogin.successHandler(new LoginSuccessHandler())
+                                .failureHandler(new LoginFailureHandler())
+                )
+                .logout(
+                        logout ->
+                                logout.logoutSuccessHandler(new D3LogoutSuccessHandler())
+                )
+                .exceptionHandling(
+                        exceptions ->
+                                exceptions.accessDeniedHandler(new D3AccessDeniedHandler())
+                )
                 // 关闭跨域防护
                 .csrf(AbstractHttpConfigurer::disable)
         ;

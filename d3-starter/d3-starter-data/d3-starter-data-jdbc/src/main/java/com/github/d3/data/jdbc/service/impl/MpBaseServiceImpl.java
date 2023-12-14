@@ -66,7 +66,7 @@ public class MpBaseServiceImpl<M extends MpBasisMapper<T>, T extends MpBaseEntit
      * 查询方法
      *
      * @param entity entity
-     * @return
+     * @return 实体类
      */
     @Override
     public T findOne(T entity) {

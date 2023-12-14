@@ -16,9 +16,9 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.List;
 
@@ -42,7 +42,7 @@ public final class D3ExceptionHandler {
     @ExceptionHandler(AbstractD3Exception.class)
     public R<String> executeFailed(HttpServletRequest request, AbstractD3Exception e) {
         urlInfo(request);
-        log.error("业务异常：{}", e.getCode().getMessage());
+        log.error("业务异常:{}", e.getCode().getMessage());
         return new R<>(e.getCode());
     }
 
@@ -55,7 +55,7 @@ public final class D3ExceptionHandler {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(AuthenticationException.class)
     public R<String> authFailed(HttpServletRequest request, AuthenticationException e) {
-        log.warn("未授权：{}", e.getMessage());
+        log.warn("未授权:{}", e.getMessage());
         debugInfo(request, e);
         return new R<>(RCode.UNAUTHORIZED);
     }
@@ -69,7 +69,7 @@ public final class D3ExceptionHandler {
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ExceptionHandler(AccessDeniedException.class)
     public R<String> forbidden(HttpServletRequest request, AccessDeniedException e) {
-        log.warn("权限拒绝：{}", e.getMessage());
+        log.warn("权限拒绝:{}", e.getMessage());
         debugInfo(request, e);
         return new R<>(RCode.FORBIDDEN);
     }
@@ -97,7 +97,7 @@ public final class D3ExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(IllegalStateException.class)
     public R<String> stateFailed(HttpServletRequest request, IllegalStateException e) {
-        log.warn("请求状态异常：{}", e.getMessage());
+        log.warn("请求状态异常:{}", e.getMessage());
         debugInfo(request, e);
         return R.fail(e.getMessage());
     }
@@ -112,7 +112,7 @@ public final class D3ExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     public R<String> validFailed(HttpServletRequest request, IllegalArgumentException e) {
         urlInfo(request);
-        log.warn("请求参数异常：{}", e.getMessage());
+        log.warn("请求参数异常:{}", e.getMessage());
         return R.fail(e.getMessage());
     }
 
@@ -131,7 +131,7 @@ public final class D3ExceptionHandler {
             errorMessage = e.getMessage();
         } else {
             try {
-                FieldError fieldError = (FieldError) allErrors.get(0);
+                FieldError fieldError = (FieldError) allErrors.getFirst();
                 errorMessage = fieldError.getDefaultMessage();
             } catch (Exception exception) {
                 log.error("获取[请求参数的异常的详细信息]时发生异常", exception);
@@ -139,7 +139,7 @@ public final class D3ExceptionHandler {
             }
         }
         urlInfo(request);
-        log.warn("请求参数异常：{}", errorMessage);
+        log.warn("请求参数异常:{}", errorMessage);
         return R.fail(errorMessage);
     }
 
@@ -153,7 +153,7 @@ public final class D3ExceptionHandler {
     @ExceptionHandler(ValidationException.class)
     public R<String> validFailed(HttpServletRequest request, ValidationException e) {
         urlInfo(request);
-        log.warn("参数校验异常：{}", e.getMessage());
+        log.warn("参数校验异常:{}", e.getMessage());
         return R.fail(e.getMessage());
     }
 
@@ -167,7 +167,7 @@ public final class D3ExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     public R<String> runtimeFailed(HttpServletRequest request, RuntimeException e) {
         urlInfo(request);
-        log.error("运行时异常：", e);
+        log.error("运行时异常:", e);
         return new R<>(RCode.SYSTEM_ERROR);
     }
 
@@ -181,7 +181,7 @@ public final class D3ExceptionHandler {
     @ExceptionHandler(Exception.class)
     public R<String> executeFailed(HttpServletRequest request, Exception e) {
         urlInfo(request);
-        log.error("系统异常：", e);
+        log.error("系统异常:", e);
         return new R<>(RCode.SYSTEM_ERROR);
     }
 
@@ -193,7 +193,7 @@ public final class D3ExceptionHandler {
     private void debugInfo(HttpServletRequest request, Exception e) {
         if (log.isDebugEnabled()) {
             urlInfo(request);
-            log.error("详细信息为：", e);
+            log.error("详细信息为:", e);
         }
     }
 
@@ -203,6 +203,6 @@ public final class D3ExceptionHandler {
      * @param request 请求
      */
     private void urlInfo(HttpServletRequest request) {
-        log.error("########## IP：[{}]，请求url：[{}]时出现异常 ##########", NetUtil.getRemoteIpAddress(request), request.getRequestURI());
+        log.error("########## IP:[{}]，请求url:[{}]时出现异常 ##########", NetUtil.getRemoteIpAddress(request), request.getRequestURI());
     }
 }

@@ -45,18 +45,6 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
     private final DefaultIdentifierGenerator identifierGenerator;
 
     /**
-     * 根据关键词获取用户
-     * 当前支持手机号及用户名
-     *
-     * @param account key
-     * @return 用户信息
-     */
-    @Override
-    public UserEntity loadUser(String account) {
-        return userMapper.loadUserWithCredentials(account, CredentialsTypeEnum.PASSWORD);
-    }
-
-    /**
      * 更新用户信息
      *
      * @param userEntity user
@@ -168,7 +156,7 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity user = loadUser(username);
+        UserEntity user = userMapper.loadUserWithCredentials(username, CredentialsTypeEnum.PASSWORD);
         if (user == null) {
             throw new UsernameNotFoundException("未查询到用户");
         }
