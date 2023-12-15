@@ -9,4 +9,4 @@
 Spring Boot Version: ${spring-boot.version}
 Spring Cloud Version: ${spring-cloud.version}
 
-Contact: @project.developers.developer.email@
+Contact: @project.developers[0].email@
