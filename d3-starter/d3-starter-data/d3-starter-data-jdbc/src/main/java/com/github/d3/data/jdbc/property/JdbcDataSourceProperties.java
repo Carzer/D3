@@ -18,12 +18,12 @@ import java.util.Map;
 @Getter
 @Setter
 @Component
-@ConfigurationProperties(prefix = "spring.datasource.jdbc", ignoreInvalidFields = true)
+@ConfigurationProperties(prefix = "spring.datasource", ignoreInvalidFields = true)
 public class JdbcDataSourceProperties {
 
     /**
      * 动态多数据源
      */
-    private Map<String, JdbcDataSource> multi = new HashMap<>();
+    private Map<String, JdbcDataSource> jdbc = new HashMap<>();
 
 }

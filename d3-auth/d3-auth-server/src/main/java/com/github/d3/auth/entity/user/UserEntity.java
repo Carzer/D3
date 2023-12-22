@@ -31,6 +31,12 @@ public class UserEntity extends MpBaseEntity {
     private String name;
 
     /**
+     * 编码
+     */
+    @TableField("code")
+    private String code;
+
+    /**
      * 用户类型
      */
     @TableField("user_type")

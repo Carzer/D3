@@ -16,7 +16,7 @@ public final class UrlConstants {
     /**
      * 分页请求
      */
-    public static final String GET_PAGE = "/getPage";
+    public static final String GET_PAGE = "/page";
 
     /**
      * 插入请求

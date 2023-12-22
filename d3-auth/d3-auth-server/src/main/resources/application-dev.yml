@@ -2,27 +2,26 @@ spring:
   # 数据库配置
   datasource:
     jdbc:
-      multi:
-        mysql01:
-          jdbc-url: jdbc:mysql://localhost:13306/d3?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&allowMultiQueries=true&rewriteBatchedStatements=true&useSSL=false
-          username: d3
-          password: K0tXBGwNHBl#
-          driver-class-name: com.mysql.cj.jdbc.Driver
-          pool-name: AuthHikariPool-mysql01
-          maximum-pool-size: 20
-          max-lifetime: 600_000
-          connection-test-query: SELECT 1
-          connection-timeout: 60_000
-        oracle01:
-          jdbc-url: jdbc:oracle:thin:@localhost:11521:ORCLCDB
-          username: c##scm
-          password: scm
-          driver-class-name: oracle.jdbc.driver.OracleDriver
-          pool-name: AuthHikariPool-oracle01
-          maximum-pool-size: 20
-          max-lifetime: 600_000
-          connection-test-query: SELECT 1 FROM DUAL
-          connection-timeout: 60_000
+      mysql01:
+        jdbc-url: jdbc:mysql://localhost:13306/d3?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&allowMultiQueries=true&rewriteBatchedStatements=true&useSSL=false
+        username: d3
+        password: K0tXBGwNHBl#
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        pool-name: AuthHikariPool-mysql01
+        maximum-pool-size: 20
+        max-lifetime: 600_000
+        connection-test-query: SELECT 1
+        connection-timeout: 60_000
+      oracle01:
+        jdbc-url: jdbc:oracle:thin:@localhost:11521:ORCLCDB
+        username: c##scm
+        password: scm
+        driver-class-name: oracle.jdbc.driver.OracleDriver
+        pool-name: AuthHikariPool-oracle01
+        maximum-pool-size: 20
+        max-lifetime: 600_000
+        connection-test-query: SELECT 1 FROM DUAL
+        connection-timeout: 60_000
 
   cloud:
     # loadbalancer缓存配置

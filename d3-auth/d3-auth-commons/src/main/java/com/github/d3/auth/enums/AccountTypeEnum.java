@@ -21,7 +21,7 @@ public enum AccountTypeEnum implements Serializable {
     /**
      * 账号类型
      */
-    NORMAL(0, "普通"),
+    CODE(0, "编码"),
     PHONE(1, "电话"),
     EMAIL(2, "邮箱");
 

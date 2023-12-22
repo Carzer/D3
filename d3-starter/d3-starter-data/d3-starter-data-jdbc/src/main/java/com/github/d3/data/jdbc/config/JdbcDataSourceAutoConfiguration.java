@@ -42,19 +42,19 @@ public class JdbcDataSourceAutoConfiguration {
      */
     @Bean(name = "dataSource")
     @Primary
-    public DataSource multiDataSource() {
-        Map<String, JdbcDataSource> multi = properties.getMulti();
-        if (CollectionUtils.isEmpty(multi)) {
+    public DataSource dataSource() {
+        Map<String, JdbcDataSource> jdbc = properties.getJdbc();
+        if (CollectionUtils.isEmpty(jdbc)) {
             throw new MsgException("no data sources configuration available, at least one is required");
         }
         // 按照目标数据源名称和目标数据源对象的映射存放在Map中
-        Map<Object, Object> targetDataSources = new HashMap<>(MapUtil.getHashMapInitialCapacity(multi.size()));
-        targetDataSources.putAll(multi);
+        Map<Object, Object> targetDataSources = new HashMap<>(MapUtil.getHashMapInitialCapacity(jdbc.size()));
+        targetDataSources.putAll(jdbc);
         // 采用AbstractRoutingDataSource的对象包装多数据源(DynamicDataSource的父类)
         JdbcDynamicDataSource dataSource = new JdbcDynamicDataSource();
         dataSource.setTargetDataSources(targetDataSources);
         // 查找map中的第一个数据源作为默认数据源，如果找不到，就抛出异常
-        JdbcDataSource defaultDs = multi.entrySet().stream().findFirst().orElseThrow().getValue();
+        JdbcDataSource defaultDs = jdbc.entrySet().stream().findFirst().orElseThrow().getValue();
         dataSource.setDefaultTargetDataSource(defaultDs);
         return dataSource;
     }

@@ -28,8 +28,14 @@ public class UserDTO extends MpBaseDTO {
      */
     @Schema(description = "name")
     @Size(min = 1, max = 50)
-
     private String name;
+
+    /**
+     * 编码
+     */
+    @Schema(description = "code")
+    @Size(min = 1, max = 255)
+    private String code;
 
     /**
      * 用户类型

@@ -97,6 +97,23 @@ public class MpBaseServiceImpl<M extends MpBasisMapper<T>, T extends MpBaseEntit
     }
 
     /**
+     * 将IPage转换为统一分页结果
+     * 这里不用转换器，而使用set方法，主要还是为了效率考虑
+     *
+     * @param iPage 分页信息
+     * @return 统一分页结果
+     */
+    protected PageResult<T> pageResult(IPage<T> iPage) {
+        PageResult<T> pageResult = new PageResult<>();
+        pageResult.setPageNum(iPage.getCurrent());
+        pageResult.setPageSize(iPage.getSize());
+        pageResult.setTotal(iPage.getTotal());
+        pageResult.setPages(iPage.getPages());
+        pageResult.setRecords(iPage.getRecords());
+        return pageResult;
+    }
+
+    /**
      * 查询并将查询结果转换为统一分页结果
      *
      * @param page         分页信息
@@ -106,13 +123,7 @@ public class MpBaseServiceImpl<M extends MpBasisMapper<T>, T extends MpBaseEntit
      */
     protected <E extends IPage<T>> PageResult<T> pageResult(E page, Wrapper<T> queryWrapper) {
         E iPage = page(page, queryWrapper);
-        PageResult<T> pageResult = new PageResult<>();
-        pageResult.setPageNum(iPage.getCurrent());
-        pageResult.setPageSize(iPage.getSize());
-        pageResult.setTotal(iPage.getTotal());
-        pageResult.setPages(iPage.getPages());
-        pageResult.setRecords(iPage.getRecords());
-        return pageResult;
+        return pageResult(iPage);
     }
 
     /**

@@ -1,7 +1,8 @@
 package com.github.d3.auth.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.incrementer.DefaultIdentifierGenerator;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.d3.auth.entity.user.UserEntity;
 import com.github.d3.auth.enums.CredentialsTypeEnum;
 import com.github.d3.auth.mapper.UserMapper;
@@ -10,6 +11,7 @@ import com.github.d3.auth.util.AuthPasswordEncoder;
 import com.github.d3.data.jdbc.service.impl.MpBaseServiceImpl;
 import com.github.d3.page.PageQuery;
 import com.github.d3.page.PageResult;
+import com.github.d3.util.MapUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +21,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * 用户信息相关服务
@@ -94,9 +96,19 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
      */
     @Override
     public PageResult<UserEntity> getPage(PageQuery pageQuery, UserEntity userEntity) {
-        LambdaQueryWrapper<UserEntity> wrapper = new LambdaQueryWrapper<>();
-        wrapper.likeRight(UserEntity::getName, userEntity.getName());
-        return pageResult(pageQuery, wrapper);
+        Page<UserEntity> page = new Page<>(pageQuery.getPageNum(), pageQuery.getPageSize());
+        Map<String, Object> queryMap = new HashMap<>(MapUtil.HASHMAP_DEFAULT_INITIAL_CAPACITY);
+        queryMap.put("query", pageQuery);
+        // 拼接查询条件：名称、编码
+        if (StringUtils.hasText(userEntity.getName())
+                || StringUtils.hasText(userEntity.getCode())) {
+            StringBuilder stringBuilder = new StringBuilder();
+            Optional.ofNullable(userEntity.getName()).ifPresent(stringBuilder::append);
+            Optional.ofNullable(userEntity.getCode()).ifPresent(stringBuilder::append);
+            queryMap.put("queryStr", stringBuilder.toString());
+        }
+        IPage<UserEntity> userPage = userMapper.getUserPage(page, queryMap);
+        return pageResult(userPage);
     }
 
     /**
