@@ -36,13 +36,13 @@
         <maven-surefire-plugin.version>3.2.3</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <!-- Spring版本定义 -->
-        <spring-boot.version>3.2.0</spring-boot.version>
+        <spring-boot.version>3.2.1</spring-boot.version>
         <spring-cloud.version>2023.0.0</spring-cloud.version>
         <alibaba.dependency.version>2022.0.0.0</alibaba.dependency.version>
         <!-- SLF4J版本定义 -->
         <slf4j.version>2.0.9</slf4j.version>
         <!-- mybatis-plus版本定义 -->
-        <mybatis-plus.version>3.5.4.1</mybatis-plus.version>
+        <mybatis-plus.version>3.5.5</mybatis-plus.version>
         <!-- Spring Doc相关版本定义 -->
         <springdoc.version>2.2.0</springdoc.version>
         <swagger.version>2.2.18</swagger.version>
