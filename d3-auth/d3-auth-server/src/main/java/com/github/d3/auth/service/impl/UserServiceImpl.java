@@ -44,7 +44,7 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
     /**
      * ID生成器
      */
-    private final DefaultIdentifierGenerator identifierGenerator;
+    private final DefaultIdentifierGenerator identifierGenerator = DefaultIdentifierGenerator.getInstance();
 
     /**
      * 更新用户信息

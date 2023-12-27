@@ -1,7 +1,6 @@
 package com.github.d3.data.jdbc.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
-import com.baomidou.mybatisplus.core.incrementer.DefaultIdentifierGenerator;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
@@ -104,16 +103,6 @@ public class MpConfiguration {
     @Bean
     public BlockAttackInnerInterceptor blockAttackInnerInterceptor() {
         return new BlockAttackInnerInterceptor();
-    }
-
-    /**
-     * ID生成器
-     *
-     * @return 雪花算法ID生成
-     */
-    @Bean
-    public DefaultIdentifierGenerator defaultIdentifierGenerator() {
-        return new DefaultIdentifierGenerator();
     }
 
     /**
