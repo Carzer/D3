@@ -38,7 +38,7 @@ public class MpBaseEntity implements BaseEntity {
     /**
      * 创建人ID
      */
-    @TableField(value = JdbcDataBaseConstants.CREATE_BY_ID_COLUMN,fill = FieldFill.INSERT)
+    @TableField(value = JdbcDataBaseConstants.CREATE_BY_ID_COLUMN, fill = FieldFill.INSERT)
     private Long createById;
 
     /**
@@ -69,8 +69,8 @@ public class MpBaseEntity implements BaseEntity {
      * 删除标记(0:未删除，其他:已删除)
      */
     @TableLogic(value = JdbcDataBaseConstants.LOG_NON_DELETE_VAL)
-    @TableField(JdbcDataBaseConstants.DELETE_FLAG_COLUMN)
-    private Long deleteFlag;
+    @TableField(JdbcDataBaseConstants.DELETED_COLUMN)
+    private Long deleted;
 
     /**
      * 版本号

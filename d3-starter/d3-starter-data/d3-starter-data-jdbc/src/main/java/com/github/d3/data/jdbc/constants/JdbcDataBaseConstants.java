@@ -46,7 +46,7 @@ public final class JdbcDataBaseConstants {
     /**
      * 删除标识列
      */
-    public static final String DELETE_FLAG_COLUMN = "delete_flag";
+    public static final String DELETED_COLUMN = "deleted";
 
     /**
      * 创建人字段
