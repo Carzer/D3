@@ -18,7 +18,7 @@
         <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
         <result column="update_by_id" jdbcType="BIGINT" property="updateById"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
-        <result column="delete_flag" jdbcType="BIGINT" property="deleteFlag"/>
+        <result column="deleted" jdbcType="BIGINT" property="deleted"/>
         <result column="version" jdbcType="INTEGER" property="version"/>
     </resultMap>
 
@@ -43,7 +43,7 @@
         ${alias}update_by,
         ${alias}update_by_id,
         ${alias}update_time,
-        ${alias}delete_flag,
+        ${alias}deleted,
         ${alias}version
     </sql>
 
@@ -58,13 +58,13 @@
         from user_account
         where account = #{account,jdbcType=VARCHAR}
         and enabled = 1
-        and delete_flag = 0) ua
+        and deleted = 0) ua
         inner join user u
-        on u.id = ua.user_id and u.delete_flag=0
+        on u.id = ua.user_id and u.deleted=0
         left join user_credentials uc
         on ua.user_id = uc.user_id
         and uc.credentials_type = #{credentialsType,jdbcType=INTEGER}
-        and uc.delete_flag=0
+        and uc.deleted=0
     </select>
 
     <!--关联租户信息查询分页-->
@@ -76,7 +76,7 @@
         </include>
         from user usr
         <where>
-            usr.delete_flag=0
+            usr.deleted=0
             <if test="queryMap.queryStr != null">
                 and match(usr.name,usr.code) against (#{queryMap.queryStr} in boolean mode)
             </if>
