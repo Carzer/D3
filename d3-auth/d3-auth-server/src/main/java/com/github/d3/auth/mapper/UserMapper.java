@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.d3.auth.entity.user.UserEntity;
 import com.github.d3.auth.enums.CredentialsTypeEnum;
 import com.github.d3.data.jdbc.mapper.MpBasisMapper;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Map;
@@ -15,6 +16,7 @@ import java.util.Map;
  * @author Carzer1020@163.com
  * @since 2022-11-28
  */
+@Mapper
 public interface UserMapper extends MpBasisMapper<UserEntity> {
 
     /**
