@@ -89,6 +89,15 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
 
     /**
      * 获取用户信息页
+     * <p>
+     * <p>
+     * 当前方法使用了mysql的全文索引，所以语句也进行了相应的调整"match() against()"，如果查询语句用在非全文索引字段，将直接报错
+     * <p>
+     * 示例：
+     * <p>
+     * 创建索引语句:<code>create fulltext index user_fulltext_index on user(name,code)  with parser ngram;</code>
+     * <p>
+     * 查询条件语句:<code>match(usr.name,usr.code) against (#{queryMap.queryStr} in boolean mode)</code>
      *
      * @param pageQuery  查询条件
      * @param userEntity 查询条件
@@ -103,8 +112,14 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
         if (StringUtils.hasText(userEntity.getName())
                 || StringUtils.hasText(userEntity.getCode())) {
             StringBuilder stringBuilder = new StringBuilder();
-            Optional.ofNullable(userEntity.getName()).ifPresent(stringBuilder::append);
-            Optional.ofNullable(userEntity.getCode()).ifPresent(stringBuilder::append);
+            Optional.ofNullable(userEntity.getName()).ifPresent(name -> {
+                stringBuilder.append("+>");
+                stringBuilder.append(name);
+            });
+            Optional.ofNullable(userEntity.getCode()).ifPresent(code -> {
+                stringBuilder.append(" +");
+                stringBuilder.append(code);
+            });
             queryMap.put("queryStr", stringBuilder.toString());
         }
         IPage<UserEntity> userPage = userMapper.getUserPage(page, queryMap);

@@ -78,7 +78,7 @@
         <where>
             usr.delete_flag=0
             <if test="queryMap.queryStr != null">
-                and match(usr.name,usr.code) against (#{queryMap.queryStr} in NATURAL LANGUAGE MODE)
+                and match(usr.name,usr.code) against (#{queryMap.queryStr} in boolean mode)
             </if>
         </where>
         order by usr.create_time desc
