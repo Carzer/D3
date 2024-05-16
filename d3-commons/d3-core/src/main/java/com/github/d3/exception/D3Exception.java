@@ -1,6 +1,6 @@
 package com.github.d3.exception;
 
-import com.github.d3.code.D3Code;
+import com.github.d3.code.RCode;
 import lombok.Getter;
 
 /**
@@ -15,14 +15,14 @@ public final class D3Exception extends AbstractD3Exception {
     /**
      * 异常编码
      */
-    private final D3Code code;
+    private final RCode code;
 
     /**
      * 构造方法
      *
      * @param code 异常编码
      */
-    public D3Exception(D3Code code) {
+    public D3Exception(RCode code) {
         this.code = code;
     }
 

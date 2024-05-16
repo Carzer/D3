@@ -11,7 +11,6 @@
         <result column="email" jdbcType="VARCHAR" property="email"/>
         <result column="locked" jdbcType="TINYINT" property="locked"/>
         <result column="expire_at" jdbcType="TIMESTAMP" property="expireAt"/>
-        <result column="external_id" jdbcType="BIGINT" property="externalId"/>
         <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
         <result column="create_by_id" jdbcType="BIGINT" property="createById"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>

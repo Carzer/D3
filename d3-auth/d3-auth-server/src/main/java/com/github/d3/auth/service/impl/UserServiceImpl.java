@@ -1,17 +1,24 @@
 package com.github.d3.auth.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.incrementer.DefaultIdentifierGenerator;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.d3.auth.code.AuthCode;
+import com.github.d3.auth.entity.user.UserCredentialsEntity;
 import com.github.d3.auth.entity.user.UserEntity;
 import com.github.d3.auth.enums.CredentialsTypeEnum;
+import com.github.d3.auth.enums.UserTypeEnum;
 import com.github.d3.auth.mapper.UserMapper;
+import com.github.d3.auth.service.UserAccountService;
 import com.github.d3.auth.service.UserService;
 import com.github.d3.auth.util.AuthPasswordEncoder;
 import com.github.d3.data.jdbc.service.impl.MpBaseServiceImpl;
+import com.github.d3.exception.BizException;
 import com.github.d3.page.PageQuery;
 import com.github.d3.page.PageResult;
 import com.github.d3.util.MapUtil;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +28,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.*;
@@ -35,6 +43,11 @@ import java.util.*;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> implements UserService, UserDetailsService {
+
+    /**
+     * 用户账号服务
+     */
+    private final UserAccountService userAccountService;
 
     /**
      * 用户mapper
@@ -65,13 +78,21 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
      * @param userEntity 用户
      * @return 用户信息
      */
-    @Override
     @Transactional(rollbackFor = Exception.class)
+    @Override
     public int insert(UserEntity userEntity) {
+        return saveWithCredentials(userEntity, null);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public int saveWithCredentials(UserEntity user, List<UserCredentialsEntity> credentials) {
         // 检查及完善用户信息
-        checkUnique(userEntity);
-        completeInfo(userEntity);
-        return userMapper.insert(userEntity);
+        checkAccount(user);
+        // 补充相关信息
+        completeUserInfo(user);
+        completeCredentials(credentials);
+        return userMapper.insert(user);
     }
 
     /**
@@ -83,8 +104,10 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int logicDeleteById(Long id) {
-        // TODO: 2023/11/14 禁止删除管理员用户
-        return userMapper.deleteById(id);
+        LambdaQueryWrapper<UserEntity> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        // 禁止删除管理员及更高级别用户
+        lambdaQueryWrapper.eq(UserEntity::getId, id).gt(UserEntity::getUserType, UserTypeEnum.ADMIN);
+        return userMapper.delete(lambdaQueryWrapper);
     }
 
     /**
@@ -104,21 +127,19 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
      * @return 执行结果
      */
     @Override
-    public PageResult<UserEntity> getPage(PageQuery pageQuery, UserEntity userEntity) {
+    public PageResult<UserEntity> getPage(PageQuery pageQuery, @NonNull UserEntity userEntity) {
         Page<UserEntity> page = new Page<>(pageQuery.getPageNum(), pageQuery.getPageSize());
         Map<String, Object> queryMap = new HashMap<>(MapUtil.HASHMAP_DEFAULT_INITIAL_CAPACITY);
         queryMap.put("query", pageQuery);
-        // 拼接查询条件：名称、编码
+        // 拼接查询条件：名称、唯一标识
         if (StringUtils.hasText(userEntity.getName())
-                || StringUtils.hasText(userEntity.getCode())) {
+                || StringUtils.hasText(userEntity.getUid())) {
             StringBuilder stringBuilder = new StringBuilder();
             Optional.ofNullable(userEntity.getName()).ifPresent(name -> {
-                stringBuilder.append("+>");
-                stringBuilder.append(name);
+                stringBuilder.append("+>").append(name);
             });
-            Optional.ofNullable(userEntity.getCode()).ifPresent(code -> {
-                stringBuilder.append(" +");
-                stringBuilder.append(code);
+            Optional.ofNullable(userEntity.getUid()).ifPresent(code -> {
+                stringBuilder.append(" +").append(code);
             });
             queryMap.put("queryStr", stringBuilder.toString());
         }
@@ -144,34 +165,49 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
      *
      * @param userEntity 用户信息
      */
-    private void completeInfo(UserEntity userEntity) {
+    private void completeUserInfo(UserEntity userEntity) {
         // 用户信息补充
         if (userEntity.getId() == null) {
             userEntity.setId(identifierGenerator.nextId(userEntity));
         }
-
-        /*由于PasswordEncoder与UserService同在SecurityConfig中实例化
-         * {@link SecurityConfig#passwordEncoder}
-         * {@link SecurityConfig#userService}
-         * {@link SecurityConfig#userDetailsService}
-         * 所以Spring无法在初始化当前类时注入PasswordEncoder
-         * 故使用新建对象的方式来使用{@link AuthPasswordEncoder}
-         */
-        AuthPasswordEncoder passwordEncoder = new AuthPasswordEncoder();
-        // 密码加密
-//        String rawPass = userEntity.getPassword();
-//        String encodedPass = StringUtils.hasText(rawPass) ? passwordEncoder.encode(rawPass) : "$2a$10$89UJRZ6A.ubPmT9MrN6iEePGKdmW2N2b8tIe3Ng1MAVaTfRB2gTKC";
-//        userEntity.setPassword(encodedPass);
     }
 
     /**
-     * 检查用户信息是否唯一
+     * 完善凭证信息
+     *
+     * @param credentials 凭证信息
+     */
+    private void completeCredentials(List<UserCredentialsEntity> credentials) {
+        if (!CollectionUtils.isEmpty(credentials)) {
+            credentials.forEach(c -> {
+                if (c.getCredentialsType().equals(CredentialsTypeEnum.PASSWORD)) {
+                    /*由于PasswordEncoder与UserService同在SecurityConfig中实例化
+                     * {@link SecurityConfig#passwordEncoder}
+                     * {@link SecurityConfig#userService}
+                     * {@link SecurityConfig#userDetailsService}
+                     * 所以Spring无法在初始化当前类时注入PasswordEncoder
+                     * 故使用新建对象的方式来使用{@link AuthPasswordEncoder}
+                     */
+                    AuthPasswordEncoder passwordEncoder = new AuthPasswordEncoder();
+                    // 密码加密
+                    String rawPass = c.getCredentials();
+                    String encodedPass = StringUtils.hasText(rawPass) ? passwordEncoder.encode(rawPass) : "$2a$10$89UJRZ6A.ubPmT9MrN6iEePGKdmW2N2b8tIe3Ng1MAVaTfRB2gTKC";
+                    c.setCredentials(encodedPass);
+                }
+            });
+        }
+    }
+
+    /**
+     * 检查用户信息
      *
      * @param userEntity 用户信息
      */
-    private void checkUnique(UserEntity userEntity) {
-        // todo 检查登录名是否重复
-
+    private void checkAccount(UserEntity userEntity) {
+        Set<String> accounts = Set.of(userEntity.getUid(), userEntity.getPhone(), userEntity.getEmail());
+        if (userAccountService.exists(accounts)) {
+            throw new BizException(AuthCode.LOGIN_NAME_EXISTED);
+        }
     }
 
     /**
@@ -185,8 +221,10 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity user = userMapper.loadUserWithCredentials(username, CredentialsTypeEnum.PASSWORD);
         if (user == null) {
+            log.trace("根据账号[{}]未查询到用户", username);
             throw new UsernameNotFoundException("未查询到用户");
         }
         return new User(user.getName(), user.getCredentials(), Collections.emptySet());
     }
+
 }

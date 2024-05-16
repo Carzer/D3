@@ -20,6 +20,11 @@
             <artifactId>d3-starter-tenant</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>com.github.d3</groupId>
+            <artifactId>d3-starter-data-commons</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!-- config -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

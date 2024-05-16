@@ -3,6 +3,7 @@ package com.github.d3.data.jdbc.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.github.d3.data.jdbc.entity.MpBaseEntity;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import java.util.Collection;
  * @author Carzer1020@163.com
  * @since 2020-03-24
  */
+@Mapper
 public interface MpBasisMapper<T extends MpBaseEntity> extends BaseMapper<T> {
 
     /**

@@ -1,6 +1,6 @@
 package com.github.d3;
 
-import com.github.d3.code.D3Code;
+import com.github.d3.code.CommonCode;
 import com.github.d3.code.RCode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -25,7 +25,7 @@ public final class R<T> {
     /**
      * 编码
      * <p>
-     * {@link RCode}
+     * {@link CommonCode}
      */
     @Schema(description = "编码:1000,操作成功")
     private long code;
@@ -57,9 +57,9 @@ public final class R<T> {
     /**
      * 构造方法
      *
-     * @param code {@link D3Code}
+     * @param code {@link RCode}
      */
-    public R(D3Code code) {
+    public R(RCode code) {
         this(code, null, null);
     }
 
@@ -69,28 +69,28 @@ public final class R<T> {
      * @param data data
      */
     public R(T data) {
-        this(RCode.SUCCESS, data, null);
+        this(CommonCode.SUCCESS, data, null);
     }
 
     /**
      * 构造方法
      *
-     * @param code    {@link D3Code}
+     * @param code    {@link RCode}
      * @param data    data
      * @param message 消息
      */
-    public R(D3Code code, T data, String message) {
+    public R(RCode code, T data, String message) {
         this(false, code, data, message);
     }
 
     /**
      * 构造方法
      *
-     * @param code    {@link D3Code}
+     * @param code    {@link RCode}
      * @param data    data
      * @param message 消息
      */
-    public R(boolean silent, D3Code code, T data, String message) {
+    public R(boolean silent, RCode code, T data, String message) {
         Assert.state(code != null, "返回码不能为空!");
         this.silent = silent;
         this.code = code.getCode();
@@ -135,7 +135,7 @@ public final class R<T> {
      * @return 返回成功
      */
     public static <T> R<T> success(T t, String message) {
-        return new R<>(RCode.SUCCESS, t, message);
+        return new R<>(CommonCode.SUCCESS, t, message);
     }
 
     /**
@@ -145,7 +145,7 @@ public final class R<T> {
      * @return 返回成功
      */
     public static <T> R<T> silenceSuccess() {
-        return new R<>(true, RCode.SUCCESS, null, null);
+        return new R<>(true, CommonCode.SUCCESS, null, null);
     }
 
     /**
@@ -184,7 +184,7 @@ public final class R<T> {
      * @return 返回失败
      */
     public static <T> R<T> silenceFail() {
-        return new R<>(true, RCode.FAILED, null, null);
+        return new R<>(true, CommonCode.FAILED, null, null);
     }
 
     /**
@@ -195,7 +195,7 @@ public final class R<T> {
      * @return 返回失败
      */
     public static <T> R<T> fail(T t, String message) {
-        return new R<>(RCode.FAILED, t, message);
+        return new R<>(CommonCode.FAILED, t, message);
     }
 
     /**
@@ -204,7 +204,7 @@ public final class R<T> {
      * @return 成功
      */
     public boolean succeed() {
-        return RCode.SUCCESS.getCode() == this.code;
+        return CommonCode.SUCCESS.getCode() == this.code;
     }
 
     /**

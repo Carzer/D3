@@ -3,7 +3,7 @@ package com.github.d3.aspect.datasource;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.d3.annotations.datasource.DataSource;
-import com.github.d3.code.RCode;
+import com.github.d3.code.CommonCode;
 import com.github.d3.enums.DatasourceTypeEnum;
 import com.github.d3.exception.D3Exception;
 import lombok.RequiredArgsConstructor;
@@ -56,7 +56,7 @@ public class DataSourceAspect {
 
         // 如果数据源配置信息异常，就不再执行后续操作
         if (dataSource == null) {
-            throw new D3Exception(RCode.ERROR);
+            throw new D3Exception(CommonCode.ERROR);
         }
 
         // 获取数据源名称及类型
@@ -79,7 +79,7 @@ public class DataSourceAspect {
      */
     private DynamicDataSourceProvider getProvider(DatasourceTypeEnum type) {
         if (type == null) {
-            throw new D3Exception(RCode.DB_TYPE_NOT_SUPPORTED);
+            throw new D3Exception(CommonCode.DATASOURCE_TYPE_NOT_SUPPORTED);
         }
         return providerCache.get(type, key ->
                 dynamicDataSourceProviders
@@ -88,7 +88,7 @@ public class DataSourceAspect {
                                 provider.supports(key)
                         ).findFirst()
                         .orElseThrow(
-                                () -> new D3Exception(RCode.DB_TYPE_NOT_SUPPORTED)
+                                () -> new D3Exception(CommonCode.DATASOURCE_TYPE_NOT_SUPPORTED)
                         )
         );
     }

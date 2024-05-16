@@ -31,10 +31,10 @@ public class UserEntity extends MpBaseEntity {
     private String name;
 
     /**
-     * 编码
+     * 唯一标识(很多系统里面喜欢使用用户编码)
      */
-    @TableField("code")
-    private String code;
+    @TableField("uid")
+    private String uid;
 
     /**
      * 用户类型
@@ -65,12 +65,6 @@ public class UserEntity extends MpBaseEntity {
      */
     @TableField("expire_at")
     private LocalDateTime expireAt;
-
-    /**
-     * 外部关联ID
-     */
-    @TableField("external_id")
-    private Long externalId;
 
     /**
      * 凭证

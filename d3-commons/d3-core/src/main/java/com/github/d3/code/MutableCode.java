@@ -10,7 +10,7 @@ import lombok.Getter;
  */
 
 @Getter
-public class MutableCode implements D3Code {
+public class MutableCode implements RCode {
 
     /**
      * 编码,默认（1001, "操作失败"）

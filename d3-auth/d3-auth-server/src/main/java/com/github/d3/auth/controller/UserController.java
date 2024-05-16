@@ -1,29 +1,18 @@
 package com.github.d3.auth.controller;
 
-import com.github.d3.R;
 import com.github.d3.annotations.security.PreAuth;
 import com.github.d3.auth.dto.UserDTO;
 import com.github.d3.auth.entity.user.UserEntity;
 import com.github.d3.auth.service.UserService;
 import com.github.d3.data.jdbc.controller.MpBaseController;
 import com.github.d3.data.jdbc.service.MpBaseService;
-import com.github.d3.page.PageQuery;
-import com.github.d3.page.PageResult;
-import com.github.d3.util.BeanCopyUtil;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.security.Principal;
-
-import static com.github.d3.constants.UrlConstants.GET_PAGE;
 
 /**
  * 用户信息
@@ -52,22 +41,6 @@ public class UserController extends MpBaseController<UserDTO, UserEntity> {
     @Override
     protected MpBaseService<UserEntity> getBaseService() {
         return this.userService;
-    }
-
-    /**
-     * 分页方法
-     *
-     * @param pageQuery 查询信息
-     * @param userDTO   用户信息
-     * @return 执行结果
-     */
-    @Operation(summary = "分页方法", description = "分页方法")
-    @GetMapping(GET_PAGE)
-    @Override
-    public R<PageResult<UserDTO>> getPage(PageQuery pageQuery, UserDTO userDTO, @Parameter(hidden = true) Principal principal) {
-        UserEntity userEntity = BeanCopyUtil.copy(userDTO, UserEntity.class);
-        PageResult<?> page = userService.getPage(pageQuery, userEntity);
-        return new R<>(BeanCopyUtil.convertPage(page, UserDTO.class));
     }
 
     /**

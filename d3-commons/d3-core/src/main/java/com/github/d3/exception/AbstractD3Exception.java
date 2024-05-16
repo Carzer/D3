@@ -1,6 +1,6 @@
 package com.github.d3.exception;
 
-import com.github.d3.code.D3Code;
+import com.github.d3.code.RCode;
 
 /**
  * 自定义异常
@@ -31,5 +31,5 @@ public abstract class AbstractD3Exception extends RuntimeException {
      *
      * @return 异常编码
      */
-    public abstract D3Code getCode();
+    public abstract RCode getCode();
 }

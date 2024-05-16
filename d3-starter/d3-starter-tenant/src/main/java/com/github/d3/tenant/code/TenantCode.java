@@ -1,21 +1,23 @@
 package com.github.d3.tenant.code;
 
-import com.github.d3.code.D3Code;
+import com.github.d3.code.RCode;
 import lombok.Getter;
 
 /**
- * 租户相关编码（10_000-19_999）
+ * 租户相关编码（30_000-39_999）
  *
  * @author Carzer1020@163.com
  * @since 2023-12-12
  */
 @Getter
-public enum TenantCode implements D3Code {
+public enum TenantCode implements RCode {
 
     /**
      * 租户信息编码
      */
-    TENANT_INFO_NOT_FOUND(10_000L, "租户信息不存在");
+    TENANT_INFO_NOT_FOUND(30_000L, "租户信息不存在"),
+    USER_TENANT_EXISTED(30_001L, "用户已经加入租户!"),
+    TENANT_INFO_ERROR(30_002L, "租户信息异常或未加入租户!");
 
     /**
      * 编码

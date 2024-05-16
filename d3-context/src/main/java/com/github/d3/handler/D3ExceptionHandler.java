@@ -2,7 +2,7 @@ package com.github.d3.handler;
 
 
 import com.github.d3.R;
-import com.github.d3.code.RCode;
+import com.github.d3.code.CommonCode;
 import com.github.d3.exception.AbstractD3Exception;
 import com.github.d3.util.NetUtil;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 全局exception捕捉
@@ -41,8 +42,7 @@ public final class D3ExceptionHandler {
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(AbstractD3Exception.class)
     public R<String> executeFailed(HttpServletRequest request, AbstractD3Exception e) {
-        urlInfo(request);
-        log.error("业务异常:{}", e.getCode().getMessage());
+        error(request, e, "业务异常");
         return new R<>(e.getCode());
     }
 
@@ -55,9 +55,8 @@ public final class D3ExceptionHandler {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(AuthenticationException.class)
     public R<String> authFailed(HttpServletRequest request, AuthenticationException e) {
-        log.warn("未授权:{}", e.getMessage());
-        debugInfo(request, e);
-        return new R<>(RCode.UNAUTHORIZED);
+        warn(request, e, "未授权");
+        return new R<>(CommonCode.UNAUTHORIZED);
     }
 
     /**
@@ -69,9 +68,8 @@ public final class D3ExceptionHandler {
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ExceptionHandler(AccessDeniedException.class)
     public R<String> forbidden(HttpServletRequest request, AccessDeniedException e) {
-        log.warn("权限拒绝:{}", e.getMessage());
-        debugInfo(request, e);
-        return new R<>(RCode.FORBIDDEN);
+        debug(request, e, "权限拒绝");
+        return new R<>(CommonCode.FORBIDDEN);
     }
 
     /**
@@ -83,9 +81,8 @@ public final class D3ExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public R<String> validFailed(HttpServletRequest request, HttpMessageNotReadableException e) {
-        log.warn("非法操作:{}", e.getMessage());
-        debugInfo(request, e);
-        return new R<>(RCode.ILLEGAL_OPERATION);
+        debug(request, e, "非法操作");
+        return new R<>(CommonCode.ILLEGAL_OPERATION);
     }
 
     /**
@@ -97,8 +94,7 @@ public final class D3ExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(IllegalStateException.class)
     public R<String> stateFailed(HttpServletRequest request, IllegalStateException e) {
-        log.warn("请求状态异常:{}", e.getMessage());
-        debugInfo(request, e);
+        debug(request, e, "请求状态异常");
         return R.fail(e.getMessage());
     }
 
@@ -111,8 +107,7 @@ public final class D3ExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(IllegalArgumentException.class)
     public R<String> validFailed(HttpServletRequest request, IllegalArgumentException e) {
-        urlInfo(request);
-        log.warn("请求参数异常:{}", e.getMessage());
+        warn(request, e, "请求参数异常");
         return R.fail(e.getMessage());
     }
 
@@ -138,8 +133,7 @@ public final class D3ExceptionHandler {
                 errorMessage = "请求参数异常";
             }
         }
-        urlInfo(request);
-        log.warn("请求参数异常:{}", errorMessage);
+        warn(request, e, "请求参数异常");
         return R.fail(errorMessage);
     }
 
@@ -152,8 +146,7 @@ public final class D3ExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ValidationException.class)
     public R<String> validFailed(HttpServletRequest request, ValidationException e) {
-        urlInfo(request);
-        log.warn("参数校验异常:{}", e.getMessage());
+        warn(request, e, "参数校验异常");
         return R.fail(e.getMessage());
     }
 
@@ -163,12 +156,11 @@ public final class D3ExceptionHandler {
      * @param e 异常
      * @return 异常消息
      */
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(RuntimeException.class)
     public R<String> runtimeFailed(HttpServletRequest request, RuntimeException e) {
-        urlInfo(request);
-        log.error("运行时异常:", e);
-        return new R<>(RCode.SYSTEM_ERROR);
+        error(request, e, "运行时异常");
+        return new R<>(CommonCode.SYSTEM_ERROR);
     }
 
     /**
@@ -180,29 +172,45 @@ public final class D3ExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
     public R<String> executeFailed(HttpServletRequest request, Exception e) {
-        urlInfo(request);
-        log.error("系统异常:", e);
-        return new R<>(RCode.SYSTEM_ERROR);
+        error(request, e, "系统异常");
+        return new R<>(CommonCode.SYSTEM_ERROR);
     }
 
     /**
-     * 输出异常详细信息
+     * 记录异常信息(debug级别)
      *
-     * @param e 异常
+     * @param request 请求
+     * @param e       异常
+     * @param message 信息
      */
-    private void debugInfo(HttpServletRequest request, Exception e) {
+    private void debug(HttpServletRequest request, Exception e, String message) {
         if (log.isDebugEnabled()) {
-            urlInfo(request);
-            log.error("详细信息为:", e);
+            error(request, e, message);
         }
     }
 
     /**
-     * url信息
+     * 记录异常信息(warn级别)
      *
      * @param request 请求
+     * @param e       异常
+     * @param message 信息
      */
-    private void urlInfo(HttpServletRequest request) {
+    private void warn(HttpServletRequest request, Exception e, String message) {
+        if (log.isWarnEnabled()) {
+            error(request, e, message);
+        }
+    }
+
+    /**
+     * 记录异常信息
+     *
+     * @param request 请求
+     * @param e       异常
+     * @param message 信息
+     */
+    private void error(HttpServletRequest request, Exception e, String message) {
         log.error("########## IP:[{}]，请求url:[{}]时出现异常 ##########", NetUtil.getRemoteIpAddress(request), request.getRequestURI());
+        log.error(String.format("%s:", Optional.ofNullable(message).orElse("详细信息")), e);
     }
 }

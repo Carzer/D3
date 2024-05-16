@@ -1,7 +1,7 @@
 package com.github.d3.auth.handler;
 
 import com.github.d3.R;
-import com.github.d3.code.RCode;
+import com.github.d3.code.CommonCode;
 import com.github.d3.util.jackson.PrintWriterUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -33,6 +33,6 @@ public class D3AccessDeniedHandler implements AccessDeniedHandler {
     public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
                        AccessDeniedException e) throws IOException {
         log.warn(e.getMessage());
-        PrintWriterUtil.write(httpServletResponse, new R<String>(RCode.FORBIDDEN), HttpServletResponse.SC_FORBIDDEN);
+        PrintWriterUtil.write(httpServletResponse, new R<String>(CommonCode.FORBIDDEN), HttpServletResponse.SC_FORBIDDEN);
     }
 }

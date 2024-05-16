@@ -1,7 +1,7 @@
 package com.github.d3.auth.handler;
 
 import com.github.d3.R;
-import com.github.d3.code.RCode;
+import com.github.d3.auth.code.AuthCode;
 import com.github.d3.exception.BizException;
 import com.github.d3.util.jackson.PrintWriterUtil;
 import jakarta.servlet.http.HttpServletRequest;
@@ -40,10 +40,10 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
         R<String> result;
         Throwable throwable = e.getCause();
         result = switch (throwable) {
-            case LockedException lockedException -> new R<>(RCode.USER_LOCKED);
-            case AccountExpiredException accountExpiredException -> new R<>(RCode.USER_EXPIRED);
+            case LockedException lockedException -> new R<>(AuthCode.USER_LOCKED);
+            case AccountExpiredException accountExpiredException -> new R<>(AuthCode.USER_EXPIRED);
             case BizException bizException -> new R<>(bizException.getCode());
-            case null, default -> new R<>(RCode.BAD_CREDENTIALS);
+            case null, default -> new R<>(AuthCode.BAD_CREDENTIALS);
         };
         PrintWriterUtil.write(httpServletResponse, result);
     }

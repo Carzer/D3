@@ -1,6 +1,6 @@
 package com.github.d3.tenant.exception;
 
-import com.github.d3.code.D3Code;
+import com.github.d3.code.RCode;
 import com.github.d3.exception.AbstractD3Exception;
 import lombok.Getter;
 
@@ -16,14 +16,14 @@ public class TenantException extends AbstractD3Exception {
     /**
      * 异常编码
      */
-    private final D3Code code;
+    private final RCode code;
 
     /**
      * 构造方法
      *
      * @param code 异常编码
      */
-    public TenantException(D3Code code) {
+    public TenantException(RCode code) {
         this.code = code;
     }
 }

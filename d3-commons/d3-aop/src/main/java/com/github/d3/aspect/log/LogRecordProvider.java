@@ -1,6 +1,7 @@
 package com.github.d3.aspect.log;
 
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.SneakyThrows;
 import org.aspectj.lang.JoinPoint;
 
 /**
@@ -20,5 +21,6 @@ public interface LogRecordProvider {
      * @param object    信息
      * @param cause     异常
      */
+    @SneakyThrows
     void execute(HttpServletRequest request, JoinPoint joinPoint, Object object, Throwable cause);
 }

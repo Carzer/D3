@@ -15,6 +15,9 @@
 
     <!-- 包含模块 -->
     <modules>
+        <!-- 通用模块 -->
+        <module>d3-starter-data-commons</module>
+        <!-- jdbc -->
         <module>d3-starter-data-jdbc</module>
     </modules>
 
