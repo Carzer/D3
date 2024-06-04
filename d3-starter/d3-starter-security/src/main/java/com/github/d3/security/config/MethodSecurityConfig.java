@@ -6,6 +6,7 @@ import com.github.d3.security.permission.MethodSecurityExpressionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
@@ -18,6 +19,7 @@ import org.springframework.security.config.annotation.method.configuration.Globa
  */
 @Order
 @EnableMethodSecurity(securedEnabled = true)
+@Configuration
 public class MethodSecurityConfig extends GlobalMethodSecurityConfiguration {
 
     /**

@@ -56,7 +56,7 @@ public class TenantLineInterceptor extends TenantLineInnerInterceptor {
     public void beforeQuery(Executor executor, MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) throws SQLException {
         if (ignoreOnce()) {
             if (log.isDebugEnabled()) {
-                log.debug("[{}]忽略租户控制", ms.getId());
+                log.debug("beforeQuery [{}]忽略租户控制", ms.getId());
             }
         } else {
             super.beforeQuery(executor, ms, parameter, rowBounds, resultHandler, boundSql);
@@ -75,7 +75,7 @@ public class TenantLineInterceptor extends TenantLineInnerInterceptor {
         if (ignoreOnce()) {
             if (log.isDebugEnabled()) {
                 PluginUtils.MPStatementHandler mpSh = PluginUtils.mpStatementHandler(sh);
-                log.debug("[{}]忽略租户控制", mpSh.mappedStatement().getId());
+                log.debug("beforePrepare [{}]忽略租户控制", mpSh.mappedStatement().getId());
             }
         } else {
             super.beforePrepare(sh, connection, transactionTimeout);

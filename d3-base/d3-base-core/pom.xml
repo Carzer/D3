@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!-- 工程信息 -->
+    <parent>
+        <artifactId>d3-base</artifactId>
+        <groupId>com.github.d3</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>d3-base-core</artifactId>
+
+    <!-- 依赖信息 -->
+    <dependencies>
+        <!-- project -->
+        <dependency>
+            <groupId>com.github.d3</groupId>
+            <artifactId>d3-base-commons</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- oracle -->
+        <dependency>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ojdbc11</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- 状态监控 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+    </dependencies>
+
+    <!-- build信息 -->
+    <build>
+        <finalName>${project.artifactId}-${project.version}</finalName>
+    </build>
+
+    <!-- 配置信息 -->
+    <profiles>
+        <profile>
+            <id>source</id>
+            <activation>
+                <property>
+                    <name>source</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <!-- 打包时提供源码 -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>

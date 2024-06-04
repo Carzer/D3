@@ -29,7 +29,7 @@ public interface TreeNode<T> {
      *
      * @return 父级Key
      */
-    String getParentKey();
+    String getPKey();
 
     /**
      * 获取Children

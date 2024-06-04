@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!-- 工程信息 -->
+    <parent>
+        <artifactId>d3</artifactId>
+        <groupId>com.github.d3</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>d3-base</artifactId>
+    <packaging>pom</packaging>
+
+    <!-- 包含模块 -->
+    <modules>
+        <module>d3-base-api</module>
+        <module>d3-base-auth-server</module>
+        <module>d3-base-dto</module>
+        <module>d3-base-commons</module>
+    </modules>
+
+    <!-- 依赖信息 -->
+    <dependencies>
+        <!-- data -->
+        <dependency>
+            <groupId>com.github.d3</groupId>
+            <artifactId>d3-starter-data-jdbc</artifactId>
+        </dependency>
+    </dependencies>
+</project>

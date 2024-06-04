@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="AuthServer" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-    <module name="d3-auth-server" />
-    <option name="SPRING_BOOT_MAIN_CLASS" value="com.github.d3.auth.AuthServer" />
+    <module name="d3-base-auth-server" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.github.d3.base.AuthServer" />
     <option name="VM_PARAMETERS" value="--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED" />
     <method v="2">
       <option name="Make" enabled="true" />

@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 @UtilityClass
 public class TreeUtil {
 
-
     /**
      * 将列表转换为树结构
      *
@@ -36,7 +35,7 @@ public class TreeUtil {
         } else {
             t.setKey(root);
         }
-        Map<String, List<String>> groupMap = list.stream().collect(Collectors.groupingBy(T::getParentKey, Collectors.mapping(T::getKey, Collectors.toList())));
+        Map<String, List<String>> groupMap = list.stream().collect(Collectors.groupingBy(T::getPKey, Collectors.mapping(T::getKey, Collectors.toList())));
         setChildren(t, map, groupMap);
         return t;
     }
@@ -61,6 +60,8 @@ public class TreeUtil {
                 // 如果子节点依然不是叶子节点，则继续设置children
                 if (groupMap.containsKey(childKey)) {
                     setChildren(child, map, groupMap);
+                    // 设置完成后，移除该节点，减少检索范围。
+                    groupMap.remove(childKey);
                 }
                 children.add(child);
             });

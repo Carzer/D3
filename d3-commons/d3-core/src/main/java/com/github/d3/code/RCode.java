@@ -23,4 +23,5 @@ public interface RCode extends Serializable {
      * @return 操作描述
      */
     String getMessage();
+
 }

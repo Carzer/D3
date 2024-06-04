@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.d3.base.core.mapper.UserMapper">
+
+    <!-- 基础result map -->
+    <resultMap id="BaseResultMap" type="com.github.d3.base.core.entity.user.UserEntity">
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="user_type" jdbcType="INTEGER" property="userType"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="locked" jdbcType="TINYINT" property="locked"/>
+        <result column="expire_at" jdbcType="TIMESTAMP" property="expireAt"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_by_id" jdbcType="BIGINT" property="createById"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_by_id" jdbcType="BIGINT" property="updateById"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="deleted" jdbcType="BIGINT" property="deleted"/>
+        <result column="version" jdbcType="INTEGER" property="version"/>
+    </resultMap>
+
+    <!-- 带凭证的结果map -->
+    <resultMap id="CredentialsResultMap" type="com.github.d3.base.core.entity.user.UserEntity" extends="BaseResultMap">
+        <result column="credentials" jdbcType="VARCHAR" property="credentials"/>
+    </resultMap>
+
+    <!-- 带凭证的结果map -->
+    <sql id="Alias_Column_List">
+        ${alias}id,
+        ${alias}name,
+        ${alias}user_type,
+        ${alias}phone,
+        ${alias}email,
+        ${alias}locked,
+        ${alias}expire_at,
+        ${alias}create_by,
+        ${alias}create_by_id,
+        ${alias}create_time,
+        ${alias}update_by,
+        ${alias}update_by_id,
+        ${alias}update_time,
+        ${alias}deleted,
+        ${alias}version
+    </sql>
+
+    <!-- 根据账号信息查询用户(查询结果附带凭证) -->
+    <select id="loadUserWithCredentials" resultMap="CredentialsResultMap">
+        select
+        <include refid="Alias_Column_List">
+            <property name="alias" value="u."/>
+        </include>
+        ,uc.credentials
+        from (select user_id
+        from user_account
+        where account = #{account,jdbcType=VARCHAR}
+        and enabled = 1
+        and deleted = 0) ua
+        inner join user u
+        on u.id = ua.user_id and u.deleted=0
+        left join user_credentials uc
+        on ua.user_id = uc.user_id
+        and uc.credentials_type = #{credentialsType,jdbcType=INTEGER}
+        and uc.deleted=0
+    </select>
+
+    <!--关联租户信息查询分页-->
+    <select id="getUserPage" resultType="com.github.d3.base.core.entity.user.UserEntity"
+            parameterType="java.util.HashMap">
+        select
+        <include refid="Alias_Column_List">
+            <property name="alias" value="usr."/>
+        </include>
+        from user usr
+        <where>
+            usr.deleted=0
+            <if test="queryMap.queryStr != null">
+                and match(usr.name,usr.code) against (#{queryMap.queryStr} in boolean mode)
+            </if>
+        </where>
+        order by usr.create_time desc
+    </select>
+</mapper>
