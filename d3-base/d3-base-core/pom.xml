@@ -18,17 +18,6 @@
             <artifactId>d3-base-commons</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!-- oracle -->
-        <dependency>
-            <groupId>com.oracle.database.jdbc</groupId>
-            <artifactId>ojdbc11</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <!-- 状态监控 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
     </dependencies>
 
     <!-- build信息 -->

@@ -63,7 +63,6 @@
             <groupId>com.oracle.database.jdbc</groupId>
             <artifactId>ojdbc11</artifactId>
             <scope>runtime</scope>
-            <optional>true</optional>
         </dependency>
     </dependencies>
 

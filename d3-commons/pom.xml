@@ -17,6 +17,7 @@
         <module>d3-aop</module>
         <module>d3-constants</module>
         <module>d3-core</module>
+        <module>d3-context</module>
         <module>d3-util</module>
     </modules>
 

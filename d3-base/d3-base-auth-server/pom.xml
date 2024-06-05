@@ -17,6 +17,11 @@
         <!-- project -->
         <dependency>
             <groupId>com.github.d3</groupId>
+            <artifactId>d3-base-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.d3</groupId>
             <artifactId>d3-base-dto</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -29,12 +34,6 @@
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-        </dependency>
-        <!-- oracle -->
-        <dependency>
-            <groupId>com.oracle.database.jdbc</groupId>
-            <artifactId>ojdbc11</artifactId>
-            <scope>runtime</scope>
         </dependency>
         <!-- oauth2-authorization-server -->
         <dependency>

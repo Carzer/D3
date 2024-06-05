@@ -1,4 +1,4 @@
-package com.github.d3.annotations.security;
+package com.github.d3.security.annotations;
 
 
 import com.github.d3.enums.AuthTypeEnum;

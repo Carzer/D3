@@ -15,7 +15,7 @@
         <!-- project -->
         <dependency>
             <groupId>com.github.d3</groupId>
-            <artifactId>d3-core</artifactId>
+            <artifactId>d3-context</artifactId>
         </dependency>
         <!-- jakarta -->
         <dependency>

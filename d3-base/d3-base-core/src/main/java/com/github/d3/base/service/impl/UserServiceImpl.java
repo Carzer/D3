@@ -142,12 +142,14 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
         if (StringUtils.hasText(userEntity.getName())
                 || StringUtils.hasText(userEntity.getUid())) {
             StringBuilder stringBuilder = new StringBuilder();
-            Optional.ofNullable(userEntity.getName()).ifPresent(name -> {
-                stringBuilder.append("+>").append(name);
-            });
-            Optional.ofNullable(userEntity.getUid()).ifPresent(code -> {
-                stringBuilder.append(" +").append(code);
-            });
+            Optional.ofNullable(userEntity.getName()).ifPresent(
+                    name ->
+                            stringBuilder.append("+>").append(name)
+            );
+            Optional.ofNullable(userEntity.getUid()).ifPresent(
+                    code ->
+                            stringBuilder.append(" +").append(code)
+            );
             queryMap.put("queryStr", stringBuilder.toString());
         }
         IPage<UserEntity> userPage = userMapper.getUserPage(page, queryMap);

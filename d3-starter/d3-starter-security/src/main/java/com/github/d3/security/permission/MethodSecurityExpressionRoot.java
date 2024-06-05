@@ -1,10 +1,10 @@
 package com.github.d3.security.permission;
 
 import cn.hutool.core.annotation.AnnotationUtil;
-import com.github.d3.annotations.security.PreAuth;
 import com.github.d3.constants.PunctuationConstants;
 import com.github.d3.enums.AuthTypeEnum;
 import com.github.d3.provider.PermissionProvider;
+import com.github.d3.security.annotations.PreAuth;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;

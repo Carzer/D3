@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <!-- 工程信息 -->
     <parent>
-        <artifactId>d3</artifactId>
+        <artifactId>d3-commons</artifactId>
         <groupId>com.github.d3</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
@@ -19,11 +19,6 @@
             <groupId>com.github.d3</groupId>
             <artifactId>d3-util</artifactId>
         </dependency>
-        <!-- security -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
         <!-- undertow -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -34,6 +29,11 @@
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
+        </dependency>
+        <!-- security -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
     </dependencies>
 </project>

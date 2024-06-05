@@ -61,8 +61,6 @@
         <module>d3-base</module>
         <!-- 通用信息 -->
         <module>d3-commons</module>
-        <!-- 运行时环境 -->
-        <module>d3-context</module>
         <!-- starter -->
         <module>d3-starter</module>
     </modules>

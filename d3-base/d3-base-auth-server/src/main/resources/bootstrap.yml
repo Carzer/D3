@@ -36,12 +36,6 @@ spring:
     multipart:
       max-file-size: 1GB
 
-# mybatis-plus配置
-mybatis-plus:
-  mapper-locations: classpath:mybatis/mappers/**/*.xml
-  type-aliases-package: com.github.d3.auth.entity
-  config-location: classpath:mybatis/mybatis-config.xml
-
 # spring doc 配置
 springdoc:
   packages-to-scan: com.github.d3.auth.controller
