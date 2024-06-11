@@ -28,11 +28,7 @@
 
     <!-- 带凭证的结果map -->
     <sql id="Alias_Column_List">
-        ${
-        alias
-        }
-        id
-        ,
+        ${alias}id,
         ${alias}name,
         ${alias}user_type,
         ${alias}phone,

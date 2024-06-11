@@ -2,7 +2,7 @@ package com.github.d3.aspect.datasource;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import com.github.d3.annotations.datasource.DataSource;
+import com.github.d3.annotations.datasource.Ds;
 import com.github.d3.code.CommonCode;
 import com.github.d3.enums.DatasourceTypeEnum;
 import com.github.d3.exception.D3Exception;
@@ -24,7 +24,7 @@ import java.util.List;
  * 数据源AOP切面定义
  *
  * @author Carzer1020@163.com
- * @see DataSource
+ * @see Ds
  * @since 2022-12-13
  */
 @Component
@@ -46,22 +46,22 @@ public class DataSourceAspect {
             .expireAfterWrite(Duration.ofHours(1)).maximumSize(100).build();
 
     @SneakyThrows
-    @Around("@within(dataSource) || @annotation(dataSource)")
-    public Object around(ProceedingJoinPoint point, DataSource dataSource) {
+    @Around("@within(ds) || @annotation(ds)")
+    public Object around(ProceedingJoinPoint point, Ds ds) {
         // 先判断 dataSource 是否为空, 为空则尝试获取上一级注解
-        if (dataSource == null) {
+        if (ds == null) {
             Class<?> clazz = point.getTarget().getClass();
-            dataSource = AnnotationUtils.findAnnotation(clazz, DataSource.class);
+            ds = AnnotationUtils.findAnnotation(clazz, Ds.class);
         }
 
         // 如果数据源配置信息异常，就不再执行后续操作
-        if (dataSource == null) {
+        if (ds == null) {
             throw new D3Exception(CommonCode.ERROR);
         }
 
         // 获取数据源名称及类型
-        String dataSourceName = dataSource.value();
-        DatasourceTypeEnum dataSourceType = dataSource.type();
+        String dataSourceName = ds.value();
+        DatasourceTypeEnum dataSourceType = ds.type();
 
         // 获取对应的数据源provider，执行对应的before及after方法
         DynamicDataSourceProvider provider = getProvider(dataSourceType);

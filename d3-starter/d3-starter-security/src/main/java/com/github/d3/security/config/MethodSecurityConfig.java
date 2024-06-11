@@ -19,7 +19,7 @@ import org.springframework.security.config.annotation.method.configuration.Globa
  */
 @Order
 @EnableMethodSecurity(securedEnabled = true)
-@Configuration
+//@Configuration
 public class MethodSecurityConfig extends GlobalMethodSecurityConfiguration {
 
     /**

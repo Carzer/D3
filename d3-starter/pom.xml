@@ -15,10 +15,10 @@
     <!-- 包含模块 -->
     <modules>
         <module>d3-starter-data</module>
-        <module>d3-starter-springdoc</module>
         <module>d3-starter-security</module>
-        <module>d3-starter-web</module>
+        <module>d3-starter-springdoc</module>
         <module>d3-starter-tenant</module>
+        <module>d3-starter-web</module>
     </modules>
 
     <!-- 参数配置 -->
