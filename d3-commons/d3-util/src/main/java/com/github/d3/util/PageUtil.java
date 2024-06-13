@@ -5,7 +5,6 @@ import com.github.d3.dto.BaseDTO;
 import com.github.d3.page.PageAble;
 import lombok.experimental.UtilityClass;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -25,7 +24,7 @@ public class PageUtil {
      * @return 查询map
      */
     public Map<String, Object> pageQueryToMap(PageAble page, BaseDTO... data) {
-        Map<String, Object> queryMap = new HashMap<>(MapUtil.HASHMAP_DEFAULT_INITIAL_CAPACITY);
+        Map<String, Object> queryMap = MapUtil.hashMap();
         if (page != null) {
             queryMap.putAll(BeanUtil.beanToMap(page, false, true));
         }

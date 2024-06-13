@@ -132,7 +132,7 @@ public class RedisHelper {
         if (CollectionUtils.isEmpty(map)) {
             return false;
         } else {
-            Map<String, Object> setMap = new HashMap<>(MapUtil.getHashMapInitialCapacity(map.size()));
+            Map<String, Object> setMap = MapUtil.hashMap(map.size());
             map.forEach((key, value) -> setMap.put(String.format("%s%s", REDIS_PREFIX, key), value));
             SessionCallback<Object> sessionCallback = new SessionCallback<>() {
                 @Override

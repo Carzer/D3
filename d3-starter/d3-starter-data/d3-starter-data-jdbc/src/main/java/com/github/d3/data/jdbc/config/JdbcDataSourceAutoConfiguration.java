@@ -16,7 +16,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.util.CollectionUtils;
 
 import javax.sql.DataSource;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -48,7 +47,7 @@ public class JdbcDataSourceAutoConfiguration {
             throw new MsgException("no data sources configuration available, at least one is required");
         }
         // 按照目标数据源名称和目标数据源对象的映射存放在Map中
-        Map<Object, Object> targetDataSources = new HashMap<>(MapUtil.getHashMapInitialCapacity(jdbc.size()));
+        Map<Object, Object> targetDataSources = MapUtil.hashMap(jdbc.size());
         targetDataSources.putAll(jdbc);
         // 采用AbstractRoutingDataSource的对象包装多数据源(DynamicDataSource的父类)
         JdbcDynamicDataSource dataSource = new JdbcDynamicDataSource();

@@ -31,7 +31,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 用户信息相关服务
@@ -136,7 +139,7 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
     @Override
     public PageResult<UserEntity> getPage(PageQuery pageQuery, @NonNull UserEntity userEntity) {
         Page<UserEntity> page = new Page<>(pageQuery.getPageNum(), pageQuery.getPageSize());
-        Map<String, Object> queryMap = new HashMap<>(MapUtil.HASHMAP_DEFAULT_INITIAL_CAPACITY);
+        Map<String, Object> queryMap = MapUtil.hashMap();
         queryMap.put("query", pageQuery);
         // 拼接查询条件：名称、唯一标识
         StringBuilder stringBuilder = new StringBuilder();

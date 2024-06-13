@@ -5,7 +5,10 @@ import com.github.d3.util.MapUtil;
 import lombok.experimental.UtilityClass;
 import org.springframework.util.CollectionUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -27,7 +30,7 @@ public class TreeUtil {
      * @return 树结构
      */
     public <T extends TreeNode<T>> T transferToTree(List<T> list, T t) {
-        Map<String, T> map = new HashMap<>(MapUtil.getHashMapInitialCapacity(list.size()));
+        Map<String, T> map = MapUtil.hashMap(list.size());
         list.forEach(entity -> map.put(entity.getKey(), entity));
         String root = Optional.ofNullable(t.getKey()).orElse(CommonConstants.ROOT_NUM);
         if (map.containsKey(root)) {

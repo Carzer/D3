@@ -7,7 +7,6 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.springframework.util.CollectionUtils;
 
 import javax.sql.DataSource;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -26,7 +25,7 @@ public class JdbcDynamicDataSource extends AbstractRoutingDataSource {
      * <p>
      * todo 变更为caffeine缓存，使用RemovalListener处理过期后对数据源的操作
      */
-    private final Map<Object, DataSource> additionalDataSources = new HashMap<>(MapUtil.HASHMAP_LARGER_INITIAL_CAPACITY);
+    private final Map<Object, DataSource> additionalDataSources = MapUtil.largerHashMap();
 
     /**
      * 判断需要使用的数据源
