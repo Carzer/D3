@@ -14,8 +14,9 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 import java.time.Duration;
 import java.util.List;
@@ -32,7 +33,7 @@ import java.util.List;
 @Slf4j
 @ConditionalOnBean(DynamicDataSourceProvider.class)
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class DataSourceAspect {
+public class DsAspect {
 
     /**
      * 动态数据源切换Provider
@@ -51,7 +52,7 @@ public class DataSourceAspect {
         // 先判断 dataSource 是否为空, 为空则尝试获取上一级注解
         if (ds == null) {
             Class<?> clazz = point.getTarget().getClass();
-            ds = AnnotationUtils.findAnnotation(clazz, Ds.class);
+            ds = AnnotatedElementUtils.getMergedAnnotation(clazz, Ds.class);
         }
 
         // 如果数据源配置信息异常，就不再执行后续操作
@@ -61,6 +62,7 @@ public class DataSourceAspect {
 
         // 获取数据源名称及类型
         String dataSourceName = ds.value();
+        Assert.hasText(dataSourceName, "传入的数据源名称不能为空");
         DatasourceTypeEnum dataSourceType = ds.type();
 
         // 获取对应的数据源provider，执行对应的before及after方法

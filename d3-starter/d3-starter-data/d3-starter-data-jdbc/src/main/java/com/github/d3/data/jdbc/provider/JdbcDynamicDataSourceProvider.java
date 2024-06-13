@@ -24,9 +24,6 @@ public class JdbcDynamicDataSourceProvider implements DynamicDataSourceProvider 
      */
     public void before(String dataSourceName) {
         JdbcDynamicDataSourceHolder.putDataSource(dataSourceName);
-        if (log.isDebugEnabled()) {
-            log.debug("Thread: {}, add dataSourceKey:[{}] to thread-local success", Thread.currentThread().getName(), dataSourceName);
-        }
     }
 
     /**
@@ -36,9 +33,6 @@ public class JdbcDynamicDataSourceProvider implements DynamicDataSourceProvider 
      */
     public void after(String dataSourceName) {
         JdbcDynamicDataSourceHolder.removeDataSource();
-        if (log.isDebugEnabled()) {
-            log.debug("Thread: {}, remove dataSourceKey:[{}] from thread-local success", Thread.currentThread().getName(), dataSourceName);
-        }
     }
 
     /**

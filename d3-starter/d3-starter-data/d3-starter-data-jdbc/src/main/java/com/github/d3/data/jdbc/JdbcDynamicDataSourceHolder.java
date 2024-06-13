@@ -1,6 +1,7 @@
 package com.github.d3.data.jdbc;
 
 import lombok.experimental.UtilityClass;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 /**
@@ -11,6 +12,7 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
  * @since 2019-12-13
  */
 @UtilityClass
+@Slf4j
 public class JdbcDynamicDataSourceHolder {
 
     /**
@@ -25,6 +27,9 @@ public class JdbcDynamicDataSourceHolder {
      */
     public void putDataSource(String name) {
         THREAD_LOCAL.set(name);
+        if (log.isDebugEnabled()) {
+            log.debug("Thread: {}, add dataSourceKey:[{}] to thread-local success", Thread.currentThread().getName(), name);
+        }
     }
 
     /**

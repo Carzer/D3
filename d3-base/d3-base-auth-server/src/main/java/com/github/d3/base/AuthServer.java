@@ -30,7 +30,7 @@ public class AuthServer {
         // 启动项目
         SpringApplication.run(AuthServer.class, args);
         String repeat = "=".repeat(20);
-        log.warn("{} 授权中心启动成功 {}", repeat, repeat);
+        log.info("{} 授权中心启动成功 {}", repeat, repeat);
     }
 
     /**
