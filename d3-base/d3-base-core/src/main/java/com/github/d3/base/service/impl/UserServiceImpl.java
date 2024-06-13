@@ -139,17 +139,15 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
         Map<String, Object> queryMap = new HashMap<>(MapUtil.HASHMAP_DEFAULT_INITIAL_CAPACITY);
         queryMap.put("query", pageQuery);
         // 拼接查询条件：名称、唯一标识
-        if (StringUtils.hasText(userEntity.getName())
-                || StringUtils.hasText(userEntity.getUid())) {
-            StringBuilder stringBuilder = new StringBuilder();
-            Optional.ofNullable(userEntity.getName()).ifPresent(
-                    name ->
-                            stringBuilder.append("+>").append(name)
-            );
-            Optional.ofNullable(userEntity.getUid()).ifPresent(
-                    code ->
-                            stringBuilder.append(" +").append(code)
-            );
+        StringBuilder stringBuilder = new StringBuilder();
+        if (StringUtils.hasText(userEntity.getName())) {
+            stringBuilder.append("+>").append(userEntity.getName());
+        }
+        if (StringUtils.hasText(userEntity.getUid())) {
+            stringBuilder.append(" +").append(userEntity.getUid());
+
+        }
+        if (!stringBuilder.isEmpty()) {
             queryMap.put("queryStr", stringBuilder.toString());
         }
         IPage<UserEntity> userPage = userMapper.getUserPage(page, queryMap);
