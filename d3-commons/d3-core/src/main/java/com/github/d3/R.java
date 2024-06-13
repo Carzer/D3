@@ -43,10 +43,18 @@ public final class R<T> {
     private T data;
 
     /**
-     * 不全局弹窗提示，搭配前端使用
+     * 是否静默消息
+     * <p>
+     * 可以搭配前端使用，不全局弹窗提示
      */
-    @Schema(description = "前台不全局弹窗提示")
+    @Schema(description = "是否静默消息")
     private Boolean silent;
+
+    /**
+     * 时间戳
+     */
+    @Schema(description = "时间戳")
+    private Long timestamp;
 
     /**
      * 私有的空构造方法，防止空参数的new
@@ -96,6 +104,7 @@ public final class R<T> {
         this.code = code.getCode();
         this.message = Optional.ofNullable(message).orElse(code.getMessage());
         this.data = data;
+        this.timestamp = System.currentTimeMillis();
     }
 
     /**
