@@ -17,6 +17,7 @@
         <module>d3-base-api</module>
         <module>d3-base-auth-server</module>
         <module>d3-base-commons</module>
+        <module>d3-base-core</module>
         <module>d3-base-dto</module>
     </modules>
 
