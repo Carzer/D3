@@ -2,7 +2,7 @@ package com.github.d3.base.handler;
 
 
 import com.github.d3.R;
-import com.github.d3.util.MapUtil;
+import com.github.d3.base.AResult;
 import com.github.d3.util.NetUtil;
 import com.github.d3.util.jackson.PrintWriterUtil;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,8 +13,6 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * LoginSuccessHandler
@@ -43,10 +41,10 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         if (log.isDebugEnabled()) {
             log.debug("用户:[{}]登录,IP:[{}]", authentication.getName(), NetUtil.getRemoteIpAddress(httpServletRequest));
         }
-        Map<String, Object> resultMap = new HashMap<>(MapUtil.HASHMAP_DEFAULT_INITIAL_CAPACITY);
-        resultMap.put("authorities", authentication.getAuthorities());
-        resultMap.put("user", authentication.getPrincipal());
-        R<Object> result = new R<>(resultMap);
+        AResult aResult = new AResult();
+        aResult.setPrincipal(authentication.getPrincipal());
+        aResult.setAuthorities(authentication.getAuthorities());
+        R<AResult> result = new R<>(aResult);
         PrintWriterUtil.write(httpServletResponse, result);
     }
 }
