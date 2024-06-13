@@ -6,6 +6,7 @@
     <resultMap id="BaseResultMap" type="com.github.d3.base.entity.user.UserEntity">
         <result column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="uid" jdbcType="VARCHAR" property="uid"/>
         <result column="user_type" jdbcType="INTEGER" property="userType"/>
         <result column="phone" jdbcType="VARCHAR" property="phone"/>
         <result column="email" jdbcType="VARCHAR" property="email"/>
@@ -30,6 +31,7 @@
     <sql id="Alias_Column_List">
         ${alias}id,
         ${alias}name,
+        ${alias}uid,
         ${alias}user_type,
         ${alias}phone,
         ${alias}email,
@@ -76,7 +78,7 @@
         <where>
             usr.deleted=0
             <if test="queryMap.queryStr != null">
-                and match(usr.name,usr.code) against (#{queryMap.queryStr} in boolean mode)
+                and match(usr.name,usr.uid) against (#{queryMap.queryStr} in boolean mode)
             </if>
         </where>
         order by usr.create_time desc

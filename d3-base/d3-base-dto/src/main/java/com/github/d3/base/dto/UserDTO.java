@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serial;
+import java.time.LocalDateTime;
 
 /**
  * 用户信息
@@ -35,7 +36,7 @@ public class UserDTO extends MpBaseDTO {
      */
     @Schema(description = "code")
     @Size(min = 1, max = 255)
-    private String code;
+    private String uid;
 
     /**
      * 用户类型
@@ -54,5 +55,18 @@ public class UserDTO extends MpBaseDTO {
      */
     @Schema(description = "email")
     private String email;
+
+
+    /**
+     * 是否锁定
+     */
+    @Schema(description = "locked")
+    private Boolean locked;
+
+    /**
+     * 过期时间
+     */
+    @Schema(description = "expire_at")
+    private LocalDateTime expireAt;
 
 }
