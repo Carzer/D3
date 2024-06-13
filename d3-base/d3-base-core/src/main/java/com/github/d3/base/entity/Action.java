@@ -38,7 +38,7 @@ public class Action extends MpBaseEntity {
      * 动作值
      */
     @TableField("val")
-    private Long val;
+    private Integer val;
 
     /**
      * 模块ID
