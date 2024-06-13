@@ -14,7 +14,9 @@ public enum DatasourceTypeEnum {
     /**
      * 数据源类型
      */
-    JDBC(0,"jdbc", "Jdbc数据源");
+    JDBC(0, "jdbc", "Jdbc数据源"),
+    REDIS(1, "redis", "Redis数据源"),
+    MONGO(2, "mongo", "MongoDB数据源");
 
     /**
      * val
@@ -35,7 +37,7 @@ public enum DatasourceTypeEnum {
      * @param key  key
      * @param desc 描述
      */
-    DatasourceTypeEnum(Integer val,String key, String desc) {
+    DatasourceTypeEnum(Integer val, String key, String desc) {
         this.val = val;
         this.key = key;
         this.desc = desc;
