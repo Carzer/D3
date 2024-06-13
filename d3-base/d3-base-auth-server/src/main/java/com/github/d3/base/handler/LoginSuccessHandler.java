@@ -3,6 +3,7 @@ package com.github.d3.base.handler;
 
 import com.github.d3.R;
 import com.github.d3.util.MapUtil;
+import com.github.d3.util.NetUtil;
 import com.github.d3.util.jackson.PrintWriterUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -40,8 +41,7 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 
         // 输出登录提示信息
         if (log.isDebugEnabled()) {
-            log.debug("用户:[{}]登录", authentication.getName());
-            log.debug("IP:[{}]", httpServletRequest.getRequestURI());
+            log.debug("用户:[{}]登录,IP:[{}]", authentication.getName(), NetUtil.getRemoteIpAddress(httpServletRequest));
         }
         Map<String, Object> resultMap = new HashMap<>(MapUtil.HASHMAP_DEFAULT_INITIAL_CAPACITY);
         resultMap.put("authorities", authentication.getAuthorities());
