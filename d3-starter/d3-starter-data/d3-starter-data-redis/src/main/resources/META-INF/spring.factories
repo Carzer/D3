@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.github.d3.data.redis.config.RedisSentinelConfig,\
+  com.github.d3.data.redis.config.RedisSentinelConfig

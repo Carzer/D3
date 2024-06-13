@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- 工程信息 -->
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.github.d3</groupId>
+        <artifactId>d3-starter-data</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>d3-starter-data-redis</artifactId>
+
+    <!-- 依赖信息 -->
+    <dependencies>
+        <!--redis-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
+    </dependencies>
+
+    <!-- build信息 -->
+    <build>
+        <finalName>${project.artifactId}-${project.version}</finalName>
+    </build>
+
+    <!-- 配置信息 -->
+    <profiles>
+        <profile>
+            <id>source</id>
+            <activation>
+                <property>
+                    <name>source</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <!-- 打包时提供源码 -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

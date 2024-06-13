@@ -19,6 +19,10 @@
         <module>d3-starter-data-commons</module>
         <!-- jdbc -->
         <module>d3-starter-data-jdbc</module>
+        <!-- mongo -->
+        <module>d3-starter-data-mongo</module>
+        <!-- redis -->
+        <module>d3-starter-data-redis</module>
     </modules>
 
     <dependencies>
