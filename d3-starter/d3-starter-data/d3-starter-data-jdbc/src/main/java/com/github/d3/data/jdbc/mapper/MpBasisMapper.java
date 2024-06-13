@@ -13,7 +13,7 @@ import java.util.Collection;
  * base mapper
  *
  * @author Carzer1020@163.com
- * @since 2020-03-24
+ * @since 1.0
  */
 @Mapper
 public interface MpBasisMapper<T extends MpBaseEntity> extends BaseMapper<T> {

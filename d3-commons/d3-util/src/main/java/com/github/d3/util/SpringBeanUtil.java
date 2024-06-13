@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * bean工具
  *
  * @author Carzer1020@163.com
- * @since 2020-04-13
+ * @since 1.0
  */
 @Component
 @SuppressWarnings("unchecked")

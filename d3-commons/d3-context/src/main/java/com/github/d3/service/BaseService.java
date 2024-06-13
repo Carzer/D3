@@ -11,7 +11,7 @@ import java.util.Collection;
  * 基础服务
  *
  * @author Carzer1020@163.com
- * @since 2020-03-26
+ * @since 1.0
  */
 @SuppressWarnings("all")
 public interface BaseService<T extends BaseEntity> {

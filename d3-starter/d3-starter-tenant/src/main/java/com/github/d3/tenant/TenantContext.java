@@ -4,7 +4,7 @@ package com.github.d3.tenant;
  * 租户管理运行环境
  *
  * @author Carzer1020@163.com
- * @since 2023-02-17
+ * @since 1.0
  */
 public final class TenantContext {
 

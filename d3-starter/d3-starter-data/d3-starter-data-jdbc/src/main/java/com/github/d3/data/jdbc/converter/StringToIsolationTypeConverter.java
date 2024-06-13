@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * String转换隔离类型枚举
  *
  * @author Carzer1020@163.com
- * @since 2021-04-14
+ * @since 1.0
  */
 @Component
 public class StringToIsolationTypeConverter implements Converter<String, IsolationTypeEnum> {

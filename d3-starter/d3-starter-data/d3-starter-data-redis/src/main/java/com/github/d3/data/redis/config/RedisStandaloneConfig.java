@@ -18,7 +18,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * redis单机配置
  *
  * @author Carzer1020@163.com
- * @since 2024-06-13
+ * @since 1.0
  */
 @Configuration
 public class RedisStandaloneConfig {

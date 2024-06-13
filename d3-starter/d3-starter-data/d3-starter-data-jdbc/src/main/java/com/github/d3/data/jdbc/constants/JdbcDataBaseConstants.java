@@ -4,7 +4,7 @@ package com.github.d3.data.jdbc.constants;
  * 逻辑删除常量
  *
  * @author Carzer1020@163.com
- * @since 2022-01-10
+ * @since 1.0
  */
 public final class JdbcDataBaseConstants {
 

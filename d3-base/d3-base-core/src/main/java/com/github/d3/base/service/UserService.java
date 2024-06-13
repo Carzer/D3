@@ -10,7 +10,7 @@ import java.util.List;
  * 用户信息相关服务
  *
  * @author Carzer1020@163.com
- * @since 2022-11-28
+ * @since 1.0
  */
 public interface UserService extends MpBaseService<UserEntity> {
 

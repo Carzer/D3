@@ -11,7 +11,7 @@ import java.util.List;
  * 基础服务
  *
  * @author Carzer1020@163.com
- * @since 2020-03-26
+ * @since 1.0
  */
 public interface MpBaseService<T extends MpBaseEntity> extends BaseService<T> {
 

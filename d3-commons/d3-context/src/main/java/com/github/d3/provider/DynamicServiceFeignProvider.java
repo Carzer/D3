@@ -24,7 +24,7 @@ import java.util.Map;
  * 动态代理服务信息
  *
  * @author Carzer1020@163.com
- * @since 2021-07-08
+ * @since 1.0
  */
 @Component
 @EnableConfigurationProperties(DynamicServiceFeignProvider.DynamicServiceConfig.class)

@@ -8,7 +8,7 @@ import org.aspectj.lang.JoinPoint;
  * 日志记录
  *
  * @author Carzer1020@163.com
- * @since 2020-09-25
+ * @since 1.0
  */
 @FunctionalInterface
 public interface LogRecordProvider {

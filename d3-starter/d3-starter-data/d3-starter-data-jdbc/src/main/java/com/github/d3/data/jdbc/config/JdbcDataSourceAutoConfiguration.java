@@ -22,7 +22,7 @@ import java.util.Map;
  * 数据源配置
  *
  * @author Carzer1020@163.com
- * @since 2021-04-29
+ * @since 1.0
  */
 @Configuration
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))

@@ -6,7 +6,7 @@ import feign.RequestTemplate;
  * Feign Provider
  *
  * @author Carzer1020@163.com
- * @since 2021-07-08
+ * @since 1.0
  */
 public interface FeignProvider {
 

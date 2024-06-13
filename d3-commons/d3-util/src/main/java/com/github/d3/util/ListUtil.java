@@ -12,7 +12,7 @@ import java.util.function.Function;
  * List操作相关的工具类
  *
  * @author Carzer1020@163.com
- * @since 2020-09-25
+ * @since 1.0
  */
 @UtilityClass
 public class ListUtil {

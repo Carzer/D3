@@ -8,7 +8,7 @@ import java.util.UUID;
  * UUID工具类
  *
  * @author Carzer1020@163.com
- * @since 2019-08-22
+ * @since 1.0
  */
 @UtilityClass
 public class UuidUtil {

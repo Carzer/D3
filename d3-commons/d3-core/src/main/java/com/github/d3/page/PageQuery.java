@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  * 分页查询接口
  *
  * @author Carzer1020@163.com
- * @since 2021-04-06
+ * @since 1.0
  */
 @Schema(description = "查询条件封装")
 @Setter

@@ -20,7 +20,7 @@ import static com.github.d3.constants.UrlConstants.*;
  * controller父类
  *
  * @author Carzer1020@163.com
- * @since 2020-04-30
+ * @since 1.0
  */
 @SuppressWarnings("all")
 @PreAuthorize("isAuthenticated()")

@@ -14,7 +14,7 @@ import java.time.LocalDate;
  * 用户相关信息
  *
  * @author Carzer1020@163.com
- * @since 2023-11-14
+ * @since 1.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

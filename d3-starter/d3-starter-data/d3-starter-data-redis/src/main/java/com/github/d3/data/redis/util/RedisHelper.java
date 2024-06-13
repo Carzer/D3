@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
  * redis操作类 所有需要存入redis的对象都必须序列化
  *
  * @author Carzer1020@163.com
- * @since 2024-06-13
+ * @since 1.0
  */
 @Component
 @SuppressWarnings({"unchecked", "unused"})

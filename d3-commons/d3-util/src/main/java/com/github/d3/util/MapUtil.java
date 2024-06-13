@@ -9,7 +9,7 @@ import java.util.HashMap;
  * Map工具类
  *
  * @author Carzer1020@163.com
- * @since 2023-11-13
+ * @since 1.0
  */
 @UtilityClass
 public class MapUtil {

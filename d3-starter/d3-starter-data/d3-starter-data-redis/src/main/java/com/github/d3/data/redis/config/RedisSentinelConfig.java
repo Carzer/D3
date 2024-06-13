@@ -23,7 +23,7 @@ import java.util.Set;
  * redis集群配置
  *
  * @author Carzer1020@163.com
- * @since 2024-06-13
+ * @since 1.0
  */
 @Configuration
 @ConditionalOnProperty(prefix = "spring.redis-sentinel", name = "enable", havingValue = "true")

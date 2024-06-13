@@ -13,7 +13,7 @@ import java.util.Map;
  * 用户账户类型枚举类
  *
  * @author Carzer1020@163.com
- * @since 2023-11-14
+ * @since 1.0
  */
 @Getter
 public enum AccountTypeEnum implements Serializable {

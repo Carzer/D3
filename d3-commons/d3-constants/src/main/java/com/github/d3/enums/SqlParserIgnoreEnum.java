@@ -6,7 +6,7 @@ import lombok.Getter;
  * 租户过滤枚举
  *
  * @author Carzer1020@163.com
- * @since 2020-09-16
+ * @since 1.0
  */
 @Getter
 public enum SqlParserIgnoreEnum {

@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
  * 授权服务
  *
  * @author Carzer1020@163.com
- * @since 2022-11-25
+ * @since 1.0
  */
 @Slf4j
 @EnableDiscoveryClient

@@ -7,7 +7,7 @@ import org.springframework.util.Assert;
  * 2的n次幂计算常用方法
  *
  * @author Carzer1020@163.com
- * @since 2024-05-27
+ * @since 1.0
  */
 @UtilityClass
 public class PowerOfTwoCalcUtil {

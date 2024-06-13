@@ -15,7 +15,7 @@ import java.util.Collection;
  * 登录授权结果
  *
  * @author Carzer1020@163.com
- * @since 2024-06-04
+ * @since 1.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

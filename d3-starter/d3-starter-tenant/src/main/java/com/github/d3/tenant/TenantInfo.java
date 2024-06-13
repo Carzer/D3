@@ -11,7 +11,7 @@ import java.io.Serializable;
  * 租户信息传输类
  *
  * @author Carzer1020@163.com
- * @since 2020-12-03
+ * @since 1.0
  */
 @Setter
 @Getter

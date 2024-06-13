@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  * 权限工具类
  *
  * @author Carzer1020@163.com
- * @since 2019-09-03
+ * @since 1.0
  */
 @UtilityClass
 public class AuthUtil {

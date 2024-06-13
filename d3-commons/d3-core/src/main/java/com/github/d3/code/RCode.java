@@ -6,7 +6,7 @@ import java.io.Serializable;
  * 返回码
  *
  * @author Carzer1020@163.com
- * @since 2022-11-25
+ * @since 1.0
  */
 public interface RCode extends Serializable {
 

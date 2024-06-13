@@ -11,7 +11,7 @@ import java.lang.annotation.*;
  * 目标数据源注解，注解在方法上指定数据源的名称
  *
  * @author Carzer1020@163.com
- * @since 2024-06-11
+ * @since 1.0
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD, ElementType.TYPE})

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * String类型转换AccountTypeEnum
  *
  * @author Carzer1020@163.com
- * @since 2023-12-14
+ * @since 1.0
  */
 @Component
 public class StringToAccountTypeConverter implements Converter<String, AccountTypeEnum> {

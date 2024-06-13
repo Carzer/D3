@@ -14,7 +14,7 @@ import java.util.Map;
  * 用户信息mapper
  *
  * @author Carzer1020@163.com
- * @since 2022-11-28
+ * @since 1.0
  */
 @Mapper
 public interface UserMapper extends MpBasisMapper<UserEntity> {

@@ -20,7 +20,7 @@ import java.util.TreeSet;
  * 网络工具类
  *
  * @author Carzer1020@163.com
- * @since 2022-11-25
+ * @since 1.0
  */
 @UtilityClass
 @Slf4j
@@ -72,7 +72,7 @@ public class NetUtil {
      * 根据mac地址获取workId
      *
      * @return workId
-     * @since 2022-11-25
+     * @since 1.0
      */
     public long generateWorkerIdBaseOnMac() {
         try {

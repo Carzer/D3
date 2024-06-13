@@ -11,7 +11,7 @@ import java.util.Map;
  * 分页工具类
  *
  * @author Carzer1020@163.com
- * @since 2021-06-01
+ * @since 1.0
  */
 @UtilityClass
 public class PageUtil {

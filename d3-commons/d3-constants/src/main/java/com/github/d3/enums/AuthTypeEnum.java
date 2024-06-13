@@ -6,7 +6,7 @@ import lombok.Getter;
  * 权限过滤类型enum
  *
  * @author Carzer1020@163.com
- * @since 2020-11-02
+ * @since 1.0
  */
 @Getter
 public enum AuthTypeEnum {

@@ -7,7 +7,7 @@ import lombok.experimental.UtilityClass;
  * 通用常量
  *
  * @author Carzer1020@163.com
- * @since 2022-11-25
+ * @since 1.0
  */
 @UtilityClass
 public class CommonConstants {

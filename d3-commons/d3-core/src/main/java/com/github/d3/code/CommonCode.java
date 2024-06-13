@@ -9,7 +9,7 @@ import java.util.Map;
  * 通用编码(1_000-9_999)
  *
  * @author Carzer1020@163.com
- * @since 2022-11-25
+ * @since 1.0
  */
 @Getter
 public enum CommonCode implements RCode {

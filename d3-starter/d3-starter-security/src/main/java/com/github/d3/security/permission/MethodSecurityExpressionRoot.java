@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
  * 表达式处理
  *
  * @author Carzer1020@163.com
- * @since 2020-11-19
+ * @since 1.0
  */
 @Slf4j
 public class MethodSecurityExpressionRoot extends SecurityExpressionRoot implements MethodSecurityExpressionOperations {

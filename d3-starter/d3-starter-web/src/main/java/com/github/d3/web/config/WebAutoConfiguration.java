@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
  * 主要是为了将工程中的tomcat全部替换为undertow
  *
  * @author Carzer1020@163.com
- * @since 2022-11-25
+ * @since 1.0
  */
 @Configuration
 public class WebAutoConfiguration {

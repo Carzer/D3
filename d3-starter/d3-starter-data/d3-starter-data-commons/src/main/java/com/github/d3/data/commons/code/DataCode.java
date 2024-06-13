@@ -10,7 +10,7 @@ import java.util.Map;
  * 数据功能编码(20_000-29_999)
  *
  * @author Carzer1020@163.com
- * @since 2024-05-16
+ * @since 1.0
  */
 @Getter
 public enum DataCode implements RCode {

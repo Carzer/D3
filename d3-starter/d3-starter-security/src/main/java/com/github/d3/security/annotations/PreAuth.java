@@ -9,7 +9,7 @@ import java.lang.annotation.*;
  * 替换自定义权限表达式中的{}
  *
  * @author Carzer1020@163.com
- * @since 2020-10-15
+ * @since 1.0
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})

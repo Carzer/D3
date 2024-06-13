@@ -20,7 +20,7 @@ import java.io.IOException;
  * 参数过滤Filter
  *
  * @author Carzer1020@163.com
- * @since 2020-10-26
+ * @since 1.0
  */
 @Component
 @WebFilter(urlPatterns = "/**", filterName = "TrimFilter", dispatcherTypes = DispatcherType.REQUEST)

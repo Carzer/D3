@@ -6,7 +6,7 @@ import lombok.experimental.UtilityClass;
  * Profile常量
  *
  * @author Carzer1020@163.com
- * @since 2022-03-29
+ * @since 1.0
  */
 @UtilityClass
 public class ProfileConstants {

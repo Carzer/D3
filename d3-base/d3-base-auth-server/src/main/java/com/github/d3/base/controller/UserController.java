@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 用户信息
  *
  * @author Carzer1020@163.com
- * @since 2022-11-28
+ * @since 1.0
  */
 @RestController
 @RequestMapping("/user")

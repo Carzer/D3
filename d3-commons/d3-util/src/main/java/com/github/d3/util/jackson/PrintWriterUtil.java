@@ -11,7 +11,7 @@ import java.io.PrintWriter;
  * 响应输出工具类
  *
  * @author Carzer1020@163.com
- * @since 2020-01-22
+ * @since 1.0
  */
 @UtilityClass
 public class PrintWriterUtil extends JacksonUtil {

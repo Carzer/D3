@@ -4,7 +4,7 @@ package com.github.d3.constants;
  * 通用URL
  *
  * @author Carzer1020@163.com
- * @since 2020-04-14
+ * @since 1.0
  */
 public final class UrlConstants {
 

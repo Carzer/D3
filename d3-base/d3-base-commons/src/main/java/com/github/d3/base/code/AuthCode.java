@@ -10,7 +10,7 @@ import java.util.Map;
  * 授权、鉴权相关编码(10_000-19_999)
  *
  * @author Carzer1020@163.com
- * @since 2024-05-13
+ * @since 1.0
  */
 @Getter
 public enum AuthCode implements RCode {

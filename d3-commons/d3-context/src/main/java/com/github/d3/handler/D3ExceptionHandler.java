@@ -27,7 +27,7 @@ import java.util.Optional;
  * 全局exception捕捉
  *
  * @author Carzer1020@163.com
- * @since 2022-11-25
+ * @since 1.0
  */
 @Slf4j
 @RestControllerAdvice

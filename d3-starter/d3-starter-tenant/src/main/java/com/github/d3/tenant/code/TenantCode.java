@@ -7,7 +7,7 @@ import lombok.Getter;
  * 租户相关编码（30_000-39_999）
  *
  * @author Carzer1020@163.com
- * @since 2023-12-12
+ * @since 1.0
  */
 @Getter
 public enum TenantCode implements RCode {

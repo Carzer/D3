@@ -13,7 +13,7 @@ import java.util.Map;
  * 用户类型枚举
  *
  * @author Carzer1020@163.com
- * @since 2022-11-28
+ * @since 1.0
  */
 @Getter
 public enum UserTypeEnum implements Serializable {

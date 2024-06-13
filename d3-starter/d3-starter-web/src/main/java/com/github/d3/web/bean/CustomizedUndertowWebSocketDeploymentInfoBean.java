@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * 统一过滤器
  *
  * @author Carzer1020@163.com
- * @since 2023-01-19
+ * @since 1.0
  */
 @Component
 public class CustomizedUndertowWebSocketDeploymentInfoBean implements WebServerFactoryCustomizer<UndertowServletWebServerFactory> {

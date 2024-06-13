@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * Feign请求对租户功能的支持
  *
  * @author Carzer1020@163.com
- * @since 2023-02-17
+ * @since 1.0
  */
 @Component
 public class TenantFeignProvider implements FeignProvider {

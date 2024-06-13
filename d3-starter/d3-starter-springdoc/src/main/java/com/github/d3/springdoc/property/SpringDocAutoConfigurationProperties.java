@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * 自定义配置
  *
  * @author Carzer1020@163.com
- * @since 2022-11-19
+ * @since 1.0
  */
 @Setter
 @Getter

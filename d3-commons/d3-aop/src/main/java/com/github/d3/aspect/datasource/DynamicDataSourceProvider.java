@@ -6,7 +6,7 @@ import com.github.d3.enums.DatasourceTypeEnum;
  * 动态数据源切换Provider
  *
  * @author Carzer1020@163.com
- * @since 2023-02-03
+ * @since 1.0
  */
 public interface DynamicDataSourceProvider {
 

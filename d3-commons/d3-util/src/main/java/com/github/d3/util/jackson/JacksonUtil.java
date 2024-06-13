@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
  * FastJson操作工具类
  *
  * @author Carzer1020@163.com
- * @since 2021-07-06
+ * @since 1.0
  */
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 public class JacksonUtil {

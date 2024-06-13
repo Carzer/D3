@@ -12,7 +12,7 @@ import java.util.Optional;
  * 缓存持续时间工具类
  *
  * @author Carzer1020@163.com
- * @since 2021-09-16
+ * @since 1.0
  */
 @UtilityClass
 public class DurationUtil {

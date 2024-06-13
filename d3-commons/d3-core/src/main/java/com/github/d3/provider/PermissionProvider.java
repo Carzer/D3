@@ -6,7 +6,7 @@ import java.util.Set;
  * 权限信息Provider
  *
  * @author Carzer1020@163.com
- * @since 2020-06-05
+ * @since 1.0
  */
 public interface PermissionProvider {
 

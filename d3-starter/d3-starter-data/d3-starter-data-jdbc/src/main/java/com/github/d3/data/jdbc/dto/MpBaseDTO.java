@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  * Mybatis Plus 基础DTO
  *
  * @author Carzer1020@163.com
- * @since 2022-11-28
+ * @since 1.0
  */
 @Data
 public class MpBaseDTO implements BaseDTO {

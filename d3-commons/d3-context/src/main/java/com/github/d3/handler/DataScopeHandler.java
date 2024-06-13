@@ -6,7 +6,7 @@ import com.github.d3.constants.CommonConstants;
  * 数据权限信息
  *
  * @author Carzer1020@163.com
- * @since 2020-11-03
+ * @since 1.0
  */
 public interface DataScopeHandler {
 

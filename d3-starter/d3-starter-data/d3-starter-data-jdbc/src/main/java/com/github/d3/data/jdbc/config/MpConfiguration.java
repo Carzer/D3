@@ -22,7 +22,7 @@ import java.util.Map;
  * mybatis-plus相关配置
  *
  * @author Carzer1020@163.com
- * @since 2020-11-19
+ * @since 1.0
  */
 @SuppressWarnings("all")
 @EnableTransactionManagement

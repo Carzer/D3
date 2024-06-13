@@ -7,7 +7,7 @@ import org.springframework.util.StringUtils;
  * 字符串工具
  *
  * @author Carzer1020@163.com
- * @since 2020-12-04
+ * @since 1.0
  */
 @UtilityClass
 public class StrUtil {

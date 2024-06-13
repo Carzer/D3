@@ -22,7 +22,7 @@ import java.util.List;
  * Spring Doc 配置信息
  *
  * @author Carzer1020@163.com
- * @since 2022-01-12
+ * @since 1.0
  */
 @Configuration
 @EnableConfigurationProperties(SpringDocAutoConfigurationProperties.class)

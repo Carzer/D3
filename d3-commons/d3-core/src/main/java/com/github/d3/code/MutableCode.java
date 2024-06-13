@@ -6,7 +6,7 @@ import lombok.Getter;
  * 通用编码(自定义错误信息)
  *
  * @author Carzer1020@163.com
- * @since 2020-12-21
+ * @since 1.0
  */
 
 @Getter

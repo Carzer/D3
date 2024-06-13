@@ -10,7 +10,7 @@ import org.springframework.util.StringUtils;
  * 自定义数据源
  *
  * @author Carzer1020@163.com
- * @since 2021-04-28
+ * @since 1.0
  */
 @Slf4j
 public final class JdbcDataSource extends HikariDataSource {

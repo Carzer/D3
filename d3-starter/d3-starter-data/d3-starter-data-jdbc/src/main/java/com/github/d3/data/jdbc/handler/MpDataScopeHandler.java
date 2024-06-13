@@ -16,7 +16,7 @@ import java.util.List;
  * 数据权限信息handler
  *
  * @author Carzer1020@163.com
- * @since 2020-11-19
+ * @since 1.0
  */
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))

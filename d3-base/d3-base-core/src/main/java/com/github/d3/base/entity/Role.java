@@ -12,7 +12,7 @@ import java.io.Serial;
  * 角色信息
  *
  * @author Carzer1020@163.com
- * @since 2024-05-23
+ * @since 1.0
  */
 @TableName("role")
 @Data

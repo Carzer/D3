@@ -13,7 +13,7 @@ import java.util.Map;
  * 系统隔离类型
  *
  * @author Carzer1020@163.com
- * @since 2021-04-13
+ * @since 1.0
  */
 @Getter
 public enum IsolationTypeEnum implements Serializable {

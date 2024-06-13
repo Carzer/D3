@@ -7,7 +7,7 @@ import lombok.Getter;
  * D3系统相关异常
  *
  * @author Carzer1020@163.com
- * @since 2023-11-14
+ * @since 1.0
  */
 @Getter
 public final class D3Exception extends AbstractD3Exception {

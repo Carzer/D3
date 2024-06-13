@@ -48,7 +48,7 @@ import java.util.UUID;
  * AuthorizationServer配置
  *
  * @author Carzer1020@163.com
- * @since 2023-11-18
+ * @since 1.0
  */
 @Configuration
 @EnableWebSecurity

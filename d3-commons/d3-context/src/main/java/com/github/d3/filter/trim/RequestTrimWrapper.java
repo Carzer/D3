@@ -22,7 +22,7 @@ import java.util.Map;
  * 请求过滤
  *
  * @author Carzer1020@163.com
- * @since 2020-10-26
+ * @since 1.0
  */
 @Slf4j
 public final class RequestTrimWrapper extends AbstractRequestWrapper {

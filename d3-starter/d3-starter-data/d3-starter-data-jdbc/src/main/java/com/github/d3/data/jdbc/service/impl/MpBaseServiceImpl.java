@@ -21,7 +21,7 @@ import java.util.List;
  * 基础服务实现类
  *
  * @author Carzer1020@163.com
- * @since 2020-11-10
+ * @since 1.0
  */
 public class MpBaseServiceImpl<M extends MpBasisMapper<T>, T extends MpBaseEntity> extends ServiceImpl<M, T> implements MpBaseService<T> {
 

@@ -4,7 +4,7 @@ package com.github.d3.constants;
  * 通用常量
  *
  * @author Carzer1020@163.com
- * @since 2019-10-25
+ * @since 1.0
  */
 public class TokenConstants {
 

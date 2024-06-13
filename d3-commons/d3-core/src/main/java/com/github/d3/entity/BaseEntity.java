@@ -6,7 +6,7 @@ import java.io.Serializable;
  * 基础类
  *
  * @author Carzer1020@163.com
- * @since 2019-08-22
+ * @since 1.0
  */
 public interface BaseEntity extends Serializable {
 

@@ -8,7 +8,7 @@ import lombok.Getter;
  * 租户相关异常
  *
  * @author Carzer1020@163.com
- * @since 2023-12-12
+ * @since 1.0
  */
 @Getter
 public class TenantException extends AbstractD3Exception {

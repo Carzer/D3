@@ -19,7 +19,7 @@ import java.io.IOException;
  * 登录失败handler
  *
  * @author Carzer1020@163.com
- * @since 2023-12-14
+ * @since 1.0
  */
 @Slf4j
 @Component

@@ -7,7 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * 加密类
  *
  * @author Carzer1020@163.com
- * @since 2019-07-16
+ * @since 1.0
  */
 @Slf4j
 public final class AuthPasswordEncoder extends BCryptPasswordEncoder {

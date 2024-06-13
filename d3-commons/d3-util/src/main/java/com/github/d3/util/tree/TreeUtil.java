@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  * 如果节点过多，还是会出现性能问题
  *
  * @author Carzer1020@163.com
- * @since 2022-12-11
+ * @since 1.0
  */
 @UtilityClass
 public class TreeUtil {
