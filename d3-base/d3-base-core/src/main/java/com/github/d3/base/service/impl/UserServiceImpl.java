@@ -22,16 +22,11 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -45,7 +40,7 @@ import java.util.Set;
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
-public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> implements UserService, UserDetailsService {
+public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> implements UserService {
 
     /**
      * 用户账号服务
@@ -118,6 +113,18 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
         // 禁止删除管理员及更高级别用户
         lambdaQueryWrapper.eq(UserEntity::getId, id).gt(UserEntity::getUserType, UserTypeEnum.ADMIN);
         return userMapper.delete(lambdaQueryWrapper);
+    }
+
+    /**
+     * 根据账号查询用户，并携带凭证信息
+     *
+     * @param account         账号
+     * @param credentialsType 凭证类型
+     * @return 用户
+     */
+    @Override
+    public UserEntity loadUserWithCredentials(String account, CredentialsTypeEnum credentialsType) {
+        return userMapper.loadUserWithCredentials(account, credentialsType);
     }
 
     /**
@@ -216,25 +223,8 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
     private void checkAccount(UserEntity userEntity) {
         Set<String> accounts = Set.of(userEntity.getUid(), userEntity.getPhone(), userEntity.getEmail());
         if (userAccountService.exists(accounts)) {
-            throw new BizException(AuthCode.LOGIN_NAME_EXISTED);
+            throw new BizException(AuthCode.LOGIN_ACCOUNT_EXISTED);
         }
-    }
-
-    /**
-     * 根据用户名查询用户
-     *
-     * @param username the username identifying the user whose data is required.
-     * @return 用户
-     * @throws UsernameNotFoundException 未查询到用户
-     */
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity user = userMapper.loadUserWithCredentials(username, CredentialsTypeEnum.PASSWORD);
-        if (user == null) {
-            log.trace("根据账号[{}]未查询到用户", username);
-            throw new UsernameNotFoundException("未查询到用户");
-        }
-        return new User(user.getName(), user.getCredentials(), Collections.emptySet());
     }
 
 }

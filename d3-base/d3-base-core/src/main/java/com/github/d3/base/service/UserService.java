@@ -2,6 +2,7 @@ package com.github.d3.base.service;
 
 import com.github.d3.base.entity.user.UserCredentialsEntity;
 import com.github.d3.base.entity.user.UserEntity;
+import com.github.d3.base.enums.CredentialsTypeEnum;
 import com.github.d3.data.jdbc.service.MpBaseService;
 
 import java.util.List;
@@ -22,4 +23,13 @@ public interface UserService extends MpBaseService<UserEntity> {
      * @return 保存结果
      */
     int saveWithCredentials(UserEntity user, List<UserCredentialsEntity> credentials);
+
+    /**
+     * 根据账号查询用户，并携带凭证信息
+     *
+     * @param account         账号
+     * @param credentialsType 凭证类型
+     * @return 用户
+     */
+    UserEntity loadUserWithCredentials(String account, CredentialsTypeEnum credentialsType);
 }
