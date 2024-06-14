@@ -198,13 +198,6 @@ public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> i
         if (!CollectionUtils.isEmpty(credentials)) {
             credentials.forEach(c -> {
                 if (c.getCredentialsType().equals(CredentialsTypeEnum.PASSWORD)) {
-                    /*由于PasswordEncoder与UserService同在SecurityConfig中实例化
-                     * {@link SecurityConfig#passwordEncoder}
-                     * {@link SecurityConfig#userService}
-                     * {@link SecurityConfig#userDetailsService}
-                     * 所以Spring无法在初始化当前类时注入PasswordEncoder
-                     * 故使用新建对象的方式来使用{@link AuthPasswordEncoder}
-                     */
                     AuthPasswordEncoder passwordEncoder = new AuthPasswordEncoder();
                     // 密码加密
                     String rawPass = c.getCredentials();
