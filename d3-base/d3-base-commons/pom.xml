@@ -11,4 +11,30 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>d3-base-commons</artifactId>
 
+    <!-- build信息 -->
+    <build>
+        <finalName>${project.artifactId}-${project.version}</finalName>
+    </build>
+
+    <!-- 配置信息 -->
+    <profiles>
+        <profile>
+            <id>source</id>
+            <activation>
+                <property>
+                    <name>source</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <!-- 打包时提供源码 -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
