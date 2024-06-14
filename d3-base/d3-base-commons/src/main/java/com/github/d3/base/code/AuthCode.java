@@ -21,12 +21,11 @@ public enum AuthCode implements RCode {
     VALID_CODE_ERROR(10_005L, "验证码错误!"),
     TOKEN_EXPIRED(10_006L, "token已过期!"),
     BAD_CREDENTIALS(10_009L, "用户名或密码错误!"),
-    ROLE_EMPTY(10_010L, "当前用户没有配置角色，请联系管理员!"),
     USER_LOCKED(10_011L, "用户已锁定，请联系管理员!"),
     USER_EXPIRED(10_012L, "用户已过期，请联系管理员!"),
-    LOGIN_NAME_EXISTED(10_013L, "登录名已存在!"),
+    LOGIN_ACCOUNT_EXISTED(10_013L, "登录账号已存在!"),
     CODE_EXISTED(10_014L, "编码重复!"),
-    OUT_OF_BOUNDS(10_015L, "超出权限范围(0-25)!"),
+    OUT_OF_BOUNDS(10_015L, "超出权限范围!"),
     BIT_DIGIT_EXISTED(10_016L, "位移值重复!"),
     MENU_NOT_EXISTED(10_017L, "菜单不存在!"),
     PHONE_EXISTED(10_022L, "手机号已存在!"),
@@ -57,7 +56,6 @@ public enum AuthCode implements RCode {
      * 信息
      */
     private final String message;
-
 
     /**
      * 构造方法
