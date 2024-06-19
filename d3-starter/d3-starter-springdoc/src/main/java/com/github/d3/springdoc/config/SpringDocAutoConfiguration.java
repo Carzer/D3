@@ -26,7 +26,7 @@ import java.util.List;
  */
 @Configuration
 @EnableConfigurationProperties(SpringDocAutoConfigurationProperties.class)
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 @ConditionalOnProperty(prefix = "springdoc.api-docs", name = "enabled", havingValue = "true", matchIfMissing = true)
 public class SpringDocAutoConfiguration {
 

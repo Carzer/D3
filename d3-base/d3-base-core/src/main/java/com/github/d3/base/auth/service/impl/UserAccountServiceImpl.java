@@ -17,7 +17,7 @@ import java.util.Set;
  * @since 1.0
  */
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class UserAccountServiceImpl extends MpBaseServiceImpl<UserAccountMapper, UserAccountEntity> implements UserAccountService {
 
     /**

@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
  */
 @Slf4j
 @Component
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class MpMetaObjectHandler implements MetaObjectHandler {
 
     /**

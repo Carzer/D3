@@ -38,7 +38,7 @@ import java.util.Set;
  * @since 1.0
  */
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 @Slf4j
 public class UserServiceImpl extends MpBaseServiceImpl<UserMapper, UserEntity> implements UserService {
 

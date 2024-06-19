@@ -28,7 +28,7 @@ import java.util.Map;
  */
 @Component
 @EnableConfigurationProperties(DynamicServiceFeignProvider.DynamicServiceConfig.class)
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 @Slf4j
 @Profile(ProfileConstants.ENV_DEV)
 public class DynamicServiceFeignProvider implements FeignProvider {

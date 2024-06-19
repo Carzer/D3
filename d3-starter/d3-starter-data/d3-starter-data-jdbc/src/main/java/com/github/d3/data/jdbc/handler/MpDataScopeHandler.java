@@ -19,7 +19,7 @@ import java.util.List;
  * @since 1.0
  */
 @Component
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class MpDataScopeHandler implements DataScopeHandler {
 
     /**

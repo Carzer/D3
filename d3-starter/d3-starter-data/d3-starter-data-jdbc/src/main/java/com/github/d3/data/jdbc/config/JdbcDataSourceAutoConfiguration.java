@@ -25,7 +25,7 @@ import java.util.Map;
  * @since 1.0
  */
 @Configuration
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class JdbcDataSourceAutoConfiguration {
 
     /**

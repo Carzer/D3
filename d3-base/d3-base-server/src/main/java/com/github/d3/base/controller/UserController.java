@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user")
 @Slf4j
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 @Tag(name = "User", description = "用户信息")
 @PreAuth(value = "user")
 public class UserController extends MpBaseController<UserDTO, UserEntity> {

@@ -32,7 +32,7 @@ import java.util.List;
 @Aspect
 @Slf4j
 @ConditionalOnBean(DynamicDataSourceProvider.class)
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class DsAspect {
 
     /**

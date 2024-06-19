@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @ConditionalOnClass(TenantConstants.class)
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class MpTenantHandler implements TenantLineHandler {
 
     /**

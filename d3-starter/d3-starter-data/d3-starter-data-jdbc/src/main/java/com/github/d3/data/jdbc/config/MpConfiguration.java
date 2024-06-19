@@ -28,7 +28,7 @@ import java.util.Map;
 @EnableTransactionManagement
 @Configuration
 @MapperScan("com.github.d3.**.mapper")
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 @Slf4j
 public class MpConfiguration {
 

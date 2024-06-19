@@ -31,7 +31,7 @@ import java.util.Map;
  */
 @Slf4j
 @Component
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public final class FeignOauth2RequestInterceptor implements RequestInterceptor {
 
     /**

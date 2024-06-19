@@ -1,10 +1,10 @@
 package com.github.d3.base.auth.config;
 
-import com.github.d3.security.handler.CustomAccessDeniedHandler;
 import com.github.d3.base.auth.handler.CustomLogoutSuccessHandler;
 import com.github.d3.base.auth.handler.LoginFailureHandler;
 import com.github.d3.base.auth.handler.LoginSuccessHandler;
 import com.github.d3.filter.CommonFilter;
+import com.github.d3.security.handler.CustomAccessDeniedHandler;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
@@ -52,7 +52,7 @@ import java.util.UUID;
  */
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class AuthorizationServerConfiguration {
 
     /**
@@ -60,6 +60,11 @@ public class AuthorizationServerConfiguration {
      */
     private final CommonFilter commonFilter;
 
+    /**
+     * 密码编码器
+     *
+     * @return 密码编码器
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
