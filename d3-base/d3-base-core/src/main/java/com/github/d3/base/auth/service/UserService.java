@@ -1,4 +1,4 @@
-package com.github.d3.base.service;
+package com.github.d3.base.auth.service;
 
 import com.github.d3.base.entity.user.UserCredentialsEntity;
 import com.github.d3.base.entity.user.UserEntity;

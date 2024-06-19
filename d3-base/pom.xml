@@ -19,6 +19,7 @@
         <module>d3-base-commons</module>
         <module>d3-base-core</module>
         <module>d3-base-dto</module>
+        <module>d3-base-server</module>
     </modules>
 
     <!-- 依赖信息 -->

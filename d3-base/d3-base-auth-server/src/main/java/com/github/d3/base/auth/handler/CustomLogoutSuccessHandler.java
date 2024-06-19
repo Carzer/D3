@@ -1,4 +1,4 @@
-package com.github.d3.base.handler;
+package com.github.d3.base.auth.handler;
 
 import com.github.d3.R;
 import com.github.d3.util.jackson.PrintWriterUtil;
@@ -19,7 +19,7 @@ import java.io.IOException;
  */
 @Slf4j
 @Component
-public class D3LogoutSuccessHandler implements LogoutSuccessHandler {
+public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
 
     /**
      * 登出成功

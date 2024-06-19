@@ -1,8 +1,8 @@
-package com.github.d3.base.service.impl;
+package com.github.d3.base.auth.service.impl;
 
 import com.github.d3.base.entity.user.UserAccountEntity;
 import com.github.d3.base.mapper.UserAccountMapper;
-import com.github.d3.base.service.UserAccountService;
+import com.github.d3.base.auth.service.UserAccountService;
 import com.github.d3.data.jdbc.service.impl.MpBaseServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

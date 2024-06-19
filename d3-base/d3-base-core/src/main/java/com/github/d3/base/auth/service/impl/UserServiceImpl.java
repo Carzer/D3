@@ -1,4 +1,4 @@
-package com.github.d3.base.service.impl;
+package com.github.d3.base.auth.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.incrementer.DefaultIdentifierGenerator;
@@ -10,8 +10,8 @@ import com.github.d3.base.entity.user.UserEntity;
 import com.github.d3.base.enums.CredentialsTypeEnum;
 import com.github.d3.base.enums.UserTypeEnum;
 import com.github.d3.base.mapper.UserMapper;
-import com.github.d3.base.service.UserAccountService;
-import com.github.d3.base.service.UserService;
+import com.github.d3.base.auth.service.UserAccountService;
+import com.github.d3.base.auth.service.UserService;
 import com.github.d3.base.util.AuthPasswordEncoder;
 import com.github.d3.data.jdbc.service.impl.MpBaseServiceImpl;
 import com.github.d3.exception.BizException;

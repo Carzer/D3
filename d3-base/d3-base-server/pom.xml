@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!-- 工程信息 -->
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.github.d3</groupId>
+        <artifactId>d3-base</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>d3-base-server</artifactId>
+    <description>基础服务</description>
+
+    <!-- 依赖信息 -->
+    <dependencies>
+        <!-- project -->
+        <dependency>
+            <groupId>com.github.d3</groupId>
+            <artifactId>d3-base-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.d3</groupId>
+            <artifactId>d3-base-dto</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- nacos-discovery -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <!-- nacos-config -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <!-- oauth2-authorization-server -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-authorization-server</artifactId>
+        </dependency>
+        <!-- springdoc -->
+        <dependency>
+            <groupId>com.github.d3</groupId>
+            <artifactId>d3-starter-springdoc</artifactId>
+        </dependency>
+        <!-- 状态监控 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+    </dependencies>
+
+    <!-- build信息 -->
+    <build>
+        <finalName>${project.artifactId}</finalName>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <!-- 先排除所有的配置文件 -->
+                <excludes>
+                    <exclude>application*.yml</exclude>
+                    <exclude>conf/**</exclude>
+                    <exclude>**/*.sql</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <!-- 引入所需环境的配置文件 -->
+                <includes>
+                    <include>bootstrap.yml</include>
+                    <include>**/*${spring.profiles.active}.yml</include>
+                    <include>banner.txt</include>
+                    <include>logback-spring.xml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!-- deploy时，忽略server工程 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -2,7 +2,7 @@ package com.github.d3.base.controller;
 
 import com.github.d3.base.dto.UserDTO;
 import com.github.d3.base.entity.user.UserEntity;
-import com.github.d3.base.service.UserService;
+import com.github.d3.base.auth.service.UserService;
 import com.github.d3.data.jdbc.controller.MpBaseController;
 import com.github.d3.data.jdbc.service.MpBaseService;
 import com.github.d3.security.annotations.PreAuth;

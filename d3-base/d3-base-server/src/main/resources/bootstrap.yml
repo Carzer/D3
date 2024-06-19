@@ -1,5 +1,5 @@
 server:
-  port: 9001
+  port: 9000
   compression:
     enabled: true
   undertow:
@@ -38,7 +38,7 @@ spring:
 
 # spring doc 配置
 springdoc:
-  packages-to-scan: com.github.d3.base.auth.controller
+  packages-to-scan: com.github.d3.base.controller
 d3:
   springdoc:
     title: ${spring.application.name}

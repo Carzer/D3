@@ -1,4 +1,4 @@
-package com.github.d3.base.handler;
+package com.github.d3.base.auth.handler;
 
 
 import com.github.d3.R;

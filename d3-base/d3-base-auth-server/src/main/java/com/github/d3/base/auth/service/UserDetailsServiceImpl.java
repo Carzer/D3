@@ -1,16 +1,19 @@
-package com.github.d3.base.service;
+package com.github.d3.base.auth.service;
 
 import com.github.d3.base.entity.user.UserEntity;
 import com.github.d3.base.enums.CredentialsTypeEnum;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AccountExpiredException;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 
 /**
@@ -42,6 +45,19 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (user == null) {
             log.info("根据账号[{}]未查询到用户", username);
             throw new UsernameNotFoundException("未查询到用户");
+        }
+        // 用户已锁定
+        if (user.getLocked()) {
+            String accountLockedMsg = String.format("账号[%s]已锁定，请联系管理员。", username);
+            log.warn(accountLockedMsg);
+            throw new LockedException(accountLockedMsg);
+        }
+        LocalDateTime expireAt = user.getExpireAt();
+        // 用户已过期
+        if (expireAt != null && LocalDateTime.now().isAfter(expireAt)) {
+            String accountExpiredMsg = String.format("账号[%s]已于%s过期。", username, expireAt);
+            log.warn(accountExpiredMsg);
+            throw new AccountExpiredException(accountExpiredMsg);
         }
         return new User(user.getName(), user.getCredentials(), Collections.emptySet());
     }

@@ -1,4 +1,4 @@
-package com.github.d3.base.handler;
+package com.github.d3.security.handler;
 
 import com.github.d3.R;
 import com.github.d3.code.CommonCode;
@@ -20,7 +20,7 @@ import java.io.IOException;
  */
 @Slf4j
 @Component
-public class D3AccessDeniedHandler implements AccessDeniedHandler {
+public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
     /**
      * 权限不足

@@ -1,9 +1,9 @@
-package com.github.d3.base.config;
+package com.github.d3.base.auth.config;
 
-import com.github.d3.base.handler.D3AccessDeniedHandler;
-import com.github.d3.base.handler.D3LogoutSuccessHandler;
-import com.github.d3.base.handler.LoginFailureHandler;
-import com.github.d3.base.handler.LoginSuccessHandler;
+import com.github.d3.security.handler.CustomAccessDeniedHandler;
+import com.github.d3.base.auth.handler.CustomLogoutSuccessHandler;
+import com.github.d3.base.auth.handler.LoginFailureHandler;
+import com.github.d3.base.auth.handler.LoginSuccessHandler;
 import com.github.d3.filter.CommonFilter;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -105,11 +105,11 @@ public class AuthorizationServerConfiguration {
                 )
                 .logout(
                         logout ->
-                                logout.logoutSuccessHandler(new D3LogoutSuccessHandler())
+                                logout.logoutSuccessHandler(new CustomLogoutSuccessHandler())
                 )
                 .exceptionHandling(
                         exceptions ->
-                                exceptions.accessDeniedHandler(new D3AccessDeniedHandler())
+                                exceptions.accessDeniedHandler(new CustomAccessDeniedHandler())
                 )
                 // 关闭跨域防护
                 .csrf(AbstractHttpConfigurer::disable)
