@@ -1,1 +1,2 @@
+com.github.d3.security.config.SecurityConfig
 com.github.d3.security.config.MethodSecurityConfig

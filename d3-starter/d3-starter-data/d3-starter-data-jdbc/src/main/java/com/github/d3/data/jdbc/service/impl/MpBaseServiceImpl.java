@@ -215,6 +215,6 @@ public class MpBaseServiceImpl<M extends MpBasisMapper<T>, T extends MpBaseEntit
      * 获取当前类的数据库表名
      */
     private String getCurrentTableName() {
-        return AnnotationUtil.getAnnotationValue(currentModelClass(), TableName.class);
+        return AnnotationUtil.getAnnotationValue(getEntityClass(), TableName.class);
     }
 }

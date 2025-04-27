@@ -9,18 +9,18 @@ import lombok.EqualsAndHashCode;
 import java.io.Serial;
 
 /**
- * 动作
+ * 组信息
  *
  * @author Carzer1020@163.com
  * @since 1.0
  */
-@TableName("action")
+@TableName("group")
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Action extends MpBaseEntity {
+public class GroupEntity extends MpBaseEntity {
 
     @Serial
-    private static final long serialVersionUID = 885167609709634089L;
+    private static final long serialVersionUID = -8342445145063783188L;
 
     /**
      * 编码
@@ -29,20 +29,20 @@ public class Action extends MpBaseEntity {
     private String code;
 
     /**
+     * 父编码
+     */
+    @TableField("p_code")
+    private String pCode;
+
+    /**
      * 名称
      */
     @TableField("name")
     private String name;
 
     /**
-     * 动作值
+     * 是否私有
      */
-    @TableField("val")
-    private Integer val;
-
-    /**
-     * 模块ID
-     */
-    @TableField("module_id")
-    private Long moduleId;
+    @TableField("pvt")
+    private Boolean pvt;
 }

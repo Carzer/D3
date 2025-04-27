@@ -9,18 +9,18 @@ import lombok.EqualsAndHashCode;
 import java.io.Serial;
 
 /**
- * 角色信息
+ * 动作
  *
  * @author Carzer1020@163.com
  * @since 1.0
  */
-@TableName("role")
+@TableName("action")
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Role extends MpBaseEntity {
+public class ActionEntity extends MpBaseEntity {
 
     @Serial
-    private static final long serialVersionUID = -1020506379699297553L;
+    private static final long serialVersionUID = 885167609709634089L;
 
     /**
      * 编码
@@ -29,20 +29,20 @@ public class Role extends MpBaseEntity {
     private String code;
 
     /**
-     * 父编码
-     */
-    @TableField("p_code")
-    private String pCode;
-
-    /**
      * 名称
      */
     @TableField("name")
     private String name;
 
     /**
-     * 是否私有
+     * 动作值
      */
-    @TableField("pvt")
-    private Boolean pvt;
+    @TableField("val")
+    private Integer val;
+
+    /**
+     * 模块ID
+     */
+    @TableField("module_id")
+    private Long moduleId;
 }

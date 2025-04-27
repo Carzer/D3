@@ -31,7 +31,7 @@ public class UserEntity extends MpBaseEntity {
     private String name;
 
     /**
-     * 唯一标识(很多系统里面喜欢使用用户编码)
+     * 唯一标识(很多系统里面会使用用户编码)
      */
     @TableField("uid")
     private String uid;

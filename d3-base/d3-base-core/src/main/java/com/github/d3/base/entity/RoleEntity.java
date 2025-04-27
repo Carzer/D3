@@ -9,18 +9,18 @@ import lombok.EqualsAndHashCode;
 import java.io.Serial;
 
 /**
- * 组信息
+ * 角色信息
  *
  * @author Carzer1020@163.com
  * @since 1.0
  */
-@TableName("group")
+@TableName("role")
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Group extends MpBaseEntity {
+public class RoleEntity extends MpBaseEntity {
 
     @Serial
-    private static final long serialVersionUID = -8342445145063783188L;
+    private static final long serialVersionUID = -1020506379699297553L;
 
     /**
      * 编码

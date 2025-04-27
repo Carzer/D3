@@ -17,6 +17,17 @@
             <groupId>com.github.d3</groupId>
             <artifactId>d3-context</artifactId>
         </dependency>
+        <!-- aspectj -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
         <!-- jakarta -->
         <dependency>
             <groupId>jakarta.servlet</groupId>

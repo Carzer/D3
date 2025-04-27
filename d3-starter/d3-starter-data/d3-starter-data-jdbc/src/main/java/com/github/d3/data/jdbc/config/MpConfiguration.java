@@ -1,10 +1,7 @@
 package com.github.d3.data.jdbc.config;
 
-import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.github.d3.data.jdbc.interceptor.FillLineInterceptor;
 import com.github.d3.data.jdbc.property.MpDataControlProperties;
 import lombok.RequiredArgsConstructor;
@@ -65,11 +62,11 @@ public class MpConfiguration {
             fillLineInterceptors.values().forEach(interceptor::addInnerInterceptor);
         }
         // 分页插件
-        interceptor.addInnerInterceptor(paginationInnerInterceptor());
+//        interceptor.addInnerInterceptor(paginationInnerInterceptor());
         // 乐观锁插件
         interceptor.addInnerInterceptor(optimisticLockerInnerInterceptor());
         // 防止全表更新与删除插件
-        interceptor.addInnerInterceptor(blockAttackInnerInterceptor());
+//        interceptor.addInnerInterceptor(blockAttackInnerInterceptor());
         return interceptor;
     }
 
@@ -78,12 +75,12 @@ public class MpConfiguration {
      *
      * @return 分页插件
      */
-    @Bean
-    public PaginationInnerInterceptor paginationInnerInterceptor() {
-        PaginationInnerInterceptor paginationInnerInterceptor = new PaginationInnerInterceptor(DbType.MYSQL);
-        paginationInnerInterceptor.setOverflow(false);
-        return paginationInnerInterceptor;
-    }
+//    @Bean
+//    public PaginationInnerInterceptor paginationInnerInterceptor() {
+//        PaginationInnerInterceptor paginationInnerInterceptor = new PaginationInnerInterceptor(DbType.MYSQL);
+//        paginationInnerInterceptor.setOverflow(false);
+//        return paginationInnerInterceptor;
+//    }
 
     /**
      * 乐观锁插件
@@ -100,10 +97,10 @@ public class MpConfiguration {
      *
      * @return 防止全表更新与删除插件
      */
-    @Bean
-    public BlockAttackInnerInterceptor blockAttackInnerInterceptor() {
-        return new BlockAttackInnerInterceptor();
-    }
+//    @Bean
+//    public BlockAttackInnerInterceptor blockAttackInnerInterceptor() {
+//        return new BlockAttackInnerInterceptor();
+//    }
 
     /**
      * 设置数据权限控制器
